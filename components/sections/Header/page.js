@@ -1,12 +1,13 @@
 import Image from "next/image";
 import HeaderBackground from "@/public/images/home-background.jpg";
-import Button from "../../primary/Button/page";
+import Button from "../../primary/PrimaryButton/page";
+import PrimaryButton from "../../primary/PrimaryButton/page";
 
 export default function Header() {
   return (
     <section className="w-full h-4/5 relative">
       {/* TODO: Apagar a div abaixo quando scroll down */}
-      <div className="bg-black/90 cursor-pointer underline tracking-wider w-full p-4 text-center absolute z-30 hover:bg-black/95 transition duration-200">
+      <div className="bg-black/90 text-white cursor-pointer underline tracking-wider w-full p-4 text-center absolute z-30 hover:bg-black/95 transition duration-200">
         <p>Book your assesment here !!!</p>
       </div>
 
@@ -28,7 +29,7 @@ export default function Header() {
             individuality while gently softening the signs of aging,
             prioritizing your safety, comfort, and well-being.
           </p>
-          <Button>Book Your Consultation</Button>
+          <PrimaryButton bold>Book Your Consultation</PrimaryButton>
         </div>
       </div>
     </section>
