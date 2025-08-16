@@ -4,8 +4,8 @@ import Headings from "@/components/primary/Headings";
 
 export default function Card({ cardIcon, cardTitle, cardInfo }) {
   return (
-    <div className="flex items-start gap-3 p-3 border border-gray-200 rounded-xl shadow-sm">
-      <div className="flex items-center justify-center bg-gray-100 text-gray-600 rounded-md shadow h-[1em] aspect-square leading-none">
+    <div className="flex items-start gap-3 p-3 border border-gray-200 rounded-xl shadow-xl">
+      <div className="flex items-center justify-center bg-gray-100 text-gray-600 rounded-md shadow aspect-square leading-none">
         {cardIcon}
       </div>
 
