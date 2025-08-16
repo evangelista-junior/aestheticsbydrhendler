@@ -1,12 +1,12 @@
-import AboutUs from "@/components/Sections/AboutUs/page";
-import WhatToExpect from "@/components/Sections/WhatToExpect/page";
-import Contact from "@/components/Sections/Contact/page";
-import Header from "@/components/Sections/Header/page";
-import NavBar from "@/components/Sections/NavBar/page";
-import Team from "@/components/Sections/Team/page";
-import Footer from "@/components/Sections/Footer/page";
-import Treatments from "@/components/Sections/Treatments/page";
-import FAQ from "@/components/Sections/FAQ/page";
+import AboutUs from "@/components/Sections/AboutUs/AboutUs";
+import WhatToExpect from "@/components/Sections/WhatToExpect/WhatToExpect";
+import Contact from "@/components/Sections/Contact/Contact";
+import Header from "@/components/Sections/Header/Header";
+import NavBar from "@/components/Sections/NavBar/NavBar";
+import Team from "@/components/Sections/Team/Team";
+import Footer from "@/components/Sections/Footer/Footer";
+import Treatments from "@/components/Sections/Treatments/Treatments";
+import FAQ from "@/components/Sections/FAQ/FAQ";
 
 export default function Home() {
   return (
@@ -20,6 +20,7 @@ export default function Home() {
       <FAQ />
       <Contact />
       <Footer />
+      test
     </div>
   );
 }
