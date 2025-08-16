@@ -1,7 +1,7 @@
 import Image from "next/image";
 import teamMemberPhoto from "@/public/images/teamMemberPhoto.jpeg";
-import Headings from "@/components/Primary/Headings/page";
-import Button from "@/components/Primary/Button/page";
+import Headings from "@/components/primary/Headings";
+import Button from "@/components/primary/Button";
 import { CalendarDays } from "lucide-react";
 
 export default function Team() {

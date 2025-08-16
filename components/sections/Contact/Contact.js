@@ -1,8 +1,8 @@
 "use client";
-import Headings from "@/components/Primary/Headings/page";
+import Headings from "@/components/primary/Headings";
 import { useForm } from "react-hook-form";
 import InputForm from "./components/InputForm/page";
-import Button from "@/components/Primary/Button/page";
+import Button from "@/components/primary/Button";
 import { Send } from "lucide-react";
 
 export default function Contact() {

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import HeaderBackground from "@/public/images/header_bg.png";
 import { CalendarDays } from "lucide-react";
-import Button from "@/components/Primary/Button/page";
+import Button from "@/components/primary/Button";
 import transparentLogo from "@/public/images/horizontal_logo_transparentbg.png";
 
 export default function Header() {

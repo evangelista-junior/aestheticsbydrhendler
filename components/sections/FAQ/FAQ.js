@@ -1,5 +1,5 @@
-import Button from "@/components/Primary/Button/page";
-import Headings from "@/components/Primary/Headings/page";
+import Button from "@/components/primary/Button";
+import Headings from "@/components/primary/Headings";
 import { Plus } from "lucide-react";
 
 const faqs = [

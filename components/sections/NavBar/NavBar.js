@@ -3,7 +3,7 @@ import Image from "next/image";
 import horizontal_logo from "@/public/images/horizontal_logo.png";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import Button from "@/components/Primary/Button/page";
+import Button from "@/components/primary/Button";
 import NavHeaderButton from "./components/NavHeaderButton/page";
 
 export default function NavBar() {

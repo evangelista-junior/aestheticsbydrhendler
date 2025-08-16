@@ -1,6 +1,6 @@
 // CHANGED: permitir clonar ícone para forçar dimensões e atributos de acessibilidade
 import { cloneElement, isValidElement } from "react";
-import Headings from "@/components/Primary/Headings/page";
+import Headings from "@/components/primary/Headings";
 
 export default function Card({ cardIcon, cardTitle, cardInfo }) {
   return (
