@@ -4,7 +4,10 @@ import aboutUsImage from "@/public/images/aboutus.png";
 
 export default function AboutUs() {
   return (
-    <section className="relative w-full flex items-center justify-center py-10 text-center text-gray-700">
+    <section
+      id="about"
+      className="relative w-full flex items-center justify-center py-10 text-center text-gray-700"
+    >
       <Image src={aboutUsImage} alt="" className="absolute w-full h-full" />
       <div
         className="relative w-4/5 xl:w-3/5 p-6 xl:p-10 bg-transparent dark:bg-[rgba(0,0,0,)] 

@@ -16,7 +16,10 @@ export default function Contact() {
   const onSubmit = (data) => console.log(`!!!!! ${data}`);
 
   return (
-    <section className="w-full py-16 px-6 bg-easyWhite text-gray-600 lg:px-20">
+    <section
+      id="contact"
+      className="w-full py-16 px-6 bg-easyWhite text-gray-600 lg:px-20"
+    >
       <Headings
         headingType="h2"
         className="uppercase font-extralight tracking-widest italic mb-4 text-center"

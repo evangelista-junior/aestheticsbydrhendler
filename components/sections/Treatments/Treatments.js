@@ -6,6 +6,7 @@ import Card from "./components/Card/page";
 export default function Treatments() {
   return (
     <section
+      id="treatments"
       className="p-8 xl:p-24 bg-white text-gray-600 flex justify-center 
      drop-shadow-[0_0px_50px_rgba(0,0,0,0.1)]"
     >

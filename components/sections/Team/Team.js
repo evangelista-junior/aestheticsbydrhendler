@@ -6,9 +6,9 @@ import { CalendarDays } from "lucide-react";
 
 export default function Team() {
   return (
-    <section className="bg-easyWhite text-black md:py-24 p-6">
-      <div className="w-full md:w-2/3 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
-        <div className="relative w-full h-[400px] md:h-[600px] rounded-2xl md:rounded-[4rem] overflow-hidden shadow-2xl">
+    <section id="team" className="bg-easyWhite text-black lg:py-24 p-6">
+      <div className="w-full lg:w-2/3 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="relative w-full h-[400px] lg:h-[600px] rounded-2xl lg:rounded-[4rem] overflow-hidden shadow-2xl">
           <Image
             src={teamMemberPhoto}
             alt="Dr. Shane Hendler"
@@ -47,7 +47,7 @@ export default function Team() {
             </p>
           </div>
 
-          <div className="mx-auto items-center md:items-start md:mx-0">
+          <div className="mx-auto items-center lg:items-start lg:mx-0">
             <Button buttonType="primaryRounded" className="w-auto">
               <CalendarDays size={20} aria-hidden="true" focusable="false" />
               Book a Consultation

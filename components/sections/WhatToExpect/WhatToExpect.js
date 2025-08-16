@@ -45,7 +45,10 @@ const BENEFITS = [
 
 export default function WhatToExpect() {
   return (
-    <section className="bg-white text-gray-800 px-4 py-12 lg:px-8 flex flex-col items-center xl:flex-row gap-8">
+    <section
+      id="expect"
+      className="bg-white text-gray-800 px-4 py-12 lg:px-8 flex flex-col items-center xl:flex-row gap-8"
+    >
       <div className="w-full flex justify-center">
         <Image
           src={benefitsImg}

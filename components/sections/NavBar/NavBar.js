@@ -1,54 +1,178 @@
 "use client";
 import Image from "next/image";
-import horizontal_logo from "@/public/images/horizontal_logo.png";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import horizontal_logo from "@/public/images/logo_horizontal_blackandwhite.png";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import Button from "@/components/primary/Button";
-import NavHeaderButton from "./components/NavHeaderButton/page";
+import NavHeaderButton from "./components/NavHeaderButton";
+import { Menu, X } from "lucide-react";
 
 export default function NavBar() {
   const [showNavBar, setShowNavBar] = useState(false);
+  const [open, setOpen] = useState(false);
+  const firstFocusable = useRef(null);
 
+  // Hide/Show ao rolar
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 60) {
-        console.log(window.scrollY);
-        setShowNavBar(true);
-        console.log(true);
-      } else {
-        setShowNavBar(false);
-        console.log(showNavBar);
-      }
+      setShowNavBar(!open && window.scrollY > 80);
     };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // estado inicial
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [open]); // << depende de open
 
-    window.addEventListener("scroll", handleScroll);
-  }, []);
+  // ESC fecha o drawer
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  // Scroll lock quando drawer aberto
+  useEffect(() => {
+    if (open) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => (document.body.style.overflow = prev);
+    }
+  }, [open]);
+
+  // Foco inicial no drawer
+  useEffect(() => {
+    if (open && firstFocusable.current) {
+      firstFocusable.current.focus();
+    }
+  }, [open]);
+
+  const handleClickSideMenu = () => {
+    setShowNavBar(false);
+    setOpen(!open);
+  };
+
+  const links = [
+    { label: "About Us", href: "#about" },
+    { label: "Team", href: "#team" },
+    { label: "Treatments", href: "#treatments" },
+    { label: "What to Expect", href: "#expect" },
+    { label: "FAQ", href: "#faq" },
+    { label: "Contact", href: "#contact" },
+  ];
+
   return (
-    <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={showNavBar ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
-      transition={{ duration: 0.4 }}
-      className="fixed top-0 left-0 w-full bg-white shadow-2xl z-50"
-    >
-      <section
-        className="bg-white text-gray-600 p-2 px-8 flex justify-between
-        items-center"
+    <>
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={showNavBar ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        className="fixed top-0 left-0 w-full bg-white shadow-2xl z-50"
       >
-        <Image src={horizontal_logo} alt="" width={150} />
+        <div className="bg-white text-gray-600 px-4 py-2 lg:px-8 flex justify-between items-center">
+          <Link
+            href="/"
+            className="inline-flex items-center"
+            aria-label="Go to homepage"
+          >
+            <Image src={horizontal_logo} alt="" width={140} priority />
+          </Link>
 
-        <div className="flex gap-8 items-center">
-          <NavHeaderButton>About Us</NavHeaderButton>
-          <NavHeaderButton>Team</NavHeaderButton>
-          <NavHeaderButton>Treatments</NavHeaderButton>
-          <NavHeaderButton>What to Expect</NavHeaderButton>
-          <NavHeaderButton>FAQ</NavHeaderButton>
-          <NavHeaderButton>Contact</NavHeaderButton>
+          {/* Links desktop */}
+          <div className="hidden md:flex gap-6 items-center">
+            {links.map((l) => (
+              <NavHeaderButton asChild key={l.label}>
+                <Link href={l.href}>{l.label}</Link>
+              </NavHeaderButton>
+            ))}
 
-          {/* TODO: Add link to the booking page */}
+            <Button buttonType="primary" className="ml-8">
+              Book now
+            </Button>
+          </div>
+
+          <button
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-md border border-gray-200 active:scale-95 "
+            onClick={() => setOpen(true)}
+            aria-label="Open menu"
+            aria-controls="mobile-drawer"
+            aria-expanded={open}
+          >
+            <Menu size={24} aria-hidden="true" focusable="false" />
+          </button>
         </div>
+      </motion.nav>
 
-        <Button buttonType="primary">Book now</Button>
-      </section>
-    </motion.nav>
+      <AnimatePresence>
+        {open && (
+          <>
+            {/* Backdrop */}
+            <motion.button
+              type="button"
+              aria-label="Close menu"
+              className="fixed inset-0 bg-easyDark/50 z-[60]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setOpen(false)}
+            />
+
+            {/* ------------------ Drawer ------------------ */}
+            <motion.aside
+              id="mobile-drawer"
+              className="fixed top-0 right-0 h-dvh w-80 max-w-[85vw] bg-white text-gray-600 z-[70] shadow-2xl flex flex-col"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.3 }}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Main menu"
+            >
+              <div className="flex items-center justify-between px-4 py-3 border-b">
+                <Image src={horizontal_logo} alt="" width={120} />
+                <button
+                  ref={firstFocusable}
+                  className="p-2 rounded-md border border-gray-200 hover:bg-gray-50"
+                  onClick={() => setOpen(false)}
+                  aria-label="Close menu"
+                >
+                  <X size={24} aria-hidden="true" focusable="false" />
+                </button>
+              </div>
+
+              <nav className="flex-1 overflow-y-auto px-4 py-4">
+                <ul className="space-y-2">
+                  {links.map((l) => (
+                    <li key={l.label}>
+                      <Link
+                        href={l.href}
+                        className="block rounded-lg px-3 py-2 text-lg active:bg-gray-100"
+                        onClick={() => handleClickSideMenu()}
+                      >
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-4">
+                  <Button
+                    buttonType="primary"
+                    className="w-full justify-center"
+                  >
+                    Book now
+                  </Button>
+                </div>
+              </nav>
+
+              <div className="px-4 pb-5 text-xs text-gray-400">
+                © {new Date().getFullYear()} Aesthetics by Dr Hendler
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

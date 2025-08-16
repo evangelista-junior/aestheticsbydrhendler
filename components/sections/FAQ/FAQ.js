@@ -55,7 +55,7 @@ const faqs = [
 
 export default function FAQ() {
   return (
-    <section className="text-gray-600 bg-white">
+    <section id="faq" className="text-gray-600 bg-white">
       <div className="relative px-4 pt-16 pb-4 lg:px-8 lg:max-w-1/2 mx-auto">
         <Headings
           headingType="h2"
