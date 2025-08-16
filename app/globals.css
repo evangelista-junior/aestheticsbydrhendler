@@ -1,19 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --easy-white: #f2f2f2;
+  --easy-dark: #171717;
+
+  --background: var(--color-easyWhite);
+  --foreground: var(--color-easyDark);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-easyWhite: var(--easy-white);
+  --color-easyDark: var(--easy-dark);
+
+  --color-primary-50: #fff1f3;
+  --color-primary-100: #ffe3e7;
+  --color-primary-200: #ffc0cb;
+  --color-primary-300: #ffa2b3;
+  --color-primary-400: #fe6e8b;
+  --color-primary-500: #f83b66;
+  --color-primary-600: #e51951;
+  --color-primary-700: #c20e43;
+  --color-primary-800: #a20f40;
+  --color-primary-900: #8a113c;
+  --color-primary-950: #4d041c;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1b1b1b;
+    --foreground: #f2f2f2;
   }
 }
 
@@ -22,3 +40,14 @@ body {
   color: var(--foreground);
   font-family: var(--font-roboto);
 }
+
+/* Remove the default marker from <summary> in all browsers */
+details > summary {
+  list-style: none;
+} /* Removes list-style bullets in general */
+details > summary::marker {
+  display: none;
+} /* Hides the marker in Firefox/Chromium */
+summary::-webkit-details-marker {
+  display: none;
+} /* Hides the marker in Safari/WebKit browsers */
