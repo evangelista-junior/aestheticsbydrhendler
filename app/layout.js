@@ -51,15 +51,14 @@ export const metadata = {
     "geo.region": "AU-NSW",
   },
 };
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${robotoFont.variable} antialiased`}>
+      <body
+        className={`${robotoFont.variable} antialiased min-h-screen flex flex-col`}
+      >
         <NavBar />
-
-        {children}
-
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

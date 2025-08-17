@@ -68,7 +68,7 @@ export default function NavBar() {
         transition={{ duration: 0.3 }}
         className={
           notHomePage
-            ? "sticky top-0 left-0 w-full shadow-2xl z-50"
+            ? "sticky top-0 left-0 w-full z-50"
             : "fixed top-0 left-0 w-full shadow-2xl z-50"
         }
       >
@@ -89,9 +89,11 @@ export default function NavBar() {
               </NavHeaderButton>
             ))}
 
-            <Button buttonType="primary" className="ml-8">
-              Book now
-            </Button>
+            <Link href="/booking">
+              <Button buttonType="primary" className="ml-8">
+                Book now
+              </Button>
+            </Link>
           </div>
 
           <button
@@ -120,7 +122,6 @@ export default function NavBar() {
               onClick={() => setOpen(false)}
             />
 
-            {/* ------------------ Drawer ------------------ */}
             <motion.aside
               id="mobile-drawer"
               className="fixed top-0 right-0 h-dvh w-80 max-w-[85vw] bg-white text-gray-600 z-[70] shadow-2xl flex flex-col"

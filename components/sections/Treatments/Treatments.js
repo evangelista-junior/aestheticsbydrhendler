@@ -8,7 +8,7 @@ export default function Treatments() {
     <section
       id="treatments"
       className="p-8 xl:p-24 bg-white text-gray-600 flex justify-center 
-     drop-shadow-[0_0px_50px_rgba(0,0,0,0.1)]"
+     drop-shadow-[0_0px_10px_rgba(0,0,0,0.1)]"
     >
       <div className="w-full xl:max-w-2/3 flex flex-col gap-6 xl:gap-12 ">
         <Card

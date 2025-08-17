@@ -4,7 +4,7 @@
   --easy-white: #f2f2f2;
   --easy-dark: #171717;
 
-  --background: var(--color-easyWhite);
+  --background: var(--color-white);
   --foreground: var(--color-easyDark);
 }
 
