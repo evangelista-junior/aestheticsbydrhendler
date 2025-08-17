@@ -111,7 +111,6 @@ export default function NavBar() {
       <AnimatePresence>
         {open && (
           <>
-            {/* Backdrop */}
             <motion.button
               type="button"
               aria-label="Close menu"
@@ -166,7 +165,7 @@ export default function NavBar() {
                 </ul>
 
                 <div className="mt-4">
-                  <Link href="/booking">
+                  <Link href="/booking" onClick={() => setOpen(!open)}>
                     <Button
                       buttonType="primary"
                       className="w-full justify-center"

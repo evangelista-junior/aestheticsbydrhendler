@@ -132,13 +132,13 @@ export default function BookingPage() {
           </Headings>
         </div>
 
-        <p className="text-gray-500 dark:text-easyWhite mb-8">
+        <span className="text-gray-500 dark:text-easyWhite">
           Please complete the form below to arrange your initial consultation.
-          <span className="text-primary-300 font-bold">
-            We’ll review the date you’ve selected and confirm availability. If
-            it’s not possible, we’ll get back to you via email with the closest
-            available time.
+          <span className="text-primary-300 font-bold ml-1">
+            You will receive an email confirmation within 24 hours.
           </span>
+        </span>
+        <p className="mb-8">
           During your consultation, we’ll confirm suitability, discuss potential
           risks, and outline a personalised plan tailored to your goals.
         </p>
