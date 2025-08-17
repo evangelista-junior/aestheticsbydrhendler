@@ -166,12 +166,14 @@ export default function NavBar() {
                 </ul>
 
                 <div className="mt-4">
-                  <Button
-                    buttonType="primary"
-                    className="w-full justify-center"
-                  >
-                    Book now
-                  </Button>
+                  <Link href="/booking">
+                    <Button
+                      buttonType="primary"
+                      className="w-full justify-center"
+                    >
+                      Book now
+                    </Button>
+                  </Link>
                 </div>
               </nav>
 
