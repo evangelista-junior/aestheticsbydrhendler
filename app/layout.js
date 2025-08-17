@@ -1,5 +1,7 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import NavBar from "@/components/sections/NavBar";
+import Footer from "@/components/sections/Footer";
 
 const robotoFont = Roboto({
   subsets: ["latin"],
@@ -53,7 +55,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${robotoFont.variable} antialiased`}>{children}</body>
+      <body className={`${robotoFont.variable} antialiased`}>
+        <NavBar />
+
+        {children}
+
+        <Footer />
+      </body>
     </html>
   );
 }

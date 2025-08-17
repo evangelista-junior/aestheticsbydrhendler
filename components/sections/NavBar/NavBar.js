@@ -7,23 +7,29 @@ import { useEffect, useRef, useState } from "react";
 import Button from "@/components/primary/Button";
 import NavHeaderButton from "./components/NavHeaderButton";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export default function NavBar() {
   const [showNavBar, setShowNavBar] = useState(false);
   const [open, setOpen] = useState(false);
-  const firstFocusable = useRef(null);
 
-  // Hide/Show ao rolar
+  const currentPathName = usePathname();
+  const notHomePage = currentPathName != "/";
+
+  //Handle the main NavBar whenever the page gets scrolled or if it's being shown in any page but home "/"
   useEffect(() => {
     const handleScroll = () => {
-      setShowNavBar(!open && window.scrollY > 80);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // estado inicial
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [open]); // << depende de open
+      const isScrolled = window.scrollY > 80;
 
-  // ESC fecha o drawer
+      setShowNavBar((!open && isScrolled) || notHomePage);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [open, notHomePage]);
+
+  //Add listener for whenever the user clicks outside the drawer
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => e.key === "Escape" && setOpen(false);
@@ -31,19 +37,12 @@ export default function NavBar() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Scroll lock quando drawer aberto
+  // Locks the scrolling when drawer menu is open
   useEffect(() => {
     if (open) {
       const prev = document.body.style.overflow;
       document.body.style.overflow = "hidden";
       return () => (document.body.style.overflow = prev);
-    }
-  }, [open]);
-
-  // Foco inicial no drawer
-  useEffect(() => {
-    if (open && firstFocusable.current) {
-      firstFocusable.current.focus();
     }
   }, [open]);
 
@@ -64,10 +63,14 @@ export default function NavBar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100, opacity: 0 }}
+        initial={notHomePage ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
         animate={showNavBar ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className="fixed top-0 left-0 w-full bg-white shadow-2xl z-50"
+        className={
+          notHomePage
+            ? "sticky top-0 left-0 w-full shadow-2xl z-50"
+            : "fixed top-0 left-0 w-full shadow-2xl z-50"
+        }
       >
         <div className="bg-white text-gray-600 px-4 py-2 lg:px-8 flex justify-between items-center">
           <Link
@@ -130,9 +133,14 @@ export default function NavBar() {
               aria-label="Main menu"
             >
               <div className="flex items-center justify-between px-4 py-3 border-b">
-                <Image src={horizontal_logo} alt="" width={120} />
+                <Link
+                  href="/"
+                  className="inline-flex items-center"
+                  aria-label="Go to homepage"
+                >
+                  <Image src={horizontal_logo} alt="" width={120} />
+                </Link>
                 <button
-                  ref={firstFocusable}
                   className="p-2 rounded-md border border-gray-200 hover:bg-gray-50"
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
