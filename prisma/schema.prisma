@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TokenStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  EXPIRED
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CANCELLED
+}
+
+model Treatments {
+  id                  String @id @default(cuid())
+  stripeProductNumber String
+  name                String
+}
+
+model TokensJWT {
+  id    String @id @default(uuid())
+  token String
+}
+
+model PaymentTokens {
+  id          String      @id @default(cuid())
+  jti         String      @unique // unique identifier, I'll use it to create the checkout session link that'll be sent on the email
+  status      TokenStatus @default(PENDING)
+  
+  email       String
+  name        String?
+  phone       String?
+  service     String
+  date        String?
+  time        String?
+  notes       String?
+  consent     Boolean     @default(false)
+  
+  amountCents Int
+  currency    String      @default("AUD")
+  provider    String?     // "stripe"
+  providerRef String?     @unique
+  
+  createdAt   DateTime
+  expiresAt   DateTime
+  usedAt      DateTime?
+  
+  booking     Bookings?
+  
+  @@index([status, expiresAt])
+  @@index([email, status])
+}
+
+model Bookings {
+  id          String        @id @default(cuid())
+  status      BookingStatus @default(CONFIRMED)
+  
+  email       String
+  name        String?
+  phone       String?
+  service     String
+  date        String?
+  time        String?
+  notes       String?
+  consent     Boolean       @default(false)
+  
+  createdAt   DateTime      @default(now())
+  confirmedAt DateTime?     @default(now())
+  cancelledAt DateTime?
+  
+  tokenId     String        @unique
+  token       PaymentTokens @relation(fields: [tokenId], references: [id], onDelete: Restrict)
+}

@@ -7,10 +7,9 @@ import transparentLogo from "@/public/images/horizontal_logo_transparentbg.png";
 
 export default function Header() {
   return (
-    <section className="w-full h-10/12 relative">
+    <section className="w-full relative">
       <div className="absolute inset-0">
         <Image src={HeaderBackground} alt="" fill className="object-cover" />
-        {/* Overlay  */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/75 z-10" />
       </div>
 

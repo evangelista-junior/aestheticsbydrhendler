@@ -47,7 +47,7 @@ export default function WhatToExpect() {
   return (
     <section
       id="expect"
-      className="bg-easyWhite text-gray-800 px-4 py-12 lg:px-8 flex flex-col items-center xl:flex-row gap-8"
+      className="bg-easyWhite text-gray-800 px-4 py-12 lg:px-8 flex flex-col items-center xl:flex-row gap-6"
     >
       <div className="w-full flex justify-center">
         <Image

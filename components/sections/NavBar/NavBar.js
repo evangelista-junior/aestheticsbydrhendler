@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import horizontal_logo from "@/public/images/logo_horizontal_blackandwhite.png";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/components/primary/Button";
 import NavHeaderButton from "./components/NavHeaderButton";
 import { Menu, X } from "lucide-react";
@@ -78,18 +78,18 @@ export default function NavBar() {
             className="inline-flex items-center"
             aria-label="Go to homepage"
           >
-            <Image src={horizontal_logo} alt="" width={140} priority />
+            <Image src={horizontal_logo} alt="" width={140} />
           </Link>
 
           {/* Links desktop */}
-          <div className="hidden md:flex gap-6 items-center">
+          <div className="hidden lg:flex gap-6 items-center">
             {links.map((l) => (
               <NavHeaderButton asChild key={l.label}>
                 <Link href={l.href}>{l.label}</Link>
               </NavHeaderButton>
             ))}
 
-            <Link href="/booking">
+            <Link href="/bookings">
               <Button buttonType="primary" className="ml-8">
                 Book now
               </Button>
@@ -97,7 +97,7 @@ export default function NavBar() {
           </div>
 
           <button
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-md border border-gray-200 active:scale-95 "
+            className="lg:hidden inline-flex items-center justify-center p-2 rounded-md border border-gray-200 active:scale-95 "
             onClick={() => setOpen(true)}
             aria-label="Open menu"
             aria-controls="mobile-drawer"
@@ -165,7 +165,7 @@ export default function NavBar() {
                 </ul>
 
                 <div className="mt-4">
-                  <Link href="/booking" onClick={() => setOpen(!open)}>
+                  <Link href="/bookings" onClick={() => setOpen(!open)}>
                     <Button
                       buttonType="primary"
                       className="w-full justify-center"

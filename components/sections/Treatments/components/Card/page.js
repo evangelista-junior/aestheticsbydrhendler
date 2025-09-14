@@ -9,7 +9,7 @@ export default function Card({
   learnMore = false,
 }) {
   return (
-    <article className="xl:flex gap-8">
+    <article className="xl:flex gap-6">
       <div className="w-full xl:w-[200px] h-[200px] xl:flex-shrink-0 overflow-hidden rounded-lg">
         {comingsoon && (
           <p className="xl:hidden text-center relative bg-primary-100 text-primary-900 text-xs font-semibold px-2 py-0.5 rounded-tl-lg rounded-tr-lg top-2">

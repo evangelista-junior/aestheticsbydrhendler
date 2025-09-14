@@ -1,5 +1,5 @@
 // app/booking/page.js  (SERVER)
-import BookingClient from "./BookingClient";
+import Booking from "./Booking";
 
 export const metadata = {
   title: "Book a Consultation | Aesthetics by Dr Hendler", // não precisa ser object
@@ -17,13 +17,13 @@ export const metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://www.aestheticsbydrhendler.com.au/booking",
+    canonical: "https://www.aestheticsbydrhendler.com.au/bookings",
   },
   openGraph: {
     title: "Book a Consultation | Aesthetics by Dr Hendler",
     description:
       "Arrange your consultation for cosmetic injectables in Bondi & Sydney’s Eastern Suburbs with Dr. Shane Hendler.",
-    url: "https://www.aestheticsbydrhendler.com.au/booking",
+    url: "https://www.aestheticsbydrhendler.com.au/bookings",
     siteName: "Aesthetics by Dr Hendler",
     locale: "en_AU",
     type: "website",
@@ -39,5 +39,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <BookingClient />;
+  return <Booking />;
 }
