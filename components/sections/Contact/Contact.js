@@ -12,7 +12,7 @@ export default function Contact() {
     formState: { errors },
   } = useForm();
 
-  //TODO: ajustar a funçao e requirements
+  //TODO: ajustar a funçao e requirements e fazer o contact form funcionar
   const onSubmit = (data) => console.log(`!!!!! ${data}`);
 
   return (

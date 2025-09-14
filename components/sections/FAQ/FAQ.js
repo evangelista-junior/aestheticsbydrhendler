@@ -61,7 +61,7 @@ export default function FAQ() {
           headingType="h2"
           className="uppercase font-extralight tracking-widest italic mb-8 text-center "
         >
-          Frequently Asked Questions
+          FAQ
         </Headings>
 
         <div className="divide-y divide-primary-300">
