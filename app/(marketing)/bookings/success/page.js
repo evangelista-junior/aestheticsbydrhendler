@@ -1,14 +1,14 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import moneyFormater from "@/lib/utils/moneyFormater";
 import Button from "@/components/primary/Button";
 import { Check, X } from "lucide-react";
 
-export default function Success() {
-  const searchParams = useSearchParams();
-  const sessionId = searchParams.get("session_id");
+export default function Success({ searchParams }) {
+  const searchParams_ = useSearchParams();
+  const { session_id: sessionId } = use(searchParams);
   const [paymentStatus, setPaymentStatus] = useState();
   const [customerName, setCustomerName] = useState();
   const [paymentAmount, setPaymentAmount] = useState();
