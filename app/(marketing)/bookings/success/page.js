@@ -72,8 +72,8 @@ export default function Success() {
             <div className="tracking-wider max-w-lg mx-auto">
               <p>
                 Hi {String(customerName).split(" ")[0]}, thank you for choosing
-                us! Your reservation is confirmed. If there's anything you need
-                before your appointment, please don't hesitate to reach us out
+                us! Your reservation is confirmed. If there is anything you need
+                before your appointment, please don not hesitate to reach us out
                 through the email bellow:
               </p>
               <a
