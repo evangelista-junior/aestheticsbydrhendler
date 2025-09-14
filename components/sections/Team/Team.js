@@ -7,7 +7,7 @@ import { CalendarDays } from "lucide-react";
 export default function Team() {
   return (
     <section id="team" className="bg-easyWhite text-black lg:py-24 p-6">
-      <div className="w-full lg:w-2/3 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 items-center">
+      <div className="w-full lg:w-2/3 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
         <div className="relative w-full h-[400px] lg:h-[600px] rounded-2xl lg:rounded-[4rem] overflow-hidden shadow-2xl">
           <Image
             src={teamMemberPhoto}
@@ -17,7 +17,7 @@ export default function Team() {
           />
         </div>
 
-        <div className="flex flex-col justify-center gap-6">
+        <div className="flex flex-col justify-center gap-8">
           <div className="flex items-center gap-3">
             <div>
               <Headings headingType="h2">Dr Shay Hendler</Headings>
