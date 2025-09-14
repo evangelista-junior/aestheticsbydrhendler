@@ -13,7 +13,7 @@ export async function GET(req) {
     return NextResponse.json(
       {
         ok: false,
-        message: `UUID is not valid`,
+        error: `UUID is not valid`,
       },
       { status: 400 }
     );
@@ -27,7 +27,7 @@ export async function GET(req) {
   const { valid, payload } = await decodeToken(paymentToken.token);
   if (!paymentToken) {
     return NextResponse.json(
-      { ok: false, message: "Booking not found" },
+      { ok: false, error: "Booking not found" },
       { status: 404 }
     );
   }
@@ -37,7 +37,7 @@ export async function GET(req) {
     return NextResponse.json(
       {
         ok: false,
-        message: `This payment link has expired for security reasons. Please start a new booking process.`,
+        error: `This payment link has expired for security reasons. Please start a new booking process.`,
       },
       { status: 400 }
     );
@@ -52,13 +52,23 @@ export async function GET(req) {
       service: true,
       providerRef: true,
       status: true,
+      usedAt: true,
     },
   });
 
   if (!paymentTokenInfo) {
     return NextResponse.json(
-      { ok: false, message: "Patient not found" },
+      { ok: false, error: "Patient not found" },
       { status: 404 }
+    );
+  }
+
+  if (paymentTokenInfo.usedAt) {
+    return NextResponse.json(
+      {
+        error: "Payment already complete!",
+      },
+      { status: 409 }
     );
   }
 
@@ -68,7 +78,7 @@ export async function GET(req) {
         paymentTokenInfo.providerRef
       );
 
-      if (!paymentTokenInfo.status === "expired") {
+      if (paymentTokenInfo.status != "expired") {
         return NextResponse.json(
           { client_secret: session.client_secret },
           { status: 200 }
@@ -86,7 +96,7 @@ export async function GET(req) {
 
   if (!treatment?.stripeProductNumber) {
     return NextResponse.json(
-      { ok: false, message: "Treatment not found or not configured" },
+      { ok: false, error: "Treatment not found or not configured" },
       { status: 400 }
     );
   }

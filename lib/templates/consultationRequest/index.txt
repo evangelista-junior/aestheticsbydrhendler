@@ -1,0 +1,15 @@
+Hello {{customerName}},
+
+We have received your consultation request.
+
+Service: {{service}}
+Date: {{date}} | Time: {{time}}
+Notes: {{notes}}
+
+Please confirm that you received this email by accessing:
+{{checkoutUrl}}
+
+If you need to reschedule: {{rescheduleUrl}}
+To cancel: {{cancelUrl}}
+
+© {{year}} Aesthetics by Dr. Hendler

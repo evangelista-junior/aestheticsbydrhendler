@@ -1,7 +1,10 @@
 "use server";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { stripe } from "@/lib/stripe";
+import path from "node:path";
+import fs from "node:fs/promises";
+import { parseEmailConsultationRequest } from "@/utils/parseEmailConsultationRequest";
+import { sendMail } from "@/lib/mailer";
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
@@ -15,13 +18,9 @@ export async function GET(req) {
       );
     }
 
-    const paymentToken = await prisma.paymentTokens.update({
+    var paymentToken = await prisma.paymentTokens.findUnique({
       where: {
         providerRef: sessionId,
-      },
-      data: {
-        usedAt: new Date(),
-        status: "CONFIRMED",
       },
     });
     if (!paymentToken) {
@@ -30,8 +29,19 @@ export async function GET(req) {
         { status: 404 }
       );
     }
+    if (!paymentToken.usedAt) {
+      paymentToken = await prisma.paymentTokens.update({
+        where: {
+          providerRef: sessionId,
+        },
+        data: {
+          usedAt: new Date(),
+          status: "CONFIRMED",
+        },
+      });
+    }
 
-    const booking = await prisma.bookings.findUnique({
+    var booking = await prisma.bookings.findUnique({
       where: { tokenId: paymentToken.id },
     });
 
@@ -52,6 +62,35 @@ export async function GET(req) {
       });
     }
 
+    if (!paymentToken.usedAt) {
+      const emailHTML = path.join(
+        process.cwd(),
+        "lib/templates/bookingConfirmation/index.html"
+      );
+      const emailTXT = path.join(
+        process.cwd(),
+        "lib/templates/bookingConfirmation/index.txt"
+      );
+      const emailHTMLStringFormat = await fs.readFile(emailHTML, "utf-8");
+      const emailTXTStringFormat = await fs.readFile(emailTXT, "utf-8");
+      const emailHTMLCustomized = parseEmailConsultationRequest({
+        string: emailHTMLStringFormat,
+        data: paymentToken,
+        bookingUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/success?session_id=${sessionId}`,
+      });
+      const emailTXTCustomized = parseEmailConsultationRequest({
+        string: emailTXTStringFormat,
+        data: paymentToken,
+        bookingUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/success?session_id=${sessionId}`,
+      });
+      const email = await sendMail({
+        emailTo: paymentToken.email,
+        emailSubject: "Aesthetics by Dr Hendler | Booking Confirmed",
+        emailText: emailTXTCustomized,
+        emailHtml: emailHTMLCustomized,
+      });
+    }
+
     return NextResponse.json(
       {
         paymentStatus: paymentToken.status,
@@ -61,8 +100,6 @@ export async function GET(req) {
         bookingId: booking.id,
       },
       { status: 200 }
-
-      //TODO:Send email to patient
     );
   } catch (err) {
     console.error("API error /bookings/return:", err);

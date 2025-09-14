@@ -1,0 +1,21 @@
+Hello {{customerName}},
+
+Your consultation has been successfully confirmed!
+
+Service: {{service}}
+Date: {{date}} | Time: {{time}}
+Notes: {{notes}}
+
+We are excited to welcome you and look forward to discussing a personalized treatment plan tailored to your goals.
+
+Important reminders:
+- Please arrive 10 minutes before your scheduled appointment
+- The consultation fee will be fully deducted from your treatment if you proceed with the procedure
+- For rescheduling, please contact us at least 24 hours in advance
+
+Access your consultation details:
+{{bookingUrl}}
+
+To cancel, please contact us or access your booking and click the cancellation option at the bottom of the page.
+
+© {{year}} Aesthetics by Dr. Hendler

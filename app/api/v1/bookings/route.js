@@ -1,10 +1,9 @@
 import { createToken } from "@/lib/jwt";
-import { sendMail, testConnection } from "@/lib/mailer";
+import { sendMail } from "@/lib/mailer";
 import { prisma } from "@/lib/prisma";
 import generateUUID from "@/utils/generateUUID";
 import { parseEmailConsultationRequest } from "@/utils/parseEmailConsultationRequest";
 import { NextResponse } from "next/server";
-import { randomUUID } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 export async function POST(request) {
@@ -32,7 +31,7 @@ export async function POST(request) {
       (k) => !data?.[k] || String(data[k]).trim() === ""
     );
     if (missing.length) {
-      return Response.json(
+      return NextResponse.json(
         {
           ok: false,
           message: `Missing required fields: ${missing.join(", ")}`,
@@ -41,7 +40,7 @@ export async function POST(request) {
       );
     }
     if (data.consent !== true) {
-      return Response.json(
+      return NextResponse.json(
         { ok: false, message: "Consent is required." },
         { status: 400 }
       );
@@ -75,7 +74,6 @@ export async function POST(request) {
       expireAt,
     });
 
-    // DB
     const uuidToken = await prisma.tokensJWT.create({
       data: {
         token: jwt,
@@ -102,38 +100,37 @@ export async function POST(request) {
       },
     });
 
-    // Email
     const emailHTML = path.join(
       process.cwd(),
-      "lib/templates/consultationRequest/consultationRequest.html"
+      "lib/templates/consultationRequest/index.html"
     );
     const emailTXT = path.join(
       process.cwd(),
-      "lib/templates/consultationRequest/consultationRequest.txt"
+      "lib/templates/consultationRequest/index.txt"
     );
-    const emailHTMLString = await fs.readFile(emailHTML, "utf8");
-    const emailTXTStringConverted = await fs.readFile(emailTXT, "utf-8");
+    const emailHTMLStringFormat = await fs.readFile(emailHTML, "utf8");
+    const emailTXTStringFormat = await fs.readFile(emailTXT, "utf-8");
     const emailHTMLCustomized = parseEmailConsultationRequest({
-      string: emailHTMLString,
+      string: emailHTMLStringFormat,
       data,
       checkoutUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/checkout?id=${uuidToken.id}`,
     });
     const emailTXTCustomized = parseEmailConsultationRequest({
-      string: emailTXTStringConverted,
+      string: emailTXTStringFormat,
       data,
       checkoutUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/checkout?id=${uuidToken.id}`,
     });
-    const info = await sendMail({
+    const email = await sendMail({
       emailTo: data.email,
       emailSubject: "Aesthetics by Dr Hendler | Complete your booking",
       emailText: emailTXTCustomized,
       emailHtml: emailHTMLCustomized,
     });
 
-    return Response.json({ ok: true }, { status: 201 });
+    return NextResponse.json({ ok: true }, { status: 201 });
   } catch (err) {
     console.error("Booking API error:", err);
-    return Response.json(
+    return NextResponse.json(
       { ok: false, message: "Server error" },
       { status: 500 }
     );

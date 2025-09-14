@@ -48,7 +48,13 @@ export default function Success({ searchParams }) {
   }
 
   async function cancelBooking() {
-    // const res = await fetch(`/api/v1/bookings/${bookingId}`);
+    const res = await fetch(`/api/v1/bookings/${bookingId}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    setModalIsOpen(false);
+
+    //
   }
 
   if (loading) {

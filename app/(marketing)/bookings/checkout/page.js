@@ -21,13 +21,14 @@ export default function Checkout({ searchParams }) {
       const res = await fetch(`/api/v1/bookings/checkout?id=${bookingId}`, {
         method: "GET",
       });
+      const data = await res.json();
 
       if (!res.ok) {
-        const { message: errorMessage } = await res.json();
+        const { error: errorMessage } = data;
         throw new Error(errorMessage);
       }
 
-      const { client_secret } = await res.json();
+      const { client_secret } = data;
       return client_secret;
     } catch (error) {
       setErrors(error.message);
@@ -40,12 +41,10 @@ export default function Checkout({ searchParams }) {
         <div className="flex justify-center">
           <Link
             href="/bookings"
-            className="group text-primary-500  bg-primary-50/50 hover:bg-primary-50 p-3 rounded-xl text-center transition-all duration-300"
+            className="text-center group text-primary-500  bg-primary-50/50 hover:bg-primary-50 p-3 rounded-xl transition-all duration-300"
           >
-            <p className="flex gap-3 items-center font-bold tracking-wide ">
-              {errors}
-            </p>
-            <p className="group-hover:tracking-wide duration-200">
+            <p className="font-bold tracking-wide">{errors}</p>
+            <p className="group-hover:tracking-wide duration-300">
               👉🏻 Click here to start a new booking!
             </p>
           </Link>
