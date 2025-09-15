@@ -1,0 +1,16 @@
+Hello {{customerName}},
+
+Your consultation booking has been successfully cancelled.
+
+Service: {{service}}
+Date: {{date}} | Time: {{time}}
+Notes: {{notes}}
+
+We have processed your refund and it should appear in your account within 3-5 business days.
+
+We're sorry to see you go, but you're always welcome to book another consultation with us in the future.
+
+To book a new consultation: https://aestheticsbydrhendler.com.au/bookings
+If you have questions: Contact us directly
+
+© {{year}} Aesthetics by Dr. Hendler

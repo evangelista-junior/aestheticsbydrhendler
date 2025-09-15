@@ -3,6 +3,7 @@ import teamMemberPhoto from "@/public/images/teamMemberPhoto.jpeg";
 import Headings from "@/components/primary/Headings";
 import Button from "@/components/primary/Button";
 import { CalendarDays } from "lucide-react";
+import Link from "next/link";
 
 export default function Team() {
   return (
@@ -47,12 +48,15 @@ export default function Team() {
             </p>
           </div>
 
-          <div className="mx-auto items-center lg:items-start lg:mx-0">
+          <Link
+            href="/bookings"
+            className="mx-auto items-center lg:items-start lg:mx-0"
+          >
             <Button buttonType="primaryRounded" className="w-auto">
               <CalendarDays size={20} aria-hidden="true" focusable="false" />
               Book a Consultation
             </Button>
-          </div>
+          </Link>
         </div>
       </div>
     </section>

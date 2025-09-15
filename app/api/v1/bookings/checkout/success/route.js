@@ -6,8 +6,8 @@ import fs from "node:fs/promises";
 import { parseEmailConsultationRequest } from "@/utils/parseEmailConsultationRequest";
 import { sendMail } from "@/lib/mailer";
 
-export async function GET(req) {
-  const { searchParams } = new URL(req.url);
+export async function POST(request) {
+  const { searchParams } = new URL(request.url);
   const sessionId = searchParams.get("session_id");
 
   try {
@@ -62,42 +62,36 @@ export async function GET(req) {
       });
     }
 
-    if (!paymentToken.usedAt) {
-      const emailHTML = path.join(
-        process.cwd(),
-        "lib/templates/bookingConfirmation/index.html"
-      );
-      const emailTXT = path.join(
-        process.cwd(),
-        "lib/templates/bookingConfirmation/index.txt"
-      );
-      const emailHTMLStringFormat = await fs.readFile(emailHTML, "utf-8");
-      const emailTXTStringFormat = await fs.readFile(emailTXT, "utf-8");
-      const emailHTMLCustomized = parseEmailConsultationRequest({
-        string: emailHTMLStringFormat,
-        data: paymentToken,
-        bookingUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/success?session_id=${sessionId}`,
-      });
-      const emailTXTCustomized = parseEmailConsultationRequest({
-        string: emailTXTStringFormat,
-        data: paymentToken,
-        bookingUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/success?session_id=${sessionId}`,
-      });
-      const email = await sendMail({
-        emailTo: paymentToken.email,
-        emailSubject: "Aesthetics by Dr Hendler | Booking Confirmed",
-        emailText: emailTXTCustomized,
-        emailHtml: emailHTMLCustomized,
-      });
-    }
+    const emailHTML = path.join(
+      process.cwd(),
+      "lib/templates/bookingConfirmation/index.html"
+    );
+    const emailTXT = path.join(
+      process.cwd(),
+      "lib/templates/bookingConfirmation/index.txt"
+    );
+    const emailHTMLStringFormat = await fs.readFile(emailHTML, "utf-8");
+    const emailTXTStringFormat = await fs.readFile(emailTXT, "utf-8");
+    const emailHTMLCustomized = parseEmailConsultationRequest({
+      string: emailHTMLStringFormat,
+      data: paymentToken,
+      bookingUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/${booking.id}`,
+    });
+    const emailTXTCustomized = parseEmailConsultationRequest({
+      string: emailTXTStringFormat,
+      data: paymentToken,
+      bookingUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/${booking.id}`,
+    });
+    const email = await sendMail({
+      emailTo: paymentToken.email,
+      emailSubject: "Aesthetics by Dr Hendler | Booking Confirmed",
+      emailText: emailTXTCustomized,
+      emailHtml: emailHTMLCustomized,
+    });
 
     return NextResponse.json(
       {
-        paymentStatus: paymentToken.status,
-        paymentAmount: paymentToken.amountCents,
-        customerName: paymentToken.name,
-        referenceNumber: paymentToken.id,
-        bookingId: booking.id,
+        redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/${booking.id}`,
       },
       { status: 200 }
     );

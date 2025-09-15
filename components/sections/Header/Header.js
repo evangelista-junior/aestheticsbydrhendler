@@ -4,6 +4,7 @@ import HeaderBackground from "@/public/images/header_bg.png";
 import { CalendarDays } from "lucide-react";
 import Button from "@/components/primary/Button";
 import transparentLogo from "@/public/images/horizontal_logo_transparentbg.png";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -24,10 +25,12 @@ export default function Header() {
             Where medical expertise meets natural aesthetics
           </p>
 
-          <Button className="mt-16 md:mt-30 " buttonType="outlineInverse">
-            <CalendarDays size={18} aria-hidden="true" focusable="false" />
-            Book Your Consultation
-          </Button>
+          <Link href="/bookings">
+            <Button className="mt-16 md:mt-30 " buttonType="outlineInverse">
+              <CalendarDays size={18} aria-hidden="true" focusable="false" />
+              Book Your Consultation
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

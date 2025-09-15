@@ -1,8 +1,12 @@
 import { prisma } from "@/lib/prisma";
 import { stripe } from "@/lib/stripe";
 import { NextResponse } from "next/server";
+import path from "node:path";
+import fs from "node:fs/promises";
+import { parseEmailConsultationRequest } from "@/utils/parseEmailConsultationRequest";
+import { sendMail } from "@/lib/mailer";
 
-export async function GET(req, { params }) {
+export async function GET(request, { params }) {
   try {
     const { bookingId } = await params;
 
@@ -12,6 +16,23 @@ export async function GET(req, { params }) {
         { status: 400 }
       );
     }
+
+    const booking = await prisma.bookings.findUnique({
+      where: { id: bookingId },
+      include: {
+        token: true,
+      },
+    });
+
+    return NextResponse.json(
+      {
+        status: booking.status,
+        amount: booking.token.amountCents,
+        name: booking.name,
+        providerRef: booking.token.id,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       { error: "Internal server error" },
@@ -88,7 +109,30 @@ export async function DELETE(req, { params }) {
       },
     });
 
-    //TODO: Send cancelation email
+    const emailHTML = path.join(
+      process.cwd(),
+      "lib/templates/bookingCancellation/index.html"
+    );
+    const emailTXT = path.join(
+      process.cwd(),
+      "lib/templates/bookingCancellation/index.txt"
+    );
+    const emailHTMLStringFormat = await fs.readFile(emailHTML, "utf-8");
+    const emailTXTStringFormat = await fs.readFile(emailTXT, "utf-8");
+    const emailHTMLCustomized = parseEmailConsultationRequest({
+      string: emailHTMLStringFormat,
+      data: booking,
+    });
+    const emailTXTCustomized = parseEmailConsultationRequest({
+      string: emailTXTStringFormat,
+      data: booking,
+    });
+    const email = await sendMail({
+      emailTo: booking.email,
+      emailSubject: "Aesthetics by Dr Hendler | Booking Cancelled",
+      emailText: emailTXTCustomized,
+      emailHtml: emailHTMLCustomized,
+    });
 
     return NextResponse.json(
       {

@@ -4,36 +4,32 @@ import { useEffect, useState, use } from "react";
 import moneyFormater from "@/lib/utils/moneyFormater";
 import Button from "@/components/primary/Button";
 import { Check, X } from "lucide-react";
+import { useParams } from "next/navigation";
 
 export default function Success({ searchParams }) {
-  const { session_id: sessionId } = use(searchParams);
+  const { bookingId } = useParams();
   const [paymentStatus, setPaymentStatus] = useState();
   const [customerName, setCustomerName] = useState();
   const [paymentAmount, setPaymentAmount] = useState();
   const [referenceNumber, setReferenceNumber] = useState();
-  const [bookingId, setBookingId] = useState();
   const [loading, setLoading] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     async function fecthCheckoutInfo() {
       try {
-        const res = await fetch(
-          `/api/v1/bookings/success?session_id=${sessionId}`,
-          {
-            method: "GET",
-          }
-        );
+        const res = await fetch(`/api/v1/bookings/${bookingId}`, {
+          method: "GET",
+        });
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
 
         const data = await res.json();
-        setPaymentStatus(data.paymentStatus);
-        setCustomerName(data.customerName);
-        setPaymentAmount(data.paymentAmount);
-        setReferenceNumber(data.referenceNumber);
-        setBookingId(data.bookingId);
+        setPaymentStatus(data.status);
+        setCustomerName(data.name);
+        setPaymentAmount(data.amount);
+        setReferenceNumber(data.providerRef);
       } catch (error) {
       } finally {
         setLoading(false);
@@ -41,7 +37,7 @@ export default function Success({ searchParams }) {
     }
 
     fecthCheckoutInfo();
-  }, [sessionId]);
+  }, [bookingId]);
 
   async function handleModalVisibility() {
     setModalIsOpen(!modalIsOpen);
@@ -53,8 +49,6 @@ export default function Success({ searchParams }) {
     });
     const data = await res.json();
     setModalIsOpen(false);
-
-    //
   }
 
   if (loading) {

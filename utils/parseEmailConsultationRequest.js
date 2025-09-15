@@ -12,5 +12,6 @@ export function parseEmailConsultationRequest({
     .replace(/{{notes}}/g, data.notes)
     .replace(/{{checkoutUrl}}/g, checkoutUrl)
     .replace(/{{bookingUrl}}/g, bookingUrl)
-    .replace(/{{year}}/g, new Date().getFullYear());
+    .replace(/{{year}}/g, new Date().getFullYear())
+    .replace(/{{cancellationDate}}/g, data.cancelledAt);
 }
