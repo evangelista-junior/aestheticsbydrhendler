@@ -4,16 +4,14 @@ import Headings from "@/components/primary/Headings";
 
 export default function Card({ cardIcon, cardTitle, cardInfo }) {
   return (
-    <div className="flex h-full items-start gap-3 p-3 border border-gray-200 rounded-xl shadow-xl">
-      <div className="flex items-center justify-center bg-transparent text-gray-600 rounded-md shadow aspect-square leading-none">
+    <div className="flex flex-col h-full items-center gap-3 p-3 border border-gray-100 rounded-md shadow-xl text-gray-600">
+      <div className="w-full flex items-center gap-3 bg-transparent">
         {cardIcon}
+        <p className="text-xl font-medium tracking-wider">{cardTitle}</p>
       </div>
 
       <div className="min-w-0">
-        <Headings headingType="h4" className="font-medium tracking-wide">
-          {cardTitle}
-        </Headings>
-        <p className="text-gray-600 font-light break-words">{cardInfo}</p>
+        <p className="font-light">{cardInfo}</p>
       </div>
     </div>
   );
