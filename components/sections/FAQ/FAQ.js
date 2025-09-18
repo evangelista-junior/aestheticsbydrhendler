@@ -1,6 +1,7 @@
 import Button from "@/components/primary/Button";
 import Headings from "@/components/primary/Headings";
 import { Plus } from "lucide-react";
+import Link from "next/link";
 
 const faqs = [
   {
@@ -56,30 +57,34 @@ const faqs = [
 export default function FAQ() {
   return (
     <section id="faq" className="text-gray-600 bg-white">
-      <div className="relative px-4 pt-16 pb-4 xl:px-8 xl:max-w-1/2 mx-auto">
+      <div className="relative px-3 pt-6 pb-4 xl:px-6 xl:max-w-2/3 mx-auto">
         <Headings
           headingType="h2"
-          className="uppercase font-extralight tracking-widest italic mb-8 text-center "
+          className="font-extralight tracking-widest italic mb-8 text-center "
         >
-          FAQ
+          Frequently asked questions
         </Headings>
 
-        <div className="divide-y divide-primary-300">
+        <div className="divide-y divide-primary-300/30">
           {faqs.map((item, idx) => (
-            <details key={idx} className="group p-4 transition duration">
-              <summary className="cursor-pointer flex items-center uppercase gap-2">
-                <span className="inline-flex h-6 w-6 items-center justify-center group-open:rotate-45 group-open:text-primary-500 transition-all duration-300">
+            <details key={idx} className="group p-6 transition duration">
+              <summary className="cursor-pointer flex items-center gap-1 justify-between">
+                <p className="text-lg tracking-wider  group-open:tracking-widest group-open:text-primary-500 transition-all duration-300">
+                  {item.q}
+                </p>
+                <span className="inline-flex h-6 w-6 items-center justify-center group-open:rotate-45 group-open:text-primary-300 transition-all duration-300">
                   <Plus size={20} aria-hidden="true" focusable="false" />
                 </span>
-                <h3 className="text-lg tracking-wide font-bold text-gray-700 group-open:tracking-widest group-open:text-primary-500 transition-all duration-300">
-                  {item.q}
-                </h3>
               </summary>
               <div className="mt-2 text-gray-500 tracking-wide flex flex-col items-center">
                 {item.a}
 
                 {item.q === "How do I book?" && (
-                  <Button buttonType="outline">Book Here</Button>
+                  <Link href="/bookings">
+                    <Button buttonType="primaryRounded" className="mt-3">
+                      Book Here
+                    </Button>
+                  </Link>
                 )}
               </div>
             </details>

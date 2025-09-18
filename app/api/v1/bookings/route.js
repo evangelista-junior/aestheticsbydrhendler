@@ -1,6 +1,7 @@
 import { createToken } from "@/lib/jwt";
 import { sendMail } from "@/lib/mailer";
 import { prisma } from "@/lib/prisma";
+import dateFormater from "@/lib/utils/dateFormater";
 import generateUUID from "@/utils/generateUUID";
 import { parseEmailConsultationRequest } from "@/utils/parseEmailConsultationRequest";
 import { NextResponse } from "next/server";
@@ -100,6 +101,10 @@ export async function POST(request) {
       },
     });
 
+    const formatedDateData = {
+      ...data,
+      preferedDate: dateFormater(data.preferedDate),
+    };
     const emailHTML = path.join(
       process.cwd(),
       "lib/templates/consultationRequest/index.html"
@@ -112,16 +117,16 @@ export async function POST(request) {
     const emailTXTStringFormat = await fs.readFile(emailTXT, "utf-8");
     const emailHTMLCustomized = parseEmailConsultationRequest({
       string: emailHTMLStringFormat,
-      data,
+      data: formatedDateData,
       checkoutUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/checkout?id=${uuidToken.id}`,
     });
     const emailTXTCustomized = parseEmailConsultationRequest({
       string: emailTXTStringFormat,
-      data,
+      data: formatedDateData,
       checkoutUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/checkout?id=${uuidToken.id}`,
     });
     const email = await sendMail({
-      emailTo: data.email,
+      emailTo: formatedDateData.email,
       emailSubject: "Aesthetics by Dr Hendler | Complete your booking",
       emailText: emailTXTCustomized,
       emailHtml: emailHTMLCustomized,
@@ -129,10 +134,6 @@ export async function POST(request) {
 
     return NextResponse.json({ ok: true }, { status: 201 });
   } catch (err) {
-    console.error("Booking API error:", err);
-    return NextResponse.json(
-      { ok: false, message: "Server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ ok: false, message: err }, { status: 500 });
   }
 }

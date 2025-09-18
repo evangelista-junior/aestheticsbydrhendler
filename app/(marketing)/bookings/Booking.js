@@ -5,8 +5,9 @@ import { useForm } from "react-hook-form";
 import ErrorLabel from "@/components/primary/ErrorLabel";
 import SelectInput from "./components/SelectInput";
 import Input from "./components/Input";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, XCircle } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Booking() {
   const {
@@ -15,8 +16,9 @@ export default function Booking() {
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm();
 
+  const [responseErrors, setResponseErrors] = useState();
+
   const onSubmit = async (data) => {
-    // TODO: treat error ui message.
     try {
       const res = await fetch(`/api/v1/bookings`, {
         method: "POST",
@@ -25,10 +27,13 @@ export default function Booking() {
         },
         body: JSON.stringify(data),
       });
-      if (!res.ok)
+      if (!res.ok) {
+        let resErrors = (await res.json()).message;
+        setResponseErrors(resErrors);
         throw new Error(
           "Failed to book your appointment, please contact us or try later."
         );
+      }
     } catch (err) {
     } finally {
     }
@@ -85,7 +90,7 @@ export default function Booking() {
   ];
 
   return (
-    <section className="dark:bg-background dark:text-easyWhite max-w-5xl mx-auto px-4 lg:px-8 py-10">
+    <section className="max-w-5xl mx-auto px-4 lg:px-8 py-10 text-gray-700">
       <span>
         Please complete the form below to arrange your initial consultation.
       </span>
@@ -178,7 +183,7 @@ export default function Booking() {
           </label>
           <textarea
             rows={4}
-            className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-easyDark/30 dark:focus:ring-white/30"
+            className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-easyDark/30"
             placeholder="Optional information."
             {...register("notes")}
           />
@@ -188,7 +193,7 @@ export default function Booking() {
           <label className="flex items-start gap-3 cursor-pointer align-middle">
             <input
               type="checkbox"
-              className="cursor-pointer h-[16px] w-[16px] aspect-square appearance-none rounded border border-primary-300 dark:border-white
+              className="cursor-pointer h-[16px] w-[16px] aspect-square appearance-none rounded border border-primary-300
                 checked:bg-primary-300 checked:border-primary-400 
                 "
               {...register("consent", {
@@ -211,25 +216,44 @@ export default function Booking() {
         </div>
       </form>
 
-      {isSubmitSuccessful && ( //TODO: treat errors and create modal component itself
+      {isSubmitSuccessful && ( //TODO: create modal component itself
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
 
-          <div className="relative z-10 max-w-md w-full mx-4 rounded-md border border-white/20 bg-white/20 p-6 shadow-xl text-center fade-in">
-            <CheckCircle className="mx-auto mb-4 h-16 w-16 text-primary-300" />
-            <h2 className="text-2xl font-semibold text-white  tracking-widest">
-              Thank you!
-            </h2>
-            <p className="mt-2 text-gray-200 tracking-wider">
-              Your booking request has been received. You’ll receive an email
-              within 24 hours with payment details to secure your appointment.
-              We look forward to welcoming you soon.
-            </p>
+          {!responseErrors ? (
+            <div className="relative z-10 max-w-md w-full mx-4 rounded-md border border-white/20 bg-white/20 p-6 shadow-xl text-center fade-in">
+              <CheckCircle className="mx-auto mb-4 h-16 w-16 text-primary-300" />
+              <h2 className="text-2xl font-semibold text-white  tracking-widest">
+                Thank you!
+              </h2>
+              <p className="mt-2 text-gray-200 tracking-wider">
+                Your booking request has been received. You’ll receive an email
+                within 24 hours with payment details to secure your appointment.
+                We look forward to welcoming you soon.
+              </p>
 
-            <Link href="/" className="inline-flex mt-3">
-              <Button buttonType="primaryRounded">Go to Homepage</Button>
-            </Link>
-          </div>
+              <Link href="/" className="inline-flex mt-3">
+                <Button buttonType="primaryRounded">Go to Homepage</Button>
+              </Link>
+            </div>
+          ) : (
+            <div className="relative z-10 max-w-md w-full mx-4 rounded-md border border-red-500/30 bg-easyWhite p-6 shadow-xl text-center fade-in">
+              <XCircle className="mx-auto mb-4 h-16 w-16 text-red-400" />
+              <h2 className="text-2xl font-semibold text-red-400 tracking-widest">
+                Oops! Something went wrong
+              </h2>
+              <p className="mt-2 text-gray-500 tracking-wider">
+                {responseErrors ||
+                  "An unexpected error occurred. Please try again."}
+              </p>
+
+              <div className="flex gap-3 justify-center mt-6">
+                <Link href="/" className="inline-flex mt-3">
+                  <Button buttonType="primary">Go to Homepage</Button>
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </section>

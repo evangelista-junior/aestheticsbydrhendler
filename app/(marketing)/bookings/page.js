@@ -2,13 +2,13 @@
 import Booking from "./Booking";
 
 export const metadata = {
-  title: "Book a Consultation | Aesthetics by Dr Hendler", // não precisa ser object
+  title: "Book a Consultation | Aesthetics by Dr Hendler",
   description:
     "Book your cosmetic injectables consultation with Dr. Shane Hendler in Bondi, Sydney. Safe, tailored anti-wrinkle and dermal filler treatments.",
   keywords: [
     "cosmetic injectables Sydney",
     "anti-wrinkle Bondi",
-    "dermal fillers Sydney",
+    "anti-wrinkle Eastern Suburbs",
     "cosmetic doctor Eastern Suburbs",
     "aesthetic clinic Bondi",
   ],

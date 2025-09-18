@@ -5,6 +5,7 @@ import path from "node:path";
 import fs from "node:fs/promises";
 import { parseEmailConsultationRequest } from "@/utils/parseEmailConsultationRequest";
 import { sendMail } from "@/lib/mailer";
+import dateFormater from "@/lib/utils/dateFormater";
 
 export async function POST(request) {
   const { searchParams } = new URL(request.url);
@@ -62,6 +63,10 @@ export async function POST(request) {
       });
     }
 
+    const formatedDatePaymentToken = {
+      ...paymentToken,
+      date: dateFormater(paymentToken.date),
+    };
     const emailHTML = path.join(
       process.cwd(),
       "lib/templates/bookingConfirmation/index.html"
@@ -74,16 +79,16 @@ export async function POST(request) {
     const emailTXTStringFormat = await fs.readFile(emailTXT, "utf-8");
     const emailHTMLCustomized = parseEmailConsultationRequest({
       string: emailHTMLStringFormat,
-      data: paymentToken,
+      data: formatedDatePaymentToken,
       bookingUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/${booking.id}`,
     });
     const emailTXTCustomized = parseEmailConsultationRequest({
       string: emailTXTStringFormat,
-      data: paymentToken,
+      data: formatedDatePaymentToken,
       bookingUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/${booking.id}`,
     });
     const email = await sendMail({
-      emailTo: paymentToken.email,
+      emailTo: formatedDatePaymentToken.email,
       emailSubject: "Aesthetics by Dr Hendler | Booking Confirmed",
       emailText: emailTXTCustomized,
       emailHtml: emailHTMLCustomized,
