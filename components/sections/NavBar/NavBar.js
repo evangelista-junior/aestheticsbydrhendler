@@ -155,7 +155,7 @@ export default function NavBar() {
                     <li key={l.label}>
                       <Link
                         href={l.href}
-                        className="block rounded-lg px-3 py-2 text-lg active:bg-gray-100"
+                        className="block px-3 py-1 tracking-widest"
                         onClick={() => handleClickSideMenu()}
                       >
                         {l.label}
