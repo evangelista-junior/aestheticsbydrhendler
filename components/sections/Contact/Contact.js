@@ -22,9 +22,9 @@ export default function Contact() {
     >
       <Headings
         headingType="h2"
-        className="uppercase font-extralight tracking-widest italic mb-4 text-center"
+        className="font-extralight tracking-widest italic mb-4 text-center"
       >
-        Contact Us
+        Contact us
       </Headings>
 
       <div className="lg:grid lg:grid-cols-2 lg:gap-10 w-full">

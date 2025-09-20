@@ -170,7 +170,7 @@ export default function Success({ searchParams }) {
 
       {modalIsOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm backdrop-saturate-200" />
 
           <div className="relative xl:max-w-1/3 z-10 mx-4 text-gray-200 rounded-md border border-white/20 bg-white/20 p-6 shadow-xl text-center fade-in">
             <h2 className="text-xl font-semibold">Booking Cancellation</h2>

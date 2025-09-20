@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "public"."Treatments" ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN     "imagePath" TEXT NOT NULL DEFAULT '',
+ALTER COLUMN "description" DROP DEFAULT;

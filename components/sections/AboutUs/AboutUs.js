@@ -10,7 +10,7 @@ export default function AboutUs() {
     >
       <Image src={aboutUsImage} alt="" className="absolute w-full h-full" />
       <div
-        className="relative w-4/5 xl:w-3/5 p-6 xl:p-10 bg-transparent dark:bg-[rgba(0,0,0,)] 
+        className="relative w-4/5 xl:w-3/5 p-6 xl:p-12 bg-transparent dark:bg-[rgba(0,0,0,)] 
         backdrop-blur-xl backdrop-saturate-200 "
       >
         <Headings headingType="h2" className="text-xl xl:text-5xl">

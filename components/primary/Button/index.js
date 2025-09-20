@@ -57,7 +57,7 @@ export default function Button({
 
   return (
     <button
-      {...type}
+      type={type}
       className={`${buttonAttributes} ${className}`}
       onClick={onClick}
     >

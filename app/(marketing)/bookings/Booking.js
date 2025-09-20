@@ -218,7 +218,7 @@ export default function Booking() {
 
       {isSubmitSuccessful && ( //TODO: create modal component itself
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm backdrop-saturate-200" />
 
           {!responseErrors ? (
             <div className="relative z-10 max-w-md w-full mx-4 rounded-md border border-white/20 bg-white/20 p-6 shadow-xl text-center fade-in">

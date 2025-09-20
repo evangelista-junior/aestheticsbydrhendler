@@ -13,8 +13,8 @@ export default function NavBar() {
   const [showNavBar, setShowNavBar] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const currentPathName = usePathname();
-  const notHomePage = currentPathName != "/";
+  const urlPath = usePathname();
+  const notHomePage = urlPath != "/";
 
   //Handle the main NavBar whenever the page gets scrolled or if it's being shown in any page but home "/"
   useEffect(() => {
@@ -52,12 +52,13 @@ export default function NavBar() {
   };
 
   const links = [
-    { label: "About Us", href: "#about" },
-    { label: "Team", href: "#team" },
-    { label: "Treatments", href: "#treatments" },
-    { label: "What to Expect", href: "#expect" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Contact", href: "#contact" },
+    //TODO: Check if they want scroll or direction to the new page
+    { label: "About Us", href: "about" },
+    { label: "Team", href: "team" },
+    { label: "Treatments", href: "treatments" },
+    { label: "What to Expect", href: "expect" },
+    { label: "FAQ", href: "faq" },
+    { label: "Contact", href: "contact" },
   ];
 
   return (
@@ -85,7 +86,9 @@ export default function NavBar() {
           <div className="hidden lg:flex gap-6 items-center">
             {links.map((l) => (
               <NavHeaderButton asChild key={l.label}>
-                <Link href={l.href}>{l.label}</Link>
+                <Link href={`${notHomePage ? "/" : "#"}${l.href}`}>
+                  {l.label}
+                </Link>
               </NavHeaderButton>
             ))}
 

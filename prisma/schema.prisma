@@ -25,10 +25,20 @@ enum BookingStatus {
   CANCELLED
 }
 
+enum TreatmentAvailability {
+  AVAILABLE
+  SOON
+}
+
 model Treatments {
   id                  String @id @default(cuid())
   stripeProductNumber String
+  imageUrl            String
   name                String
+  description         String
+  availability        TreatmentAvailability @default(SOON)
+  hasBlogContent      Boolean @default(false) //TODO: create blog relation
+  createdAt DateTime @default(now())
 }
 
 model TokensJWT {

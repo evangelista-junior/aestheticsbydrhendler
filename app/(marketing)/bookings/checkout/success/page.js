@@ -23,7 +23,7 @@ export default function Success({ searchParams }) {
         const apiResponse = await res.json();
         router.push(apiResponse.redirectUrl);
       } catch (error) {
-      } finally {
+        //TODO: treat this
       }
     }
 
