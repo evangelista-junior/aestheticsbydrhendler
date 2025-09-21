@@ -2,11 +2,8 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/sections/NavBar";
 import Footer from "@/components/sections/Footer";
-
-const robotoFont = Roboto({
-  subsets: ["latin"],
-  variable: "--font-roboto",
-});
+import neutralBackgorund from "@/public/images/neutral-background.png";
+import Image from "next/image";
 
 export const metadata = {
   title:
@@ -56,7 +53,14 @@ export default function RootLayout({ children }) {
     <html lang="en" className="h-full">
       <body className="grid h-screen grid-rows-[auto_1fr_auto] antialiased">
         <NavBar />
-        <main className="bg-gray-100">{children}</main>
+        <Image
+          src={neutralBackgorund}
+          alt=""
+          aria-hidden
+          fill
+          className="absolute inset-0 object-cove opacity-5"
+        />
+        <main className="flex justify-center items-center">{children}</main>
         <Footer />
       </body>
     </html>

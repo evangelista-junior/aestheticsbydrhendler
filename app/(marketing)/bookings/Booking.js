@@ -90,7 +90,7 @@ export default function Booking() {
   ];
 
   return (
-    <section className="max-w-5xl mx-auto px-4 lg:px-8 py-10 text-gray-700">
+    <section className="relative max-w-5xl bg-transparent backdrop-blur-2xl px-3 lg:px-6 py-12 text-gray-700">
       <span>
         Please complete the form below to arrange your initial consultation.
       </span>
