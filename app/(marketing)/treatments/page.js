@@ -39,7 +39,7 @@ export default function Treatments() {
         </Headings>
       )}
 
-      <div className="px-12 py-6 w-full grid 2xl:grid-cols-2 gap-6 xl:gap-12">
+      <div className="px-12 py-6 w-full grid 2xl:grid-cols-2 gap-3 xl:gap-12">
         {!!treatments &&
           treatments.map((treatment) => {
             return (

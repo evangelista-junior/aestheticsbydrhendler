@@ -4,7 +4,7 @@ import Team from "@/components/sections/Team";
 import Treatments from "@/app/(marketing)/treatments/page";
 import WhatToExpect from "@/components/sections/WhatToExpect";
 import FAQ from "@/components/sections/FAQ";
-import Contact from "@/components/sections/Contact/Contact";
+import Contact from "@/app/(marketing)/contact/page";
 
 export default function Home() {
   return (

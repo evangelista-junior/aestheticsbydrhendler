@@ -13,7 +13,7 @@ export default function SelectInput({
       </label>
 
       <select
-        className={`mt-2 w-full rounded-lg border border-gray-300 px-3 py-2.5 outline-none focus:ring-2 focus:ring-easyDark/30 dark:focus:ring-white/30
+        className={`mt-2 w-full border border-gray-300 px-3 py-2.5 outline-none focus:ring-2 focus:ring-easyDark/30
                     ${
                       errors
                         ? "border-primary-300 placeholder-primary-300 text-primary-300"

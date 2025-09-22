@@ -91,7 +91,7 @@ export default function Booking() {
   ];
 
   return (
-    <section className="relative max-w-5xl bg-transparent backdrop-blur-2xl px-3 lg:px-6 py-12 ">
+    <section className="relative max-w-5xl  bg-white/50 rounded-sm backdrop-blur-2xl p-6 lg:px-12 lg:py-12 ">
       <span>
         Please complete the form below to arrange your initial consultation.
       </span>

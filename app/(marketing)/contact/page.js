@@ -1,10 +1,12 @@
 "use client";
+
 import Headings from "@/components/primary/Headings";
 import { useForm } from "react-hook-form";
 import Button from "@/components/primary/Button";
 import { Mail, MapPinned, Phone, Send } from "lucide-react";
 import Input from "@/components/primary/Input";
 import TextArea from "@/components/primary/TextArea";
+import { usePathname } from "next/navigation";
 
 export default function Contact() {
   const {
@@ -13,20 +15,26 @@ export default function Contact() {
     formState: { errors },
   } = useForm();
 
+  const urlPath = usePathname();
+
+  const isDedicatedPath = urlPath == "/contact" && true;
+
   //TODO: ajustar a funçao e requirements e fazer o contact form funcionar
   const onSubmit = (data) => console.log(`!!!!! ${data.email}`);
 
   return (
     <section
       id="contact"
-      className="w-full py-16 px-6 bg-easyWhite text-gray-600 lg:px-20"
+      className="relative w-full py-12 px-6 lg:px-12 backdrop-blur-2xl flex flex-col gap-9 justify-center items-center"
     >
-      <Headings
-        headingType="h2"
-        className="font-extralight tracking-widest italic mb-4 text-center"
-      >
-        Contact us
-      </Headings>
+      {isDedicatedPath && ( //TODO: loading
+        <Headings
+          headingType="h1"
+          className="font-light tracking-widest bg-primary-300 text-white -skew-x-12 px-12 py-3"
+        >
+          Contact us
+        </Headings>
+      )}
 
       <div className="lg:grid lg:grid-cols-2 lg:gap-10 w-full">
         <div className="mb-6">
@@ -119,11 +127,12 @@ export default function Contact() {
           <TextArea
             title="How can we help you?"
             placeholder="Please provide your details and message so we can offer you the best service."
-            hookFormArgs={register("message", { required: true })}
-            errors={errors.message}
+            hookFormArgs={register("content", {
+              required: "Message is required!",
+            })}
+            errors={errors.content}
+            isRequired
           />
-
-          {errors.exampleRequired && <span>This field is required</span>}
 
           <Button buttonType="dark" type="submit">
             <Send size={20} aria-hidden="true" focusable="false" />

@@ -11,7 +11,7 @@ export default function Card({
   treatmentHasBlogContent,
 }) {
   return (
-    <article className="md:flex md:items-center gap-8">
+    <article className="md:flex md:items-center gap-8 rounded-xl p-3">
       <div className="w-full md:w-[200px] md:h-[200px] md:flex-shrink-0 overflow-hidden rounded-lg aspect-square">
         {treatmentAvailability == "SOON" && (
           <p className="xl:hidden text-center relative bg-primary-100 text-primary-900 text-xs font-semibold px-2 py-0.5 rounded-tl-lg rounded-tr-lg top-2">
