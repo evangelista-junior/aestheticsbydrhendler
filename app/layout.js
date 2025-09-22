@@ -60,7 +60,9 @@ export default function RootLayout({ children }) {
           fill
           className="absolute inset-0 object-cove opacity-5"
         />
-        <main className="flex justify-center items-center">{children}</main>
+        <main className="flex justify-center items-center text-gray-700dark:text-easyWhite">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

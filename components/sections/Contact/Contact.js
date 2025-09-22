@@ -3,7 +3,7 @@ import Headings from "@/components/primary/Headings";
 import { useForm } from "react-hook-form";
 import InputForm from "./components/InputForm/page";
 import Button from "@/components/primary/Button";
-import { Send } from "lucide-react";
+import { Mail, MapPinned, Phone, Send } from "lucide-react";
 
 export default function Contact() {
   const {
@@ -13,7 +13,7 @@ export default function Contact() {
   } = useForm();
 
   //TODO: ajustar a funçao e requirements e fazer o contact form funcionar
-  const onSubmit = (data) => console.log(`!!!!! ${data}`);
+  const onSubmit = (data) => console.log(`!!!!! ${data.firstName}`);
 
   return (
     <section
@@ -31,22 +31,25 @@ export default function Contact() {
         <div className="mb-6">
           <div className="flex flex-col gap-3 ">
             <address className="not-italic text-textSecondary space-y-0.5 mb-2">
-              <p>
-                📞 tel:{" "}
+              <div className="flex items-center gap-3 tracking-wider ">
+                <Phone size={20} />
                 <a href="tel:+610404058431" className=" hover:underline">
                   +61 404 058 431
                 </a>
-              </p>
-              <p>
-                📧 email:{" "}
+              </div>
+              <div className="flex items-center gap-3 tracking-wider ">
+                <Mail size={20} />
                 <a
                   href="mailto:info@aestheticsbydrhendler.com.au"
                   className=" hover:underline"
                 >
                   info@aestheticsbydrhendler.com.au
                 </a>
-              </p>
-              <p>📍 Bondi, Sydney Eastern Suburbs, NSW</p>
+              </div>
+              <div className="flex items-center gap-3 tracking-wider ">
+                <MapPinned size={20} />
+                <p>Bondi, Sydney Eastern Suburbs, NSW</p>
+              </div>
             </address>
           </div>
 

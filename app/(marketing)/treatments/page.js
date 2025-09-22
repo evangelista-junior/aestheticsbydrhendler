@@ -31,9 +31,9 @@ export default function Treatments() {
   return (
     <section
       id="treatments"
-      className="flex flex-col items-center justify-center gap-9 relative p-6 2xl:px-24 bg-transparent backdrop-blur-2xl text-gray-600 drop-shadow-[0_0px_10px_rgba(0,0,0,0.1)]"
+      className="flex flex-col items-center justify-center gap-9 relative p-6 2xl:px-24 bg-transparent backdrop-blur-2xl  drop-shadow-[0_0px_10px_rgba(0,0,0,0.1)]"
     >
-      {isDedicatedPath && (
+      {isDedicatedPath && ( //TODO: loading
         <Headings headingType="h1" className="font-light tracking-widest">
           Available treatments
         </Headings>
