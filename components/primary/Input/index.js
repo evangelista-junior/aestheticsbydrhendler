@@ -10,7 +10,7 @@ export default function Input({
 }) {
   return (
     <div>
-      <label className="block text-sm tracking-wider after:content-['*'] after:text-red-400">
+      <label className="block text-sm tracking-wider after:content-['*'] after:text-red-400 after:ml-1">
         {labelTitle}
       </label>
       <input

@@ -4,10 +4,11 @@ import Button from "@/components/primary/Button";
 import { useForm } from "react-hook-form";
 import ErrorLabel from "@/components/primary/ErrorLabel";
 import SelectInput from "./components/SelectInput";
-import Input from "./components/Input";
+import Input from "../../../components/primary/Input";
 import { CheckCircle, XCircle } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import TextArea from "@/components/primary/TextArea";
 
 export default function Booking() {
   const {
@@ -104,7 +105,7 @@ export default function Booking() {
         className="grid grid-cols-1 xl:grid-cols-2 gap-3"
       >
         <Input
-          labelTitle={"Full Name"}
+          labelTitle="Full Name"
           inputPlaceholder="Jane Doe"
           inputAutoComplete="name"
           inputType="text"
@@ -119,7 +120,7 @@ export default function Booking() {
         />
 
         <Input
-          labelTitle={"Email"}
+          labelTitle="Email"
           inputPlaceholder="jane@example.com"
           inputAutoComplete="email"
           inputType="email"
@@ -178,14 +179,11 @@ export default function Booking() {
         />
 
         <div className="xl:col-span-2">
-          <label htmlFor="notes" className="block text-sm tracking-wider ">
-            Anything you’d like us to know?
-          </label>
-          <textarea
-            rows={4}
-            className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-easyDark/30"
+          <TextArea
+            title="Anything you’d like us to know?"
             placeholder="Optional information."
-            {...register("notes")}
+            hookFormArgs={register("notes")}
+            className="xl:col-span-2"
           />
         </div>
 

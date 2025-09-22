@@ -1,9 +1,10 @@
 "use client";
 import Headings from "@/components/primary/Headings";
 import { useForm } from "react-hook-form";
-import InputForm from "./components/InputForm/page";
 import Button from "@/components/primary/Button";
 import { Mail, MapPinned, Phone, Send } from "lucide-react";
+import Input from "@/components/primary/Input";
+import TextArea from "@/components/primary/TextArea";
 
 export default function Contact() {
   const {
@@ -13,7 +14,7 @@ export default function Contact() {
   } = useForm();
 
   //TODO: ajustar a funçao e requirements e fazer o contact form funcionar
-  const onSubmit = (data) => console.log(`!!!!! ${data.firstName}`);
+  const onSubmit = (data) => console.log(`!!!!! ${data.email}`);
 
   return (
     <section
@@ -68,52 +69,58 @@ export default function Contact() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-2 w-full"
         >
-          <div className="flex flex-col lg:flex-row gap-2">
-            <InputForm
-              inputName="First Name"
-              hookFormSettings={{
-                ...register("firstName", { required: true }),
-              }}
-            />
-            <InputForm
-              inputName="Last Name"
-              hookFormSettings={{ ...register("lastName", { required: true }) }}
-            />
-          </div>
+          <Input
+            labelTitle="Full Name"
+            inputPlaceholder="Jane Doe"
+            inputAutoComplete="name"
+            inputType="text"
+            hookFormArgs={register("name", {
+              required: "Please enter your full name.",
+              pattern: {
+                value: /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:\s+[A-Za-zÀ-ÖØ-öø-ÿ]+)+$/,
+                message: "Please enter your full name",
+              },
+            })}
+            errors={errors.name}
+          />
 
-          <InputForm
-            inputName="📞 Phone Number"
-            hookFormSettings={{
-              ...register("phoneNumber", { required: true }),
+          <Input
+            labelTitle="Mobile Number"
+            inputPlaceholder="0412 345 678"
+            inputAutoComplete="phone"
+            inputType="phone"
+            hookFormArgs={{
+              ...register("phone", {
+                required: "Phone number is required",
+                pattern: {
+                  value: /^(?:\+61|0)?4\d{8}$/,
+                  message: "Please follow the right format (e.g. 0412 345 678)",
+                },
+              }),
             }}
-            inputType="tel"
-          />
-          <InputForm
-            inputName="📧 Email"
-            hookFormSettings={{ ...register("email", { required: true }) }}
-            inputType="email"
+            errors={errors.phone}
           />
 
-          <textarea
+          <Input
+            labelTitle="Email"
+            inputPlaceholder="jane@example.com"
+            inputAutoComplete="email"
+            inputType="email"
+            hookFormArgs={register("email", {
+              required: "Email is required.",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Please enter a valid email, e.g. name@example.com",
+              },
+            })}
+            errors={errors.email}
+          />
+
+          <TextArea
+            title="How can we help you?"
             placeholder="Please provide your details and message so we can offer you the best service."
-            {...register("message", { required: true })}
-            required
-            className="
-              w-full
-              border border-gray-300
-              bg-white
-              p-2
-              text-gray-700
-              shadow-sm
-              focus:border-primary-300
-              focus:ring-2
-              focus:ring-primary-200
-              focus:outline-none
-              transition
-              duration-300
-              resize-none
-              !h-[100px]
-            "
+            hookFormArgs={register("message", { required: true })}
+            errors={errors.message}
           />
 
           {errors.exampleRequired && <span>This field is required</span>}
