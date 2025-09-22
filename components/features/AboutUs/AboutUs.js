@@ -1,4 +1,4 @@
-import Headings from "@/components/primary/Headings";
+import Headings from "@/components/ui/Headings";
 import Image from "next/image";
 import aboutUsImage from "@/public/images/aboutus.png";
 

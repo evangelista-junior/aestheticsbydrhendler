@@ -2,7 +2,7 @@
 import Image from "next/image";
 import HeaderBackground from "@/public/images/header_bg.png";
 import { CalendarDays } from "lucide-react";
-import Button from "@/components/primary/Button";
+import Button from "@/components/ui/Button";
 import transparentLogo from "@/public/images/horizontal_logo_transparentbg.png";
 import Link from "next/link";
 

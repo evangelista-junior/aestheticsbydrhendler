@@ -1,7 +1,7 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/sections/NavBar";
-import Footer from "@/components/sections/Footer";
+import NavBar from "@/components/features/NavBar";
+import Footer from "@/components/features/Footer";
 import neutralBackgorund from "@/public/images/neutral-background.png";
 import Image from "next/image";
 

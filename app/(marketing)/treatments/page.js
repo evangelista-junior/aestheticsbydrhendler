@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Card from "./components/Card/page";
 import { useEffect, useState } from "react";
-import Headings from "@/components/primary/Headings";
+import Headings from "@/components/ui/Headings";
 
 export default function Treatments() {
   const [treatments, setTreatments] = useState([]);

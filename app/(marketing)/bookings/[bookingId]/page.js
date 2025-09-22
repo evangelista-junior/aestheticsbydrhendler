@@ -2,7 +2,7 @@
 
 import { useEffect, useState, use } from "react";
 import moneyFormater from "@/lib/utils/moneyFormater";
-import Button from "@/components/primary/Button";
+import Button from "@/components/ui/Button";
 import { Check, X } from "lucide-react";
 import { useParams } from "next/navigation";
 import { checkIsRefundable } from "@/lib/business/booking/cancellation";

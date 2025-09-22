@@ -1,4 +1,4 @@
-import ErrorLabel from "@/components/primary/ErrorLabel";
+import ErrorLabel from "@/components/ui/ErrorLabel";
 
 export default function SelectInput({
   labelTitle,

@@ -1,11 +1,11 @@
 "use client";
 
-import Headings from "@/components/primary/Headings";
+import Headings from "@/components/ui/Headings";
 import { useForm } from "react-hook-form";
-import Button from "@/components/primary/Button";
+import Button from "@/components/ui/Button";
 import { Mail, MapPinned, Phone, Send } from "lucide-react";
-import Input from "@/components/primary/Input";
-import TextArea from "@/components/primary/TextArea";
+import Input from "@/components/ui/Input";
+import TextArea from "@/components/ui/TextArea";
 import { usePathname } from "next/navigation";
 
 export default function Contact() {

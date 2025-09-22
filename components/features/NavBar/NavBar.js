@@ -4,7 +4,7 @@ import Link from "next/link";
 import horizontal_logo from "@/public/images/logo_horizontal_blackandwhite.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import Button from "@/components/primary/Button";
+import Button from "@/components/ui/Button";
 import NavHeaderButton from "./components/NavHeaderButton";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";

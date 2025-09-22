@@ -1,14 +1,14 @@
 "use client";
 
-import Button from "@/components/primary/Button";
+import Button from "@/components/ui/Button";
 import { useForm } from "react-hook-form";
-import ErrorLabel from "@/components/primary/ErrorLabel";
+import ErrorLabel from "@/components/ui/ErrorLabel";
 import SelectInput from "./components/SelectInput";
-import Input from "../../../components/primary/Input";
+import Input from "../../../components/ui/Input";
 import { CheckCircle, XCircle } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import TextArea from "@/components/primary/TextArea";
+import TextArea from "@/components/ui/TextArea";
 
 export default function Booking() {
   const {
@@ -91,7 +91,7 @@ export default function Booking() {
   ];
 
   return (
-    <section className="relative max-w-5xl  bg-white/50 rounded-sm backdrop-blur-2xl p-6 lg:px-12 lg:py-12 ">
+    <section className="relative max-w-5xl bg-easyDark/5 p-6 lg:px-12 lg:py-12 ">
       <span>
         Please complete the form below to arrange your initial consultation.
       </span>
