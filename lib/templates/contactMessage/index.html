@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>New Contact Form Message</title>
+  </head>
+  <body style="margin: 0; padding: 0; background: #f3f4f6">
+    <center style="width: 100%; background: #f3f4f6">
+      <table
+        role="presentation"
+        cellspacing="0"
+        cellpadding="0"
+        border="0"
+        width="100%"
+      >
+        <tr>
+          <td align="center" style="padding: 24px">
+            <!-- Card container -->
+            <table
+              role="presentation"
+              cellspacing="0"
+              cellpadding="0"
+              border="0"
+              width="600"
+              style="
+                width: 600px;
+                max-width: 100%;
+                background: #ffffff;
+                border-radius: 12px;
+                overflow: hidden;
+              "
+            >
+              <!-- Header -->
+              <tr>
+                <td style="background: #171717; color: #ffffff; padding: 24px">
+                  <h1
+                    style="
+                      margin: 0;
+                      font-size: 20px;
+                      font-weight: 700;
+                      font-family: Arial, Helvetica, sans-serif;
+                      color: #ffffff;
+                      letter-spacing: 0.05em;
+                    "
+                  >
+                    New Contact Form Message
+                  </h1>
+                  <p
+                    style="
+                      margin: 4px 0 0;
+                      font-size: 14px;
+                      line-height: 1.5;
+                      opacity: 0.85;
+                      font-family: Arial, Helvetica, sans-serif;
+                    "
+                  >
+                    A message has been submitted through your website.
+                  </p>
+                </td>
+              </tr>
+
+              <!-- Body -->
+              <tr>
+                <td style="padding: 24px">
+                  <p
+                    style="
+                      margin: 0 0 16px;
+                      font-size: 15px;
+                      line-height: 1.6;
+                      font-family: Arial, Helvetica, sans-serif;
+                      color: #374151;
+                    "
+                  >
+                    You have received a new contact form submission:
+                  </p>
+
+                  <!-- Summary box -->
+                  <table
+                    role="presentation"
+                    cellspacing="0"
+                    cellpadding="0"
+                    border="0"
+                    width="100%"
+                    style="
+                      margin: 16px 0;
+                      border: 1px solid #e5e7eb;
+                      background: #f9fafb;
+                      border-radius: 8px;
+                    "
+                  >
+                    <tr>
+                      <td
+                        style="
+                          padding: 12px 16px;
+                          font-size: 14px;
+                          font-family: Arial, Helvetica, sans-serif;
+                          color: #111827;
+                        "
+                      >
+                        <strong>Name:</strong> {{name}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="
+                          padding: 0 16px 12px 16px;
+                          font-size: 14px;
+                          font-family: Arial, Helvetica, sans-serif;
+                          color: #111827;
+                        "
+                      >
+                        <strong>Email:</strong> {{email}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="
+                          padding: 0 16px 12px 16px;
+                          font-size: 14px;
+                          font-family: Arial, Helvetica, sans-serif;
+                          color: #111827;
+                        "
+                      >
+                        <strong>Phone:</strong> {{phone}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="
+                          padding: 0 16px 16px 16px;
+                          font-size: 14px;
+                          font-family: Arial, Helvetica, sans-serif;
+                          color: #374151;
+                        "
+                      >
+                        <strong>Message:</strong><br />
+                        <em>{{message}}</em>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <p
+                    style="
+                      margin: 16px 0 0;
+                      font-size: 12px;
+                      line-height: 1.6;
+                      font-family: Arial, Helvetica, sans-serif;
+                      color: #6b7280;
+                    "
+                  >
+                    This email was automatically generated by your website’s
+                    contact form.
+                  </p>
+                </td>
+              </tr>
+
+              <!-- Footer -->
+              <tr>
+                <td
+                  style="
+                    background: #f3f4f6;
+                    color: #6b7280;
+                    padding: 16px 24px;
+                    font-size: 12px;
+                    font-family: Arial, Helvetica, sans-serif;
+                    border-top: 1px solid #e5e7eb;
+                  "
+                >
+                  © {{year}} Your Website — All rights reserved.
+                </td>
+              </tr>
+            </table>
+            <!-- /Card container -->
+          </td>
+        </tr>
+      </table>
+    </center>
+  </body>
+</html>

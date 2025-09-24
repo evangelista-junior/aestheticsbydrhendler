@@ -12,6 +12,7 @@ export default function Contact() {
   const {
     register,
     handleSubmit,
+    isSubmitting,
     formState: { errors },
   } = useForm();
 
@@ -20,7 +21,26 @@ export default function Contact() {
   const isDedicatedPath = urlPath == "/contact" && true;
 
   //TODO: ajustar a funçao e requirements e fazer o contact form funcionar
-  const onSubmit = (data) => console.log(`!!!!! ${data.email}`);
+  const onSubmit = (data) => {
+    async function fetchPostContactApi() {
+      try {
+        const res = await fetch("/api/v1/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        if (!res.ok) {
+          throw new Error("The contact message failed to be sent!");
+        }
+        console.log(res);
+      } catch (err) {
+        console.log(`Something went wrong: ${err}`);
+      }
+    }
+
+    fetchPostContactApi();
+  };
 
   return (
     <section
@@ -127,14 +147,14 @@ export default function Contact() {
           <TextArea
             title="How can we help you?"
             placeholder="Please provide your details and message so we can offer you the best service."
-            hookFormArgs={register("content", {
+            hookFormArgs={register("message", {
               required: "Message is required!",
             })}
-            errors={errors.content}
+            errors={errors.message}
             isRequired
           />
 
-          <Button buttonType="dark" type="submit">
+          <Button buttonType="dark" type="submit" disabled={isSubmitting}>
             <Send size={20} aria-hidden="true" focusable="false" />
             Send Message
           </Button>

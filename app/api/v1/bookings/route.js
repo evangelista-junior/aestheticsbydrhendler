@@ -7,6 +7,7 @@ import { parseEmailConsultationRequest } from "@/utils/parseEmailConsultationReq
 import { NextResponse } from "next/server";
 import fs from "node:fs/promises";
 import path from "node:path";
+
 export async function POST(request) {
   try {
     const data = await request.json();
@@ -37,7 +38,7 @@ export async function POST(request) {
           ok: false,
           message: `Missing required fields: ${missing.join(", ")}`,
         },
-        { status: 400 }
+        { status: 422 }
       );
     }
     if (data.consent !== true) {

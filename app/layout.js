@@ -58,7 +58,7 @@ export default function RootLayout({ children }) {
           alt=""
           aria-hidden
           fill
-          className="absolute inset-0 object-cove opacity-5"
+          className="absolute inset-0 object-cover opacity-5"
         />
         <main className="flex justify-center items-center text-gray-700">
           {children}

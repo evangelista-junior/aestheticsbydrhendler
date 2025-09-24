@@ -5,10 +5,15 @@ import { useForm } from "react-hook-form";
 import ErrorLabel from "@/components/ui/ErrorLabel";
 import SelectInput from "./components/SelectInput";
 import Input from "../../../components/ui/Input";
-import { CheckCircle, XCircle } from "lucide-react";
+import { Check, XCircle } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import TextArea from "@/components/ui/TextArea";
+import {
+  emailValidator,
+  fullNameValidator,
+  phoneNumberValidator,
+} from "@/utils/regexValidators";
 
 export default function Booking() {
   const {
@@ -91,7 +96,7 @@ export default function Booking() {
   ];
 
   return (
-    <section className="relative max-w-5xl bg-easyDark/5 p-6 lg:px-12 lg:py-12 ">
+    <section className="relative max-w-5xl bg-white shadow-xl p-6 lg:px-12 lg:py-12 ">
       <span>
         Please complete the form below to arrange your initial consultation.
       </span>
@@ -112,7 +117,7 @@ export default function Booking() {
           hookFormArgs={register("name", {
             required: "Please enter your full name.",
             pattern: {
-              value: /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:\s+[A-Za-zÀ-ÖØ-öø-ÿ]+)+$/,
+              value: fullNameValidator,
               message: "Please enter your full name",
             },
           })}
@@ -127,7 +132,7 @@ export default function Booking() {
           hookFormArgs={register("email", {
             required: "Email is required.",
             pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              value: emailValidator,
               message: "Please enter a valid email, e.g. name@example.com",
             },
           })}
@@ -143,7 +148,7 @@ export default function Booking() {
             ...register("phone", {
               required: "Phone number is required",
               pattern: {
-                value: /^(?:\+61|0)?4\d{8}$/,
+                value: phoneNumberValidator,
                 message: "Please follow the right format (e.g. 0412 345 678)",
               },
             }),
@@ -213,18 +218,19 @@ export default function Booking() {
           </Button>
         </div>
       </form>
-
       {isSubmitSuccessful && ( //TODO: create modal component itself
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm backdrop-saturate-200" />
 
           {!responseErrors ? (
-            <div className="relative z-10 max-w-md w-full mx-4 rounded-md border border-white/20 bg-white/20 p-6 shadow-xl text-center fade-in">
-              <CheckCircle className="mx-auto mb-4 h-16 w-16 text-primary-300" />
-              <h2 className="text-2xl font-semibold text-white  tracking-widest">
-                Thank you!
-              </h2>
-              <p className="mt-2 text-gray-200 tracking-wider">
+            <div className="relative z-10 max-w-md w-full mx-4 border border-white/40 bg-transparent backdrop-blur-2xl text-white p-6 shadow-xl text-center fade-in">
+              <div className="flex w-full items-center justify-center gap-1">
+                <Check size={30} className="" />
+                <h2 className="text-2xl font-light tracking-wider">
+                  Thank you!
+                </h2>
+              </div>
+              <p className="mt-2 text-gray-200 tracking-wide">
                 Your booking request has been received. You’ll receive an email
                 within 24 hours with payment details to secure your appointment.
                 We look forward to welcoming you soon.

@@ -1,0 +1,54 @@
+import { sendContactMessage, sendMail } from "@/lib/mailer";
+import {
+  emailValidator,
+  fullNameValidator,
+  phoneNumberValidator,
+} from "@/utils/regexValidators";
+import { NextResponse } from "next/server";
+
+export async function POST(request, response) {
+  const data = await request.json();
+  const requiredData = ["name", "phone", "email", "message"];
+
+  const missingData = requiredData.filter((k) => !data[k] | (k.trim() == ""));
+  console.log(missingData);
+  if (missingData.length) {
+    return NextResponse.json(
+      {
+        ok: false,
+        message: `Missing required fields: ${missingData.join(", ")}`,
+      },
+      { status: 422 }
+    );
+  }
+
+  const validations = {
+    name: fullNameValidator,
+    phone: phoneNumberValidator,
+    email: emailValidator,
+  };
+  const notValidData = requiredData.filter(
+    (k) => validations[k]?.test(data[k]) == false
+  );
+  if (notValidData.length) {
+    return NextResponse.json(
+      {
+        ok: false,
+        message: `The following fields are not valid: ${notValidData.join(
+          ", "
+        )}`,
+      },
+      { status: 422 }
+    );
+  }
+
+  // const email = await sendContactMessage({
+  //   contactName: data.name,
+  //   contactEmail: data.email,
+  //   contactPhone: data.phone,
+  //   contactMessage: data.message,
+  // });
+  // console.log(email);
+
+  return NextResponse.json({ ok: true }, { status: 200 });
+}

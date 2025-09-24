@@ -1,6 +1,7 @@
 export default function Button({
   children,
   type,
+  disabled,
   buttonType = "primary" |
     "dark" |
     "primaryRounded" |
@@ -60,6 +61,7 @@ export default function Button({
       type={type}
       className={`${buttonAttributes} ${className}`}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>
