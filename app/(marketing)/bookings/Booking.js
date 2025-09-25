@@ -14,6 +14,7 @@ import {
   fullNameValidator,
   phoneNumberValidator,
 } from "@/utils/regexValidators";
+import FeedbackModal from "@/components/ui/FeedbackModal";
 
 export default function Booking() {
   const {
@@ -218,47 +219,15 @@ export default function Booking() {
           </Button>
         </div>
       </form>
-      {isSubmitSuccessful && ( //TODO: create modal component itself
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm backdrop-saturate-200" />
 
-          {!responseErrors ? (
-            <div className="relative z-10 max-w-md w-full mx-4 border border-white/40 bg-transparent backdrop-blur-2xl text-white p-6 shadow-xl text-center fade-in">
-              <div className="flex w-full items-center justify-center gap-1">
-                <Check size={30} className="" />
-                <h2 className="text-2xl font-light tracking-wider">
-                  Thank you!
-                </h2>
-              </div>
-              <p className="mt-2 text-gray-200 tracking-wide">
-                Your booking request has been received. You’ll receive an email
+      {isSubmitSuccessful && ( //TODO: useState
+        <FeedbackModal
+          successTitle="Thank you!"
+          successMessage="Your booking request has been received. You’ll receive an email
                 within 24 hours with payment details to secure your appointment.
-                We look forward to welcoming you soon.
-              </p>
-
-              <Link href="/" className="inline-flex mt-3">
-                <Button buttonType="primaryRounded">Go to Homepage</Button>
-              </Link>
-            </div>
-          ) : (
-            <div className="relative z-10 max-w-md w-full mx-4 rounded-md border border-red-500/30 bg-easyWhite p-6 shadow-xl text-center fade-in">
-              <XCircle className="mx-auto mb-4 h-16 w-16 text-red-400" />
-              <h2 className="text-2xl font-semibold text-red-400 tracking-widest">
-                Oops! Something went wrong
-              </h2>
-              <p className="mt-2 text-gray-500 tracking-wider">
-                {responseErrors ||
-                  "An unexpected error occurred. Please try again."}
-              </p>
-
-              <div className="flex gap-3 justify-center mt-6">
-                <Link href="/" className="inline-flex mt-3">
-                  <Button buttonType="primary">Go to Homepage</Button>
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
+                We look forward to welcoming you soon."
+          errorMessage="We couldn’t process your request at the moment. Please try again later or contact our team for assistance."
+        />
       )}
     </section>
   );

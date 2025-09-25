@@ -7,8 +7,12 @@ import { Mail, MapPinned, Phone, Send } from "lucide-react";
 import Input from "@/components/ui/Input";
 import TextArea from "@/components/ui/TextArea";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import FeedbackModal from "@/components/ui/FeedbackModal";
 
 export default function Contact() {
+  const [fetchErrors, setFetchErrors] = useState();
+  const [openModal, setOpenModal] = useState(false);
   const {
     register,
     handleSubmit,
@@ -20,7 +24,6 @@ export default function Contact() {
 
   const isDedicatedPath = urlPath == "/contact" && true;
 
-  //TODO: ajustar a funçao e requirements e fazer o contact form funcionar
   const onSubmit = (data) => {
     async function fetchPostContactApi() {
       try {
@@ -31,11 +34,13 @@ export default function Contact() {
         });
 
         if (!res.ok) {
-          throw new Error("The contact message failed to be sent!");
+          throw new Error(res.message);
         }
-        console.log(res);
       } catch (err) {
         console.log(`Something went wrong: ${err}`);
+        setFetchErrors(err);
+      } finally {
+        setOpenModal(true);
       }
     }
 
@@ -160,6 +165,15 @@ export default function Contact() {
           </Button>
         </form>
       </div>
+
+      {openModal && (
+        <FeedbackModal
+          successTitle="Request sent successfully!"
+          successMessage="Thank you for reaching out. Your request has been submitted and our team will get back to you shortly."
+          errorMessage={fetchErrors}
+          buttonText="Close"
+        />
+      )}
     </section>
   );
 }

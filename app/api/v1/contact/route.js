@@ -41,7 +41,7 @@ export async function POST(request, response) {
       { status: 422 }
     );
   }
-
+  //TODO:remove and add trycatch
   // const email = await sendContactMessage({
   //   contactName: data.name,
   //   contactEmail: data.email,
