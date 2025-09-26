@@ -7,10 +7,11 @@ export default function FeedbackModal({
   successTitle,
   successMessage,
   errorMessage,
+  onClick,
   buttonText = "Go to Homepage",
 }) {
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm backdrop-saturate-100" />
 
       {!errorMessage ? (
@@ -23,9 +24,13 @@ export default function FeedbackModal({
           </div>
           <p className="mt-2 text-gray-200 tracking-wide">{successMessage}</p>
 
-          <Link href="/" className="inline-flex mt-3">
-            <Button buttonType="primaryRounded">{buttonText}</Button>
-          </Link>
+          <Button
+            buttonType="primaryRounded"
+            className="inline-flex mt-3"
+            onClick={onClick}
+          >
+            {buttonText}
+          </Button>
         </div>
       ) : (
         <div className="relative z-10 max-w-md w-full mx-4 rounded-md border border-red-500/30 bg-easyWhite p-6 shadow-xl text-center fade-in">
@@ -35,10 +40,8 @@ export default function FeedbackModal({
           </h2>
           <p className="mt-2 text-gray-500 tracking-wider">{errorMessage}</p>
 
-          <div className="flex gap-3 justify-center mt-6">
-            <Link href="/" className="inline-flex mt-3">
-              <Button buttonType="primary">{buttonText}</Button>
-            </Link>
+          <div className="flex gap-3 justify-center mt-6" onClick={onClick}>
+            <Button buttonType="primary">{buttonText}</Button>
           </div>
         </div>
       )}

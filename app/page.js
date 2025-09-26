@@ -1,9 +1,9 @@
-import Header from "@/components/features/Header";
-import AboutUs from "@/components/features/AboutUs";
-import Team from "@/components/features/Team";
+import Header from "@/features/Header";
+import AboutUs from "@/features/AboutUs";
+import Team from "@/features/Team";
 import Treatments from "@/app/(marketing)/treatments/page";
-import WhatToExpect from "@/components/features/WhatToExpect";
-import FAQ from "@/components/features/FAQ";
+import WhatToExpect from "@/features/WhatToExpect";
+import FAQ from "@/features/FAQ";
 import Contact from "@/app/(marketing)/contact/page";
 
 export default function Home() {

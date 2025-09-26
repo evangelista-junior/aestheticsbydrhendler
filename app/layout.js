@@ -1,9 +1,10 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/features/NavBar";
-import Footer from "@/components/features/Footer";
+import NavBar from "@/features/NavBar";
+import Footer from "@/features/Footer";
 import neutralBackgorund from "@/public/images/neutral-background.png";
 import Image from "next/image";
+import LoadingModal from "@/components/ui/LoadingModal";
 
 export const metadata = {
   title:
@@ -52,6 +53,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="h-full">
       <body className="grid h-screen grid-rows-[auto_1fr_auto] antialiased">
+        <LoadingModal />
         <NavBar />
         <Image
           src={neutralBackgorund}

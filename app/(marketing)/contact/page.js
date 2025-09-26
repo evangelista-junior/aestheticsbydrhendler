@@ -9,22 +9,26 @@ import TextArea from "@/components/ui/TextArea";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import FeedbackModal from "@/components/ui/FeedbackModal";
+import { useLoading } from "@/store/useLoadingModal";
 
 export default function Contact() {
-  const [fetchErrors, setFetchErrors] = useState();
-  const [openModal, setOpenModal] = useState(false);
   const {
     register,
     handleSubmit,
     isSubmitting,
     formState: { errors },
   } = useForm();
+  const [fetchErrors, setFetchErrors] = useState();
+  const [openModal, setOpenModal] = useState(false);
+  const { setLoading, showLoading } = useLoading();
 
   const urlPath = usePathname();
 
   const isDedicatedPath = urlPath == "/contact" && true;
 
   const onSubmit = (data) => {
+    setLoading(true);
+    showLoading();
     async function fetchPostContactApi() {
       try {
         const res = await fetch("/api/v1/contact", {
@@ -37,9 +41,10 @@ export default function Contact() {
           throw new Error(res.message);
         }
       } catch (err) {
-        console.log(`Something went wrong: ${err}`);
         setFetchErrors(err);
       } finally {
+        setLoading(false);
+        showLoading();
         setOpenModal(true);
       }
     }
@@ -122,15 +127,13 @@ export default function Contact() {
             inputPlaceholder="0412 345 678"
             inputAutoComplete="phone"
             inputType="phone"
-            hookFormArgs={{
-              ...register("phone", {
-                required: "Phone number is required",
-                pattern: {
-                  value: /^(?:\+61|0)?4\d{8}$/,
-                  message: "Please follow the right format (e.g. 0412 345 678)",
-                },
-              }),
-            }}
+            hookFormArgs={register("phone", {
+              required: "Phone number is required",
+              pattern: {
+                value: /^(?:\+61|0)?4\d{8}$/,
+                message: "Please follow the right format (e.g. 0412 345 678)",
+              },
+            })}
             errors={errors.phone}
           />
 
@@ -172,6 +175,7 @@ export default function Contact() {
           successMessage="Thank you for reaching out. Your request has been submitted and our team will get back to you shortly."
           errorMessage={fetchErrors}
           buttonText="Close"
+          onClick={() => console.log("fuck")}
         />
       )}
     </section>

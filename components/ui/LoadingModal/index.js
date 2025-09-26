@@ -1,0 +1,18 @@
+"use client";
+
+import { createPortal } from "react-dom";
+import { useLoading } from "@/store/useLoadingModal";
+
+export default function LoadingModal() {
+  const { isLoading } = useLoading();
+
+  if (isLoading) {
+    return createPortal(
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center">
+        <div className="absolute inset-0 bg-easyWhite/30 backdrop-blur-sm backdrop-saturate-100" />
+        <div className="animate-spin rounded-full h-24 w-24 border-b-2 border-primary-300 shadow"></div>
+      </div>,
+      document.body
+    );
+  }
+}
