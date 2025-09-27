@@ -40,11 +40,11 @@ export default function Button({
       break;
     case "confirm":
       buttonAttributes +=
-        " rounded-md border-2 border-green-200 bg-green-100 text-white hover:bg-transparent hover:text-green-300";
+        " rounded-md border-2 border-green-400 bg-green-400 text-white hover:bg-green-600";
       break;
     case "decline":
       buttonAttributes +=
-        " rounded-md border-2 border-red-200 bg-red-400 text-white hover:bg-transparent hover:text-red-300";
+        " rounded-md border-2 border-red-400 bg-red-400 text-white hover:bg-red-600";
       break;
     case "confirmInverse":
       buttonAttributes +=

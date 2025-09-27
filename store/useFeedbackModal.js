@@ -8,11 +8,19 @@ export const useFeedbackModal = create((set, get) => ({
   errorMessage: "",
   buttonText: "Go to Homepage",
   onClick: () => redirect("/"),
+  redirectToHomempage: () => {
+    set({ isOpen: false }), redirect("/");
+  },
 
-  setOpen: () =>
+  setOpenModal: () =>
     set({
-      isOpen: !get().isOpen,
+      isOpen: true,
     }),
+  setClearErrors: () =>
+    set({
+      errorMessage: "",
+    }),
+  setCloseModal: () => set({ isOpen: false }),
   setSuccessTitle: (value) => set({ successTitle: value }),
   setSuccessMessage: (value) => set({ successMessage: value }),
   setErrorMessage: (value) => set({ errorMessage: value }),

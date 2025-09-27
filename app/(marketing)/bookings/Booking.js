@@ -5,28 +5,38 @@ import { useForm } from "react-hook-form";
 import ErrorLabel from "@/components/ui/ErrorLabel";
 import SelectInput from "./components/SelectInput";
 import Input from "../../../components/ui/Input";
-import { Check, XCircle } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
 import TextArea from "@/components/ui/TextArea";
 import {
   emailValidator,
   fullNameValidator,
   phoneNumberValidator,
 } from "@/utils/regexValidators";
-import FeedbackModal from "@/components/ui/FeedbackModal";
+import { useFeedbackModal } from "@/store/useFeedbackModal";
+import { useLoadingModal } from "@/store/useLoadingModal";
 
 export default function Booking() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors, isSubmitting },
   } = useForm();
-
-  const [responseErrors, setResponseErrors] = useState();
+  const {
+    setOpenModal,
+    setSuccessTitle,
+    setSuccessMessage,
+    setErrorMessage,
+    setButtonText,
+    setOnClick,
+    redirectToHomempage,
+    setClearErrors,
+  } = useFeedbackModal();
+  const { setLoading } = useLoadingModal();
 
   const onSubmit = async (data) => {
     try {
+      if (isSubmitting) return;
+
+      setLoading(true);
       const res = await fetch(`/api/v1/bookings`, {
         method: "POST",
         headers: {
@@ -34,15 +44,23 @@ export default function Booking() {
         },
         body: JSON.stringify(data),
       });
+
       if (!res.ok) {
-        let resErrors = (await res.json()).message;
-        setResponseErrors(resErrors);
-        throw new Error(
-          "Failed to book your appointment, please contact us or try later."
-        );
+        throw new Error((await res.json()).message);
       }
+
+      setSuccessTitle("Booking Confirmed!");
+      setSuccessMessage(
+        "Your request has been submitted successfully. Please check your email within 24 hours for payment details to secure your appointment. We look forward to seeing you soon."
+      );
+      setButtonText("Go to Homepage");
+      setOnClick(redirectToHomempage);
+      setClearErrors();
     } catch (err) {
+      setErrorMessage(Error(err).message);
     } finally {
+      setLoading(false);
+      setOpenModal();
     }
   };
 
@@ -219,16 +237,6 @@ export default function Booking() {
           </Button>
         </div>
       </form>
-
-      {isSubmitSuccessful && ( //TODO: useState
-        <FeedbackModal
-          successTitle="Thank you!"
-          successMessage="Your booking request has been received. You’ll receive an email
-                within 24 hours with payment details to secure your appointment.
-                We look forward to welcoming you soon."
-          errorMessage="We couldn’t process your request at the moment. Please try again later or contact our team for assistance."
-        />
-      )}
     </section>
   );
 }

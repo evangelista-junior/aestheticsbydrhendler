@@ -7,47 +7,54 @@ import {
 import { NextResponse } from "next/server";
 
 export async function POST(request, response) {
-  const data = await request.json();
-  const requiredData = ["name", "phone", "email", "message"];
+  try {
+    const data = await request.json();
+    const requiredData = ["name", "phone", "email", "message"];
 
-  const missingData = requiredData.filter((k) => !data[k] | (k.trim() == ""));
-  console.log(missingData);
-  if (missingData.length) {
+    const missingData = requiredData.filter((k) => !data[k] | (k.trim() == ""));
+    if (missingData.length) {
+      return NextResponse.json(
+        {
+          ok: false,
+          message: `Missing required fields: ${missingData.join(", ")}`,
+        },
+        { status: 422 }
+      );
+    }
+
+    const validations = {
+      name: fullNameValidator,
+      phone: phoneNumberValidator,
+      email: emailValidator,
+    };
+    const notValidData = requiredData.filter(
+      (k) => validations[k]?.test(data[k]) == false
+    );
+    if (notValidData.length) {
+      return NextResponse.json(
+        {
+          ok: false,
+          message: `The following fields are not valid: ${notValidData.join(
+            ", "
+          )}`,
+        },
+        { status: 422 }
+      );
+    }
+
+    // TODO:remove and add trycatch
+    const email = await sendContactMessage({
+      contactName: data.name,
+      contactEmail: data.email,
+      contactPhone: data.phone,
+      contactMessage: data.message,
+    });
+
+    return NextResponse.json({ ok: true }, { status: 200 });
+  } catch (error) {
     return NextResponse.json(
-      {
-        ok: false,
-        message: `Missing required fields: ${missingData.join(", ")}`,
-      },
-      { status: 422 }
+      { ok: false, message: "Something went wrong on the server!" },
+      { status: 500 }
     );
   }
-
-  const validations = {
-    name: fullNameValidator,
-    phone: phoneNumberValidator,
-    email: emailValidator,
-  };
-  const notValidData = requiredData.filter(
-    (k) => validations[k]?.test(data[k]) == false
-  );
-  if (notValidData.length) {
-    return NextResponse.json(
-      {
-        ok: false,
-        message: `The following fields are not valid: ${notValidData.join(
-          ", "
-        )}`,
-      },
-      { status: 422 }
-    );
-  }
-  // TODO:remove and add trycatch
-  const email = await sendContactMessage({
-    contactName: data.name,
-    contactEmail: data.email,
-    contactPhone: data.phone,
-    contactMessage: data.message,
-  });
-
-  return NextResponse.json({ ok: true }, { status: 200 });
 }

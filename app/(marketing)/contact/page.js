@@ -16,50 +16,57 @@ export default function Contact() {
     register,
     handleSubmit,
     isSubmitting,
+    reset,
     formState: { errors },
   } = useForm();
   const { setLoading } = useLoadingModal();
   const {
-    setOpen,
+    setOpenModal,
     setSuccessTitle,
     setSuccessMessage,
     setErrorMessage,
     setButtonText,
     setOnClick,
+    setCloseModal,
+    setClearErrors,
   } = useFeedbackModal();
 
   const urlPath = usePathname();
 
   const isDedicatedPath = urlPath == "/contact" && true;
 
-  const onSubmit = (data) => {
-    setLoading(true);
-    async function fetchPostContactApi() {
-      try {
-        const res = await fetch("/api/v1/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
+  const onSubmit = async (data) => {
+    if (isSubmitting) return;
 
-        if (!res.ok) {
-          throw new Error(res.message);
-        }
-      } catch (err) {
-        setErrorMessage(err);
-      } finally {
-        setLoading(false);
-        setOpen();
-        setSuccessTitle("Request sent successfully!");
-        setSuccessMessage(
-          "Thank you for reaching out. Your request has been submitted and our team will get back to you shortly."
-        );
-        setButtonText("Close");
-        setOnClick(() => setOpen());
+    try {
+      setLoading(true);
+
+      const res = await fetch("/api/v1/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        throw new Error((await res.json()).message);
       }
-    }
 
-    fetchPostContactApi();
+      reset();
+      setClearErrors();
+      setSuccessTitle("Request sent successfully!");
+      setSuccessMessage(
+        "Thank you for reaching out. Your request has been submitted and our team will get back to you shortly."
+      );
+      setButtonText("Close");
+      setOnClick(() => setCloseModal());
+    } catch (err) {
+      setErrorMessage(err.message || "Something went wrong. Please try again.");
+      setButtonText("Try Again");
+      setOnClick(() => setCloseModal());
+    } finally {
+      setLoading(false);
+      setOpenModal();
+    }
   };
 
   return (

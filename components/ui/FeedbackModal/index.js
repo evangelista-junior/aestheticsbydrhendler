@@ -37,15 +37,16 @@ export default function FeedbackModal() {
             </Button>
           </div>
         ) : (
-          <div className="relative z-10 max-w-md w-full mx-4 rounded-md border border-red-500/30 bg-easyWhite p-6 shadow-xl text-center fade-in">
-            <XCircle className="mx-auto mb-4 h-16 w-16 text-red-400" />
-            <h2 className="text-2xl font-semibold text-red-400 tracking-widest">
-              Oops! Something went wrong
-            </h2>
-            <p className="mt-2 text-gray-500 tracking-wider">{errorMessage}</p>
+          <div className="relative z-[9999] w-full max-w-md border border-red-600/20 bg-white/20 backdrop-blur-sm backdrop-saturate-100 p-3 shadow-xl text-center fade-in">
+            <XCircle className="mx-auto mb-4 h-12 w-12 p-1 text-white bg-red-400 rounded-full" />
+            <p className="mt-3 text-gray-200 tracking-wide">{errorMessage}</p>
+            <p className="text-white tracking-wide">
+              We could not process your request at the moment. Please try again
+              later or contact our team for support.
+            </p>
 
             <div className="flex gap-3 justify-center mt-6" onClick={onClick}>
-              <Button buttonType="primary">{buttonText}</Button>
+              <Button buttonType="decline">{buttonText}</Button>
             </div>
           </div>
         )}
