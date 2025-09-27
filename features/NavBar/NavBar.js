@@ -56,7 +56,7 @@ export default function NavBar() {
     { label: "About Us", href: "about" },
     { label: "Team", href: "team" },
     { label: "Treatments", href: "treatments" },
-    { label: "What to Expect", href: "expect" },
+    { label: "What to Expect", href: "what-to-expect" },
     { label: "FAQ", href: "faq" },
     { label: "Contact", href: "contact" },
   ];
