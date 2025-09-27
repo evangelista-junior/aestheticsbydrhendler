@@ -39,7 +39,7 @@ export default function Contact() {
     if (isSubmitting) return;
 
     try {
-      setLoading(true);
+      if (isDedicatedPath) setLoading(true);
 
       const res = await fetch("/api/v1/contact", {
         method: "POST",
