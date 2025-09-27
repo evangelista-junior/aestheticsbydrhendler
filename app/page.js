@@ -2,7 +2,7 @@ import Header from "@/features/Header";
 import AboutUs from "@/features/AboutUs";
 import Team from "@/app/(marketing)/team/page";
 import Treatments from "@/app/(marketing)/treatments/page";
-import WhatToExpect from "@/features/WhatToExpect";
+import WhatToExpect from "@/app/(marketing)/what-to-expect/page";
 import FAQ from "@/features/FAQ";
 import Contact from "@/app/(marketing)/contact/page";
 
