@@ -9,7 +9,7 @@ export default function Input({
   errors,
 }) {
   return (
-    <div>
+    <div className="">
       <label className="block text-sm tracking-wider after:content-['*'] after:text-red-400 after:ml-1">
         {labelTitle}
       </label>

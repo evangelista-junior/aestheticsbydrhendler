@@ -78,7 +78,7 @@ export default function Success({ searchParams }) {
 
   return (
     <div className="h-full flex flex-col justify-center items-center p-4">
-      <div className="xl:w-1/3 flex flex-col items-center gap-6 -3 py-6 bg-white p-6 rounded-md shadow-md">
+      <div className="w-full flex flex-col items-center gap-6 -3 py-6 bg-white p-6 rounded-md shadow-md">
         <div className="flex flex-col justify-center text-center gap-6">
           <p className="text-3xl md:text-4xl font-bold tracking-wide">
             Booking Confirmed!

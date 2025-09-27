@@ -6,7 +6,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Link from "next/link";
-import { use, useState } from "react";
+import { use, useState, useCallback } from "react";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
@@ -16,7 +16,7 @@ export default function Checkout({ searchParams }) {
   const { id: bookingId } = use(searchParams);
   const [errors, setErrors] = useState();
 
-  async function fetchClientSecret() {
+  const fetchClientSecret = useCallback(async () => {
     try {
       const res = await fetch(`/api/v1/bookings/checkout?id=${bookingId}`, {
         method: "GET",
@@ -34,7 +34,8 @@ export default function Checkout({ searchParams }) {
       setErrors(error.message);
       throw error;
     }
-  }
+  }, [bookingId]);
+
   return (
     <div className="p-4 bg-white h-full">
       {errors ? (
