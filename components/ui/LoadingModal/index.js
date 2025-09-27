@@ -1,10 +1,10 @@
 "use client";
 
 import { createPortal } from "react-dom";
-import { useLoading } from "@/store/useLoadingModal";
+import { useLoadingModal } from "@/store/useLoadingModal";
 
 export default function LoadingModal() {
-  const { isLoading } = useLoading();
+  const { isLoading } = useLoadingModal();
 
   if (isLoading) {
     return createPortal(

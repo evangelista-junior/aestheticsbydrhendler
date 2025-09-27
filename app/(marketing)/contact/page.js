@@ -7,9 +7,9 @@ import { Mail, MapPinned, Phone, Send } from "lucide-react";
 import Input from "@/components/ui/Input";
 import TextArea from "@/components/ui/TextArea";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import FeedbackModal from "@/components/ui/FeedbackModal";
-import { useLoading } from "@/store/useLoadingModal";
+import { useLoadingModal } from "@/store/useLoadingModal";
+import { useFeedbackModal } from "@/store/useFeedbackModal";
 
 export default function Contact() {
   const {
@@ -18,17 +18,22 @@ export default function Contact() {
     isSubmitting,
     formState: { errors },
   } = useForm();
-  const [fetchErrors, setFetchErrors] = useState();
-  const [openModal, setOpenModal] = useState(false);
-  const { setLoading, showLoading } = useLoading();
+  const { setLoading } = useLoadingModal();
+  const {
+    setOpen,
+    setSuccessTitle,
+    setSuccessMessage,
+    setErrorMessage,
+    setButtonText,
+    setOnClick,
+  } = useFeedbackModal();
 
   const urlPath = usePathname();
 
   const isDedicatedPath = urlPath == "/contact" && true;
 
   const onSubmit = (data) => {
-    setLoading(true);
-    showLoading();
+    setLoading();
     async function fetchPostContactApi() {
       try {
         const res = await fetch("/api/v1/contact", {
@@ -41,11 +46,16 @@ export default function Contact() {
           throw new Error(res.message);
         }
       } catch (err) {
-        setFetchErrors(err);
+        setErrorMessage(err);
       } finally {
-        setLoading(false);
-        showLoading();
-        setOpenModal(true);
+        setLoading();
+        setOpen();
+        setSuccessTitle("Request sent successfully!");
+        setSuccessMessage(
+          "Thank you for reaching out. Your request has been submitted and our team will get back to you shortly."
+        );
+        setButtonText("Close");
+        setOnClick(() => setOpen());
       }
     }
 
@@ -168,16 +178,6 @@ export default function Contact() {
           </Button>
         </form>
       </div>
-
-      {openModal && (
-        <FeedbackModal
-          successTitle="Request sent successfully!"
-          successMessage="Thank you for reaching out. Your request has been submitted and our team will get back to you shortly."
-          errorMessage={fetchErrors}
-          buttonText="Close"
-          onClick={() => console.log("fuck")}
-        />
-      )}
     </section>
   );
 }

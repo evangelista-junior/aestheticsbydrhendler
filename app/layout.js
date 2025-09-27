@@ -5,6 +5,7 @@ import Footer from "@/features/Footer";
 import neutralBackgorund from "@/public/images/neutral-background.png";
 import Image from "next/image";
 import LoadingModal from "@/components/ui/LoadingModal";
+import FeedbackModal from "@/components/ui/FeedbackModal";
 
 export const metadata = {
   title:
@@ -54,6 +55,8 @@ export default function RootLayout({ children }) {
     <html lang="en" className="h-full">
       <body className="grid h-screen grid-rows-[auto_1fr_auto] antialiased">
         <LoadingModal />
+        <FeedbackModal />
+
         <NavBar />
         <Image
           src={neutralBackgorund}
