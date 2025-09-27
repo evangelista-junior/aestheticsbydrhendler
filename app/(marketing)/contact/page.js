@@ -33,7 +33,7 @@ export default function Contact() {
   const isDedicatedPath = urlPath == "/contact" && true;
 
   const onSubmit = (data) => {
-    setLoading();
+    setLoading(true);
     async function fetchPostContactApi() {
       try {
         const res = await fetch("/api/v1/contact", {
@@ -48,7 +48,7 @@ export default function Contact() {
       } catch (err) {
         setErrorMessage(err);
       } finally {
-        setLoading();
+        setLoading(false);
         setOpen();
         setSuccessTitle("Request sent successfully!");
         setSuccessMessage(
