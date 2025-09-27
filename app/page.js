@@ -1,6 +1,6 @@
 import Header from "@/features/Header";
 import AboutUs from "@/features/AboutUs";
-import Team from "@/features/Team";
+import Team from "@/app/(marketing)/team/page";
 import Treatments from "@/app/(marketing)/treatments/page";
 import WhatToExpect from "@/features/WhatToExpect";
 import FAQ from "@/features/FAQ";
