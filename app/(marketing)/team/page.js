@@ -1,7 +1,7 @@
 import Image from "next/image";
 import teamMemberPhoto from "@/public/images/teamMemberPhoto.jpeg";
-import Headings from "@/components/ui/Headings";
-import Button from "@/components/ui/Button";
+import Headings from "@/components/Headings";
+import Button from "@/components/Button";
 import { CalendarDays } from "lucide-react";
 import Link from "next/link";
 

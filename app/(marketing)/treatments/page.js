@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Card from "./components/Card/page";
 import { useEffect, useState } from "react";
-import Headings from "@/components/ui/Headings";
+import Headings from "@/components/Headings";
 import { useLoadingModal } from "@/store/useLoadingModal";
 
 export default function Treatments() {

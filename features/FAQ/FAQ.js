@@ -1,5 +1,5 @@
-import Button from "@/components/ui/Button";
-import Headings from "@/components/ui/Headings";
+import Button from "@/components/Button";
+import Headings from "@/components/Headings";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 

@@ -1,11 +1,11 @@
 "use client";
 
-import Button from "@/components/ui/Button";
+import Button from "@/components/Button";
 import { useForm } from "react-hook-form";
-import ErrorLabel from "@/components/ui/ErrorLabel";
+import ErrorLabel from "@/components/ErrorLabel";
 import SelectInput from "./components/SelectInput";
-import Input from "../../../components/ui/Input";
-import TextArea from "@/components/ui/TextArea";
+import Input from "../../../components/Input";
+import TextArea from "@/components/TextArea";
 import {
   emailValidator,
   fullNameValidator,

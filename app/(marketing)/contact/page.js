@@ -1,13 +1,13 @@
 "use client";
 
-import Headings from "@/components/ui/Headings";
+import Headings from "@/components/Headings";
 import { useForm } from "react-hook-form";
-import Button from "@/components/ui/Button";
+import Button from "@/components/Button";
 import { Mail, MapPinned, Phone, Send } from "lucide-react";
-import Input from "@/components/ui/Input";
-import TextArea from "@/components/ui/TextArea";
+import Input from "@/components/Input";
+import TextArea from "@/components/TextArea";
 import { usePathname } from "next/navigation";
-import FeedbackModal from "@/components/ui/FeedbackModal";
+import FeedbackModal from "@/components/FeedbackModal";
 import { useLoadingModal } from "@/store/useLoadingModal";
 import { useFeedbackModal } from "@/store/useFeedbackModal";
 

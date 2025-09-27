@@ -1,4 +1,4 @@
-import ErrorLabel from "@/components/ui/ErrorLabel";
+import ErrorLabel from "@/components/ErrorLabel";
 
 export default function TextArea({
   title,

@@ -4,8 +4,8 @@ import NavBar from "@/features/NavBar";
 import Footer from "@/features/Footer";
 import neutralBackgorund from "@/public/images/neutral-background.png";
 import Image from "next/image";
-import LoadingModal from "@/components/ui/LoadingModal";
-import FeedbackModal from "@/components/ui/FeedbackModal";
+import LoadingModal from "@/components/LoadingModal";
+import FeedbackModal from "@/components/FeedbackModal";
 
 export const metadata = {
   title:
