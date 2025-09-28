@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 import { Check, X } from "lucide-react";
 import { useParams } from "next/navigation";
 import { checkIsRefundable } from "@/lib/business/booking/cancellation";
+import { useLoadingModal } from "@/store/useLoadingModal";
 
 export default function Success({ searchParams }) {
   const { bookingId } = useParams();
@@ -17,12 +18,14 @@ export default function Success({ searchParams }) {
   const [time, setTime] = useState();
   const [service, setService] = useState();
   const [isRefundable, setIsRefundable] = useState();
-  const [loading, setLoading] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const { setLoading } = useLoadingModal();
 
   useEffect(() => {
     async function fecthCheckoutInfo() {
       try {
+        setLoading(true);
         const res = await fetch(`/api/v1/bookings/${bookingId}`, {
           method: "GET",
         });
@@ -52,7 +55,7 @@ export default function Success({ searchParams }) {
     }
 
     fecthCheckoutInfo();
-  }, [bookingId]);
+  }, [bookingId, setLoading]);
 
   async function handleModalVisibility() {
     setModalIsOpen(!modalIsOpen);
@@ -68,19 +71,12 @@ export default function Success({ searchParams }) {
     setModalIsOpen(false);
   }
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-300"></div>
-      </div>
-    );
-  }
-
   return (
     <div className="h-full flex flex-col justify-center items-center p-4">
-      <div className="w-full flex flex-col items-center gap-6 -3 py-6 bg-white p-6 rounded-md shadow-md">
+      <div className="w-full flex flex-col items-center gap-6 bg-white/10 p-6 py-9 shadow-md">
         <div className="flex flex-col justify-center text-center gap-6">
-          <p className="text-3xl md:text-4xl font-bold tracking-wide">
+          <p className="flex justify-center items-center gap-1 text-3xl md:text-4xl font-light tracking-wider bg-[linear-gradient(90deg,white_0%,#fef2f2_50%,white_100%)] text-primary-300 py-3">
+            <Check className="w-9 h-9 -mb-1.5 p-1" />
             Booking Confirmed!
           </p>
           <div className="tracking-wider max-w-lg mx-auto">
