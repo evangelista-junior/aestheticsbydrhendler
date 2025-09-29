@@ -45,7 +45,6 @@ const BENEFITS = [
 
 export default function WhatToExpect() {
   return (
-    //flex justify-center items-center p-12
     <section
       id="what-to-expect"
       className="w-full p-12 grid gap-6 2xl:grid-cols-[auto_1fr] justify-center items-center"
