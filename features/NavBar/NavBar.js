@@ -53,12 +53,12 @@ export default function NavBar() {
 
   const links = [
     //TODO: Check if they want scroll or direction to the new page
-    { label: "About Us", href: "about" },
-    { label: "Team", href: "team" },
-    { label: "Treatments", href: "treatments" },
-    { label: "What to Expect", href: "what-to-expect" },
-    { label: "FAQ", href: "faq" },
-    { label: "Contact", href: "contact" },
+    { label: "About Us", href: "about", dedicatedPage: false },
+    { label: "Team", href: "team", dedicatedPage: true },
+    { label: "Treatments", href: "treatments", dedicatedPage: true },
+    { label: "What to Expect", href: "what-to-expect", dedicatedPage: true },
+    { label: "FAQ", href: "faq", dedicatedPage: true },
+    { label: "Contact", href: "contact", dedicatedPage: false },
   ];
 
   return (
@@ -82,11 +82,14 @@ export default function NavBar() {
             <Image src={horizontal_logo} alt="" width={140} />
           </Link>
 
-          {/* Links desktop */}
           <div className="hidden lg:flex gap-6 items-center">
             {links.map((l) => (
               <NavHeaderButton asChild key={l.label}>
-                <Link href={`${notHomePage ? "/" : "#"}${l.href}`}>
+                <Link
+                  href={`${notHomePage && l.dedicatedPage ? "/" : "/#"}${
+                    l.href
+                  }`}
+                >
                   {l.label}
                 </Link>
               </NavHeaderButton>
@@ -157,7 +160,9 @@ export default function NavBar() {
                   {links.map((l) => (
                     <li key={l.label}>
                       <Link
-                        href={l.href}
+                        href={`${notHomePage && l.dedicatedPage ? "/" : "/#"}${
+                          l.href
+                        }`}
                         className="block px-3 py-1 tracking-widest"
                         onClick={() => handleClickSideMenu()}
                       >

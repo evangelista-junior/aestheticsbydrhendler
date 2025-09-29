@@ -47,7 +47,7 @@ export default function WhatToExpect() {
   return (
     //flex justify-center items-center p-12
     <section
-      id="expect"
+      id="what-to-expect"
       className="w-full p-12 grid gap-6 2xl:grid-cols-[auto_1fr] justify-center items-center"
     >
       <div className="w-full 2xl:w-[90%] flex justify-center">
