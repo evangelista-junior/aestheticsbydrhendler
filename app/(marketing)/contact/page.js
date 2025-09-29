@@ -7,7 +7,6 @@ import { Mail, MapPinned, Phone, Send } from "lucide-react";
 import Input from "@/components/Input";
 import TextArea from "@/components/TextArea";
 import { usePathname } from "next/navigation";
-import FeedbackModal from "@/components/FeedbackModal";
 import { useLoadingModal } from "@/store/useLoadingModal";
 import { useFeedbackModal } from "@/store/useFeedbackModal";
 

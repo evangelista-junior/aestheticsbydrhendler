@@ -28,7 +28,7 @@ const BENEFITS = [
   },
   {
     icon: Sparkle,
-    title: "Natural-Looking Results",
+    title: "Natural Results",
     info: "Achieve subtle enhancements that respect your facial dynamics and natural expressions. A ‘fresh not frozen’ approach.",
   },
   {
