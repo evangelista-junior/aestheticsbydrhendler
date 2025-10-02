@@ -13,6 +13,7 @@ import {
 } from "@/utils/regexValidators";
 import { useFeedbackModal } from "@/store/useFeedbackModal";
 import { useLoadingModal } from "@/store/useLoadingModal";
+import { useEffect, useState } from "react";
 
 export default function Booking() {
   const {
@@ -31,6 +32,32 @@ export default function Booking() {
     setClearErrors,
   } = useFeedbackModal();
   const { setLoading } = useLoadingModal();
+
+  const [treatments, setTreatments] = useState([]);
+
+  useEffect(() => {
+    try {
+      async function fetchAvailableTreatments() {
+        const response = await fetch("/api/v1/treatments?fields=name");
+
+        if (!response.ok) {
+          throw new Error("Treatments api request went wrong!");
+        }
+        const data = await response.json();
+
+        if (!data.treatments) {
+          throw new Error("No treatment found!");
+        }
+
+        const treatments = data.treatments.map((t) => t.name);
+        setTreatments(treatments);
+      }
+
+      fetchAvailableTreatments();
+    } catch (err) {
+      console.warn(err);
+    }
+  }, []);
 
   const onSubmit = async (data) => {
     try {
@@ -181,7 +208,7 @@ export default function Booking() {
             required: "Please select a service",
           })}
           errors={errors.service}
-          options={["Consultation Only", "Anti-wrinkle Treatment"]}
+          options={treatments}
         />
 
         <Input
