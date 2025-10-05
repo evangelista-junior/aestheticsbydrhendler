@@ -11,7 +11,7 @@ export default function TextArea({
   return (
     <div>
       <label
-        className={`block text-sm tracking-wider ${
+        className={`block text-sm tracking-wide ${
           isRequired && "after:content-['*'] after:text-red-400 after:ml-1"
         }`}
       >
@@ -19,12 +19,8 @@ export default function TextArea({
       </label>
       <textarea
         rows={4}
-        className={`${className} mt-2 w-full border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-easyDark/30 
-          ${
-            errors
-              ? "border-primary-300 placeholder-primary-300 text-primary-300"
-              : "border-gray-300"
-          }
+        className={`${className} mt-2 w-full shadow p-2 outline-none focus:ring-2 focus:ring-easyDark/30 
+          ${errors && " placeholder-primary-300 text-primary-300"}
         `}
         placeholder={placeholder}
         {...hookFormArgs}

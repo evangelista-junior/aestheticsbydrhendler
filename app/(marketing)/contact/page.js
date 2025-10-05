@@ -83,12 +83,12 @@ export default function Contact() {
         />
       </div>
 
-      <div className="shadow p-3">
+      <div className="shadow p-6">
         <p className="tracking-wider font-light mb-1">
           Get in contact with us through the form bellow or follow us on
           Instagram
         </p>
-        <address className="not-italic tracking-wider text-sm mb-3">
+        <address className="not-italic tracking-wider text-sm mb-3 px-2">
           <div className="flex items-center gap-1 cursor-pointer mb-1 hover:underline">
             <Mail className="w-3 h-3" />
             <a href="mailto:info@aestheticsbydrhendler.com.au">
