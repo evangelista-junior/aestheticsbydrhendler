@@ -7,7 +7,7 @@ export default function Button({
   onClick,
 }) {
   const baseStyles =
-    "flex justify-center items-center gap-2 cursor-pointer transition-all duration-300 uppercase tracking-wider shadow-2xl p-2 px-4";
+    "flex justify-center items-center gap-2 cursor-pointer transition-all duration-300 uppercase tracking-wider shadow-xl p-2 px-4";
 
   const variants = {
     primary: "bg-primary-300 text-white text-shadow-md hover:scale-105",
@@ -15,7 +15,7 @@ export default function Button({
     dark: "bg-easyDark text-white p-4 border-2 border-easyDark rounded-sm hover:bg-gray-100 hover:text-gray-600 hover:border-gray-400 hover:rounded-md duration-400",
 
     darkInverse:
-      "bg-gray-100 text-gray-600 p-4 border-2 border-gray-400 rounded-md hover:bg-easyDark hover:text-white hover:border-easyDark hover:rounded-sm duration-400",
+      "bg-transparent text-gray-600 p-4 border-2 border-gray-400 rounded-md hover:bg-easyDark hover:text-white hover:border-easyDark hover:rounded-sm duration-400",
 
     primaryRounded:
       "rounded-md border-2 border-primary-300 bg-primary-300 text-white hover:bg-transparent hover:text-primary-300",

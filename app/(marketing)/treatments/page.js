@@ -25,7 +25,6 @@ export default function Treatments() {
         setTreatments(data.treatments);
       } catch (err) {
         console.error("Failed to fetch treatments:", err);
-        // TODO: setError(err.message) if you track error state
       } finally {
         setLoading(false);
       }

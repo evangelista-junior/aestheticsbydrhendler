@@ -3,7 +3,7 @@
 import Headings from "@/components/Headings";
 import { useForm } from "react-hook-form";
 import Button from "@/components/Button";
-import { Mail, MapPinned, Phone, Send } from "lucide-react";
+import { Instagram, Mail, MapPinned, Phone, Send } from "lucide-react";
 import Input from "@/components/Input";
 import TextArea from "@/components/TextArea";
 import { usePathname } from "next/navigation";
@@ -71,53 +71,41 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative w-full py-12 px-6 lg:px-12 backdrop-blur-2xl flex flex-col gap-9 justify-center items-center"
+      className="w-full py-12 px-6 lg:py-24 lg:px-12 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6"
     >
-      {isDedicatedPath && ( //TODO: loading
-        <Headings
-          headingType="h1"
-          className="font-light tracking-widest bg-primary-300 text-white -skew-x-12 px-12 py-3"
-        >
-          Contact us
-        </Headings>
-      )}
+      <div className="shadow-2xl w-full h-full saturate-25">
+        <iframe
+          title="Clinic Location Map"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB2NIWI3Tv9iDPrlnowr_0ZqZWoAQydKJU&q=Parlour%20Box%2C%20entrance%20at%20rear%2C%20Wairoa%20Avenue%2C%20North%20Bondi%20NSW%2C%20Australia&zoom=16&maptype=roadmap"
+          width="100%"
+          height="100%"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </div>
 
-      <div className="lg:grid lg:grid-cols-2 lg:gap-10 w-full">
-        <div className="mb-6">
-          <div className="flex flex-col gap-3 ">
-            <address className="not-italic text-textSecondary space-y-0.5 mb-2">
-              <div className="flex items-center gap-3 tracking-wider ">
-                <Phone size={20} />
-                <a href="tel:+610404058431" className=" hover:underline">
-                  +61 404 058 431
-                </a>
-              </div>
-              <div className="flex items-center gap-3 tracking-wider ">
-                <Mail size={20} />
-                <a
-                  href="mailto:info@aestheticsbydrhendler.com.au"
-                  className=" hover:underline"
-                >
-                  info@aestheticsbydrhendler.com.au
-                </a>
-              </div>
-              <div className="flex items-center gap-3 tracking-wider ">
-                <MapPinned size={20} />
-                <p>Bondi, Sydney Eastern Suburbs, NSW</p>
-              </div>
-            </address>
+      <div className="shadow p-3">
+        <p className="tracking-wider font-light mb-1">
+          Get in contact with us through the form bellow or follow us on
+          Instagram
+        </p>
+        <address className="not-italic tracking-wider text-sm mb-3">
+          <div className="flex items-center gap-1 cursor-pointer mb-1 hover:underline">
+            <Mail className="w-3 h-3" />
+            <a href="mailto:info@aestheticsbydrhendler.com.au">
+              info@aestheticsbydrhendler.com.au
+            </a>
           </div>
-
-          <div className="rounded-sm overflow-hidden shadow-2xl w-full h-[300px]">
-            <iframe
-              title="Clinic Location Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.123456789!2d151.2767!3d-33.8915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae4a8f60d8f1%3A0x1234567890abcdef!2sBondi%20Beach%2C%20Sydney%20NSW!5e0!3m2!1sen!2sau!4v0000000000000"
-              width="100%"
-              height="300"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          <div className="flex items-center gap-1 cursor-pointer mb-1 hover:underline">
+            <Instagram className="w-3 h-3" />
+            <a href="https://www.instagram.com/aestheticsbydrhendler">
+              @aestheticsbydrhendler
+            </a>
           </div>
-        </div>
+          <div className="flex items-center gap-1 cursor-pointer mb-1 hover:underline">
+            <MapPinned className="w-3 h-3" />
+            <p>38 Wairoa Ave, North Bondi NSW 2026 (entrance at rear)</p>
+          </div>
+        </address>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -179,7 +167,7 @@ export default function Contact() {
           />
 
           <Button buttonType="dark" type="submit" disabled={isSubmitting}>
-            <Send size={20} aria-hidden="true" focusable="false" />
+            <Send aria-hidden="true" focusable="false" className="h-4 w-4" />
             Send Message
           </Button>
         </form>
