@@ -47,13 +47,13 @@ export default function WhatToExpect() {
   return (
     <section
       id="what-to-expect"
-      className="w-full p-12 grid gap-6 2xl:grid-cols-[auto_1fr] justify-center items-center"
+      className="w-full p-12 grid gap-6 2xl:grid-cols-[auto_1fr] justify-center items-center group"
     >
-      <div className="w-full 2xl:w-[90%] flex justify-center">
+      <div className="w-full 2xl:w-[90%] flex justify-center overflow-hidden">
         <Image
           src={benefitsImg}
           alt="Benefits"
-          className="2xl:w-full max-h-[650px] object-cover shadow-2xl"
+          className="2xl:w-full max-h-[650px] object-cover shadow-2xl scale-110 group-hover:scale-100 duration-500"
         />
       </div>
 
