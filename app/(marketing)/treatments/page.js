@@ -16,7 +16,7 @@ export default function Treatments() {
   useEffect(() => {
     async function fetchTreatments() {
       try {
-        setLoading(true);
+        if (isDedicatedPath) setLoading(true);
         const res = await fetch("/api/v1/treatments");
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
