@@ -13,7 +13,9 @@ export default function Headings({
   };
 
   return (
-    <Tag className={`font-bold ${sizeClasses[headingType] || ""} ${className}`}>
+    <Tag
+      className={` font-title ${sizeClasses[headingType] || ""} ${className}`}
+    >
       {children}
     </Tag>
   );

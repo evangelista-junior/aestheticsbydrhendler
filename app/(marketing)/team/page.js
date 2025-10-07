@@ -22,13 +22,13 @@ export default function Team() {
           <div className="flex items-center gap-3">
             <div>
               <Headings headingType="h2">Dr Shay Hendler</Headings>
-              <p className="text-gray-600 mt-2 tracking-wide">
+              <p className="text-gray-600 mt-2 tracking-wide font-title">
                 MD, BA-Psych | AHPRA MED0002142210
               </p>
             </div>
           </div>
 
-          <div className="text-gray-800 text-lg leading-relaxed space-y-4">
+          <div className="text-gray-800 text-md leading-relaxed tracking-wide space-y-4">
             <p>
               Dr Hendler is a dedicated paediatric doctor with additional{" "}
               <strong>specialist training in medical aesthetics.</strong>
