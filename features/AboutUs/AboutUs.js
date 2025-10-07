@@ -6,16 +6,16 @@ export default function AboutUs() {
   return (
     <section
       id="about"
-      className="w-full flex items-center justify-center py-6 text-gray-600"
+      className="w-full flex items-center justify-center md:py-6 text-gray-600"
     >
       <Image
         src={aboutUsImage}
         alt="About Us"
-        className="object-cover relative w-3/5 "
+        className="object-cover relative md:w-3/5"
       />
 
-      <div className="absolute backdrop-saturate-50 w-4/5 xl:w-2/5 p-6 xl:p-12">
-        <p className="text-xl lg:text-xl font-title uppercase">
+      <div className="absolute backdrop-saturate-50 w-full md:w-2/5 p-6 xl:p-12">
+        <p className="text-md md:text-xl font-title uppercase">
           Enhancing natural beauty with ethical, safe, and effective aesthetic
           procedures.
         </p>

@@ -28,14 +28,14 @@ export default function Card({
       </div>
       <div>
         <h3 className="text-md tracking-wider font-bold mb-1 flex text-start xl:items-center gap-3 flex-col xl:flex-row">
-          <span className="font-title uppercase">{treatmentName}</span>
+          <span className="font-title text-lg">{treatmentName}</span>
           {treatmentAvailability == "SOON" && (
             <p className="hidden xl:inline-block bg-primary-100 text-primary-900 text-xs font-semibold px-2 py-0.5 rounded relative xl:static -top-20">
               COMING SOON
             </p>
           )}
         </h3>
-        <p className="mb-3 leading-relaxed">{treatmentInfo}</p>
+        <p className="mb-3 leading-relaxed text-sm">{treatmentInfo}</p>
         {treatmentHasBlogContent && (
           <Link href={`/treatments/${treatmentId}`}>
             <button
