@@ -1,4 +1,3 @@
-import { Roboto } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/features/NavBar";
 import Footer from "@/features/Footer";
@@ -52,7 +51,7 @@ export const metadata = {
 };
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full font-body">
       <body className="grid h-screen grid-rows-[auto_1fr_auto] antialiased">
         <LoadingModal />
         <FeedbackModal />

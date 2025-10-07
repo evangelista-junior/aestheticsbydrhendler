@@ -6,21 +6,23 @@ export default function AboutUs() {
   return (
     <section
       id="about"
-      className="relative w-full flex items-center justify-center py-10 text-center text-gray-700"
+      className="w-full flex items-center justify-center py-6 text-gray-600"
     >
-      <Image src={aboutUsImage} alt="" className="absolute w-full h-full" />
-      <div
-        className="relative w-4/5 xl:w-3/5 p-6 xl:p-12 bg-transparent dark:bg-[rgba(0,0,0,)] 
-        backdrop-blur-xl backdrop-saturate-200 "
-      >
-        <Headings headingType="h2" className="text-xl xl:text-5xl">
+      <Image
+        src={aboutUsImage}
+        alt="About Us"
+        className="object-cover relative w-3/5 "
+      />
+
+      <div className="absolute backdrop-saturate-50 w-4/5 xl:w-2/5 p-6 xl:p-12">
+        <p className="text-xl lg:text-xl font-title uppercase">
           Enhancing natural beauty with ethical, safe, and effective aesthetic
           procedures.
-        </Headings>
+        </p>
 
-        <p className="text-base xl:text-lg leading-relaxed font-light tracking-wide mt-4 light:text-neutral-700">
+        <p className="text-sm leading-relaxed font-light tracking-wide mt-1">
           We specialise in treatments that are{" "}
-          <span className="font-bold tracking-widest">
+          <span className="font-bold tracking-wider">
             effective yet undetectable
           </span>
           . Our mission is to celebrate what makes you uniquely you, using

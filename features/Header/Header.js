@@ -21,7 +21,7 @@ export default function Header() {
             className="w-full max-w-[600px]"
             alt=""
           />
-          <p className="w-[43ch] tracking-widest text-md md:text-2xl font-extralight text-nowrap overflow-hidden typing">
+          <p className="w-full text-center tracking-widest text-md md:text-2xl font-extralight text-nowrap overflow-hidden typing">
             Where medical expertise meets natural aesthetics
           </p>
 
