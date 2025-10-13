@@ -45,36 +45,35 @@ const BENEFITS = [
 
 export default function WhatToExpect() {
   return (
-    <section
-      id="what-to-expect"
-      className="w-full p-12 grid gap-6 2xl:grid-cols-[auto_1fr] justify-center items-center group"
-    >
-      <div className="w-full 2xl:w-[90%] flex justify-center overflow-hidden">
-        <Image
-          src={benefitsImg}
-          alt="Benefits"
-          className="2xl:w-full max-h-[650px] object-cover shadow-2xl scale-110 group-hover:scale-100 duration-500"
-        />
-      </div>
+    <section id="what-to-expect" className="w-full">
+      <div className="w-full p-12 grid gap-6 2xl:grid-cols-[auto_1fr] justify-center items-center group">
+        <div className="w-full 2xl:w-[90%] flex justify-center overflow-hidden">
+          <Image
+            src={benefitsImg}
+            alt="Benefits"
+            className="2xl:w-full max-h-[650px] object-cover shadow-2xl scale-110 group-hover:scale-100 duration-700"
+          />
+        </div>
 
-      <div className="w-full 2xl:w-full">
-        <ul className="grid sm:grid-cols-1 lg:grid-cols-2 gap-6">
-          {BENEFITS.map(({ icon: Icon, title, info }) => (
-            <li key={title}>
-              <Card
-                cardIcon={
-                  <Icon
-                    aria-hidden="true"
-                    focusable="false"
-                    className="h-6 w-6"
-                  />
-                }
-                cardTitle={title}
-                cardInfo={info}
-              />
-            </li>
-          ))}
-        </ul>
+        <div className="w-full 2xl:w-full">
+          <ul className="grid sm:grid-cols-1 lg:grid-cols-2 gap-6">
+            {BENEFITS.map(({ icon: Icon, title, info }) => (
+              <li key={title}>
+                <Card
+                  cardIcon={
+                    <Icon
+                      aria-hidden="true"
+                      focusable="false"
+                      className="h-6 w-6"
+                    />
+                  }
+                  cardTitle={title}
+                  cardInfo={info}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

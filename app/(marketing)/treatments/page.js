@@ -31,7 +31,7 @@ export default function Treatments() {
     }
 
     fetchTreatments();
-  }, [setLoading]);
+  }, [setLoading, isDedicatedPath]);
 
   if (!isLoading) {
     return (
