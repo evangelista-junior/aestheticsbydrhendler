@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import Headings from "@/components/Headings";
-import { Plus } from "lucide-react";
+import { ChevronDown, Plus } from "lucide-react";
 import Link from "next/link";
 
 const faqs = [
@@ -57,30 +57,33 @@ const faqs = [
 export default function FAQ() {
   return (
     <section id="faq" className="text-gray-600 bg-white">
-      <div className="relative px-3 pt-6 pb-4 xl:px-6 xl:max-w-2/3 mx-auto">
+      <div className="relative px-3 pt-6 xl:px-6 xl:max-w-2/3 mx-auto">
         <Headings
           headingType="h2"
-          className="font-extralight tracking-widest italic mb-8 text-center "
+          className="font-title italic mb-1 rounded text-center bg-gray-400/5"
         >
-          Frequently asked questions
+          FAQ
         </Headings>
 
-        <div className="divide-y divide-primary-300/30">
+        <div className="">
           {faqs.map((item, idx) => (
-            <details key={idx} className="group p-6 transition duration">
-              <summary className="cursor-pointer flex items-center gap-1 justify-between">
-                <p className="text-lg tracking-wider  group-open:tracking-widest group-open:text-primary-500 transition-all duration-300">
+            <details
+              key={idx}
+              className="group p-6 transition duration-300 bg-gray-400/5 rounded mt-1"
+            >
+              <summary className="cursor-pointer flex items-center gap-3">
+                <span className="inline-flex h-6 w-6 items-center justify-center group-open:rotate-180 group-open:text-primary-300 transition-all duration-300">
+                  <ChevronDown size={20} aria-hidden="true" focusable="false" />
+                </span>
+                <p className="text-lg tracking-wider font-bold group-open:text-primary-300 transition-all duration-300">
                   {item.q}
                 </p>
-                <span className="inline-flex h-6 w-6 items-center justify-center group-open:rotate-45 group-open:text-primary-300 transition-all duration-300">
-                  <Plus size={20} aria-hidden="true" focusable="false" />
-                </span>
               </summary>
-              <div className="mt-2 text-gray-500 tracking-wide flex flex-col items-center">
+              <div className="mt-2 text-gray-500 tracking-wide flex flex-col">
                 {item.a}
 
                 {item.q === "How do I book?" && (
-                  <Link href="/bookings">
+                  <Link href="/bookings" className="">
                     <Button buttonType="primaryRounded" className="mt-3">
                       Book Here
                     </Button>
