@@ -222,7 +222,7 @@ export default function Booking() {
           inputType="date"
           hookFormArgs={register("preferedDate", {
             required: "Please choose a date",
-            validate: bookingDateValidation(pickedDate),
+            validate: (pickedDate) => bookingDateValidation(pickedDate),
           })}
           errors={errors.preferedDate}
           minDate={setFirstAvailableDate()}
