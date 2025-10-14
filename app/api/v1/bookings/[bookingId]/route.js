@@ -3,7 +3,7 @@ import { stripe } from "@/lib/stripe";
 import { NextResponse } from "next/server";
 import path from "node:path";
 import fs from "node:fs/promises";
-import { parseEmailConsultationRequest } from "@/utils/parseEmailConsultationRequest";
+import { parseEmailConsultationRequest } from "@/lib/utils/parseEmailConsultationRequest";
 import { sendMail } from "@/lib/mailer";
 import { checkIsRefundable } from "@/lib/business/booking/cancellation";
 import dateFormater from "@/lib/utils/dateFormater";

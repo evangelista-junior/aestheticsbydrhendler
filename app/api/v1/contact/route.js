@@ -3,7 +3,7 @@ import {
   emailValidator,
   fullNameValidator,
   phoneNumberValidator,
-} from "@/utils/regexValidators";
+} from "@/lib/utils/regexValidators";
 import { NextResponse } from "next/server";
 
 export async function POST(request, response) {

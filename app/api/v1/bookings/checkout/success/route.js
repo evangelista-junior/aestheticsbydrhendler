@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import path from "node:path";
 import fs from "node:fs/promises";
-import { parseEmailConsultationRequest } from "@/utils/parseEmailConsultationRequest";
+import { parseEmailConsultationRequest } from "@/lib/utils/parseEmailConsultationRequest";
 import { sendMail } from "@/lib/mailer";
 import dateFormater from "@/lib/utils/dateFormater";
 
