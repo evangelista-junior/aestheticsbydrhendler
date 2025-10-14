@@ -10,10 +10,11 @@ import {
   emailValidator,
   fullNameValidator,
   phoneNumberValidator,
-} from "@/utils/regexValidators";
+} from "@/lib/utils/regexValidators";
 import { useFeedbackModal } from "@/store/useFeedbackModal";
 import { useLoadingModal } from "@/store/useLoadingModal";
 import { useEffect, useState } from "react";
+import { bookingDateValidation } from "@/lib/business/booking/bookingDateValidation";
 
 export default function Booking() {
   const {
@@ -32,7 +33,6 @@ export default function Booking() {
     setClearErrors,
   } = useFeedbackModal();
   const { setLoading } = useLoadingModal();
-
   const [treatments, setTreatments] = useState([]);
 
   useEffect(() => {
@@ -141,6 +141,12 @@ export default function Booking() {
     "08:00 pm",
   ];
 
+  function setFirstAvailableDate() {
+    const today = new Date();
+    const availableDate = new Date(today.setDate(today.getDate() + 1));
+    return availableDate.toLocaleDateString("en-CA");
+  }
+
   return (
     <section className="relative max-w-5xl bg-white shadow-xl p-6 lg:px-12 lg:py-12 ">
       <span>
@@ -216,8 +222,10 @@ export default function Booking() {
           inputType="date"
           hookFormArgs={register("preferedDate", {
             required: "Please choose a date",
+            validate: bookingDateValidation(pickedDate),
           })}
           errors={errors.preferedDate}
+          minDate={setFirstAvailableDate()}
         />
 
         <SelectInput

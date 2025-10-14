@@ -7,6 +7,7 @@ export default function Input({
   inputType,
   hookFormArgs,
   errors,
+  minDate,
 }) {
   return (
     <div className="">
@@ -19,6 +20,7 @@ export default function Input({
                     ${errors && "placeholder-primary-300 text-primary-300"}`}
         placeholder={inputPlaceholder}
         autoComplete={inputAutoComplete}
+        min={minDate}
         {...hookFormArgs}
       />
       <ErrorLabel field={errors} />
