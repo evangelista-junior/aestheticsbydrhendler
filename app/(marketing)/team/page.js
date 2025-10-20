@@ -7,8 +7,8 @@ import Link from "next/link";
 
 export default function Team() {
   return (
-    <section id="team" className="bg-easyWhite text-black lg:py-24 p-6">
-      <div className="w-full xl:w-2/3 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center">
+    <section id="team" className="text-black lg:py-24 p-6">
+      <div className="w-full xl:w-2/3 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center bg-white p-6">
         <div className="relative w-full h-[500px] lg:h-[600px] overflow-hidden shadow-2xl">
           <Image
             src={teamMemberPhoto}
