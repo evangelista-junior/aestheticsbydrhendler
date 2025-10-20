@@ -1,7 +1,7 @@
 import "./globals.css";
 import NavBar from "@/features/NavBar";
 import Footer from "@/features/Footer";
-import neutralBackgorund from "@/public/images/neutral-background.png";
+import neutralBackgorund from "@/public/images/handcrafted_background.png";
 import Image from "next/image";
 import LoadingModal from "@/components/LoadingModal";
 import FeedbackModal from "@/components/FeedbackModal";
@@ -63,7 +63,7 @@ export default function RootLayout({ children }) {
             alt=""
             aria-hidden
             fill
-            className="object-cover opacity-5"
+            className="object-cover opacity-50"
             priority={false}
           />
         </div>
