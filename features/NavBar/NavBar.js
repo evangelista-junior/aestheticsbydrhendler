@@ -2,7 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import horizontal_logo from "@/public/images/logo_horizontal_blackandwhite.png";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useTransform,
+  useScroll,
+} from "framer-motion";
 import { useEffect, useState } from "react";
 import Button from "@/components/Button";
 import NavHeaderButton from "./components/NavHeaderButton";
@@ -61,19 +66,33 @@ export default function NavBar() {
     { label: "Contact", href: "contact", dedicatedPage: false },
   ];
 
+  const { scrollY } = useScroll();
+
+  const backgroundColor = useTransform(
+    scrollY,
+    [0, 100, 150],
+    ["transparent", "#ffffff10", "#ffffff"]
+  );
+
+  const boxShadow = useTransform(
+    scrollY,
+    [0, 150],
+    ["0px 0px 0px rgba(0,0,0,0)", "0px 2px 10px rgba(0,0,0,0.25)"]
+  );
+
   return (
     <>
       <motion.nav
-        initial={notHomePage ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
-        animate={showNavBar ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }}
-        transition={{ duration: 0.3 }}
+        initial={notHomePage ? { y: 0, opacity: 1 } : { y: 0, opacity: 1 }}
+        animate={showNavBar ? { y: 0, opacity: 1 } : { y: 0, opacity: 1 }}
+        style={{ backgroundColor, boxShadow }}
         className={
           notHomePage
             ? "sticky top-0 left-0 w-full z-50"
-            : "fixed top-0 left-0 w-full shadow-2xl z-50"
+            : "fixed top-0 left-0 w-full z-50"
         }
       >
-        <div className="bg-white text-gray-600 px-4 py-2 lg:px-8 flex justify-between items-center">
+        <div className="text-gray-600 px-4 py-2 lg:px-8 flex justify-between items-center">
           <Link
             href="/"
             className="inline-flex items-center"

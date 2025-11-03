@@ -1,7 +1,7 @@
 import "./globals.css";
 import NavBar from "@/features/NavBar";
 import Footer from "@/features/Footer";
-import neutralBackgorund from "@/public/images/handcrafted_background.png";
+import bgImage from "@/public/images/sand.png";
 import Image from "next/image";
 import LoadingModal from "@/components/LoadingModal";
 import FeedbackModal from "@/components/FeedbackModal";
@@ -53,20 +53,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="h-full font-body">
       <body className="grid h-screen grid-rows-[auto_1fr_auto] antialiased">
+        {/* <Image
+          src={bgImage}
+          alt=""
+          aria-hidden
+          fill
+          className="object-cover opacity-20"
+          priority={false}
+        /> */}
         <LoadingModal />
         <FeedbackModal />
 
         <NavBar />
-        <div className="absolute inset-0 -z-10">
-          <Image
-            src={neutralBackgorund}
-            alt=""
-            aria-hidden
-            fill
-            className="object-cover opacity-50"
-            priority={false}
-          />
-        </div>
         <main className="flex justify-center items-center text-gray-700 z-10">
           {children}
         </main>
