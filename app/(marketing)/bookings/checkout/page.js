@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/components/Button";
 import {
   EmbeddedCheckout,
   EmbeddedCheckoutProvider,
@@ -40,15 +41,24 @@ export default function Checkout({ searchParams }) {
     <div className="p-4 bg-white w-full">
       {errors ? (
         <div className="flex justify-center">
-          <Link
-            href="/bookings"
-            className="text-center group text-primary-500  bg-primary-50/50 hover:bg-primary-50 p-3 rounded-xl transition-all duration-300"
-          >
-            <p className="font-bold tracking-wide">{errors}</p>
-            <p className="group-hover:tracking-wide duration-300">
-              👉🏻 Click here to start a new booking!
+          <div className="flex flex-col justify-center items-center p-3 py-6 xl:max-w-1/3 border-1 border-red-500/20 shadow-xl rounded">
+            <p className="font-extralight text-2xl mb-3">{errors}</p>
+            <p className="">
+              We are sorry for being unable to complete your purchase.
             </p>
-          </Link>
+            <p className="mb-6">
+              Click here if you want to{" "}
+              <Link href="/bookings">
+                <span className="underline tracking-wider hover:text-primary-300 duration-300">
+                  create a new booking!
+                </span>
+              </Link>
+            </p>
+
+            <Link href="/">
+              <Button>Go to Homepage</Button>
+            </Link>
+          </div>
         </div>
       ) : (
         <EmbeddedCheckoutProvider
