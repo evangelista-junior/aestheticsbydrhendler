@@ -37,7 +37,7 @@ export default function Checkout({ searchParams }) {
   }, [bookingId]);
 
   return (
-    <div className="p-4 bg-white h-full">
+    <div className="p-4 bg-white w-full">
       {errors ? (
         <div className="flex justify-center">
           <Link
