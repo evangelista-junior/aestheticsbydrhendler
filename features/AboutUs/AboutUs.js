@@ -1,6 +1,5 @@
-import Headings from "@/components/Headings";
 import Image from "next/image";
-import aboutUsImage from "@/public/images/aboutus.png";
+import aboutUsImage from "@/public/images/sand.png";
 
 export default function AboutUs() {
   return (
@@ -10,17 +9,17 @@ export default function AboutUs() {
     >
       <Image
         src={aboutUsImage}
-        alt="About Us"
-        className="object-cover relative md:w-3/5"
+        alt="About us image (sand pattern)"
+        className="object-cover relative md:w-3/5 opacity-30"
       />
 
-      <div className="absolute backdrop-saturate-50 w-full md:w-2/5 p-6 xl:p-12">
+      <div className="absolute w-full md:w-2/5 p-1 xl:p-12">
         <p className="text-md md:text-xl font-title uppercase">
           Enhancing natural beauty with ethical, safe, and effective aesthetic
           procedures.
         </p>
 
-        <p className="text-sm leading-relaxed font-light tracking-wide mt-1">
+        <p className="text-xs md:text-sm leading-relaxed font-light tracking-wide mt-1">
           We specialise in treatments that are{" "}
           <span className="font-bold tracking-wider">
             effective yet undetectable
