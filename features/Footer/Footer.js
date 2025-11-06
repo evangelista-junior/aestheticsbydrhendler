@@ -1,15 +1,20 @@
 export default function Footer() {
   return (
-    <footer className="w-full text-gray-600 py-4 px-6 md:px-20">
+    <footer className="w-full text-gray-600 py-4 px-6 md:px-20 uppercase">
       <div className="mx-auto text-center text-xs">
-        <p className="mb-1">
-          All procedures are performed by qualified health practitioners.
-          Results vary between individuals. Please consult with our team to
-          discuss your needs and suitability.
-        </p>
         <p>
           © {new Date().getFullYear()} Aesthetics By Dr Hendler. All rights
-          reserved.
+          reserved.{" "}
+          <span className="text-primary">
+            Website developed by{" "}
+            <a
+              className="underline tracking-wider"
+              href="https://www.linkedin.com/in/evangelista-junior/"
+              target="_blank"
+            >
+              Evangelista Junior Alves Teixeira
+            </a>
+          </span>
         </p>
         <p>
           Registered with AHPRA. This website complies with AHPRA advertising
@@ -21,6 +26,12 @@ export default function Footer() {
           <a href="/terms-of-use" className="underline hover:text-primary">
             Terms of Use
           </a>
+        </p>
+
+        <p>
+          All procedures are performed by qualified health practitioners.
+          Results vary between individuals. Please consult with our team to
+          discuss your needs and suitability.
         </p>
       </div>
     </footer>
