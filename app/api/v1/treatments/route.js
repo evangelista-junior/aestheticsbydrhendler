@@ -23,7 +23,6 @@ export async function GET(request) {
     }, {});
     const isFiltered = select && Object.keys(select).length > 0;
     const onlyAvailable = status == "AVAILABLE";
-    console.log(!!status);
 
     const treatments = await prisma.treatments.findMany({
       ...(isFiltered && { select }),
