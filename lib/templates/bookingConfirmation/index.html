@@ -17,7 +17,6 @@
       >
         <tr>
           <td align="center" style="padding: 24px">
-            <!-- Card container -->
             <table
               role="presentation"
               cellspacing="0"
@@ -28,15 +27,13 @@
                 width: 600px;
                 max-width: 100%;
                 background: #ffffff;
-                border-radius: 12px;
+                border-radius: 2px;
                 overflow: hidden;
               "
             >
-              <!-- Header -->
               <tr>
-                <td style="background: #171717; color: #ffffff; padding: 24px">
+                <td style="background: #52051c; color: #ffffff; padding: 24px">
                   <div style="display: flex; align-items: center; gap: 16px">
-                    <!-- Logo -->
                     <img
                       src="https://www.aestheticsbydrhendler.com.au/images/horizontal_logo_transparentbg.png"
                       alt="Aesthetics by Dr. Hendler"
@@ -50,7 +47,6 @@
                       "
                     />
 
-                    <!-- Textos -->
                     <div>
                       <h1
                         style="
@@ -61,21 +57,22 @@
                           font-weight: 700;
                           font-family: Arial, Helvetica, sans-serif;
                           color: #ffffff;
+                          text-transform: uppercase;
                         "
                       >
                         Aesthetics by Dr. Hendler
                       </h1>
                       <p
                         style="
-                          display: flex;
-                          justify-items: center;
-                          gap: 0.5rem;
+                          letter-spacing: 0.1rem;
                           margin: 6px 0 0;
                           font-size: 14px;
                           line-height: 1.5;
                           opacity: 0.9;
                           font-family: Arial, Helvetica, sans-serif;
                           color: #ffffff;
+                          text-transform: uppercase;
+                          font-size: x-small;
                         "
                       >
                         Booking Confirmation
@@ -85,7 +82,6 @@
                 </td>
               </tr>
 
-              <!-- Body -->
               <tr>
                 <td style="padding: 24px">
                   <p
@@ -109,7 +105,9 @@
                     "
                   >
                     Thank you for choosing
-                    <strong>Aesthetics by Dr. Hendler</strong>.<br />
+                    <span style="text-transform: uppercase; font-weight: 700"
+                      >Aesthetics by Dr. Hendler</span
+                    >.<br />.<br />
                     Your consultation has been successfully confirmed and your
                     payment has been processed.<br />
 
@@ -185,7 +183,6 @@
                     </tr>
                   </table>
 
-                  <!-- Button (bulletproof) -->
                   <table
                     role="presentation"
                     cellspacing="0"
@@ -195,13 +192,9 @@
                     style="margin: 24px auto"
                   >
                     <tr>
-                      <td
-                        align="center"
-                        bgcolor="#ffa2b3"
-                        style="border-radius: 999px"
-                      >
+                      <td align="center" bgcolor="#52051c">
                         <a
-                          href="{{bookingUrl}}"
+                          href="{{checkoutUrl}}"
                           target="_blank"
                           style="
                             display: inline-block;
@@ -210,8 +203,8 @@
                             font-size: 15px;
                             color: #ffffff;
                             text-decoration: none;
-                            border-radius: 999px;
-                            background: #ffa2b3;
+                            background: #52051c;
+                            text-transform: uppercase;
                           "
                         >
                           Check my booking
@@ -220,7 +213,6 @@
                     </tr>
                   </table>
 
-                  <!-- Fallback link -->
                   <p
                     style="
                       margin: 8px 0 0;
@@ -248,24 +240,27 @@
 
                   <p
                     style="
-                      margin: 0 0 8px;
+                      margin: 0 0 3px;
                       font-size: 14px;
                       line-height: 1.6;
                       font-family: Arial, Helvetica, sans-serif;
                       color: #374151;
+                      text-transform: uppercase;
+                      font-size: x-small;
                     "
                   >
                     For canceling access your booking and check the bottom of
-                    the page.
+                    your booking page.
                   </p>
 
                   <p
                     style="
-                      margin: 16px 0 0;
-                      font-size: 12px;
+                      margin: 3px 0 0;
                       line-height: 1.6;
                       font-family: Arial, Helvetica, sans-serif;
                       color: #6b7280;
+                      text-transform: uppercase;
+                      font-size: x-small;
                     "
                   >
                     If you didn’t make this request, please ignore this email.
@@ -273,7 +268,6 @@
                 </td>
               </tr>
 
-              <!-- Footer -->
               <tr>
                 <td
                   style="
@@ -291,7 +285,6 @@
                 </td>
               </tr>
             </table>
-            <!-- /Card container -->
           </td>
         </tr>
       </table>

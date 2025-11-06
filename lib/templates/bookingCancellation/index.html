@@ -17,7 +17,6 @@
       >
         <tr>
           <td align="center" style="padding: 24px">
-            <!-- Card container -->
             <table
               role="presentation"
               cellspacing="0"
@@ -28,15 +27,13 @@
                 width: 600px;
                 max-width: 100%;
                 background: #ffffff;
-                border-radius: 12px;
+                border-radius: 2px;
                 overflow: hidden;
               "
             >
-              <!-- Header -->
               <tr>
-                <td style="background: #171717; color: #ffffff; padding: 24px">
+                <td style="background: #52051c; color: #ffffff; padding: 24px">
                   <div style="display: flex; align-items: center; gap: 16px">
-                    <!-- Logo -->
                     <img
                       src="https://www.aestheticsbydrhendler.com.au/images/horizontal_logo_transparentbg.png"
                       alt="Aesthetics by Dr. Hendler"
@@ -50,7 +47,6 @@
                       "
                     />
 
-                    <!-- Textos -->
                     <div>
                       <h1
                         style="
@@ -61,6 +57,7 @@
                           font-weight: 700;
                           font-family: Arial, Helvetica, sans-serif;
                           color: #ffffff;
+                          text-transform: uppercase;
                         "
                       >
                         Aesthetics by Dr. Hendler
@@ -74,6 +71,8 @@
                           opacity: 0.9;
                           font-family: Arial, Helvetica, sans-serif;
                           color: #ffffff;
+                          text-transform: uppercase;
+                          font-size: x-small;
                         "
                       >
                         Booking cancellation confirmation
@@ -83,7 +82,6 @@
                 </td>
               </tr>
 
-              <!-- Body -->
               <tr>
                 <td style="padding: 24px">
                   <p
@@ -124,7 +122,6 @@
                     </span>
                   </p>
 
-                  <!-- Summary box -->
                   <table
                     role="presentation"
                     cellspacing="0"
@@ -133,9 +130,9 @@
                     width="100%"
                     style="
                       margin: 16px 0;
-                      border: 1px solid #fca5a5;
-                      background: #fef2f2;
-                      border-radius: 8px;
+                      border: 1px solid #52051c;
+                      background: #52051c40;
+                      border-radius: 2px;
                     "
                   >
                     <tr>
@@ -145,7 +142,7 @@
                           font-size: 14px;
                           line-height: 1.5;
                           font-family: Arial, Helvetica, sans-serif;
-                          color: #111827;
+                          color: #fff;
                         "
                       >
                         <strong>Cancelled Service:</strong> {{service}}
@@ -158,7 +155,7 @@
                           font-size: 14px;
                           line-height: 1.5;
                           font-family: Arial, Helvetica, sans-serif;
-                          color: #111827;
+                          color: #fff;
                         "
                       >
                         <strong>Original Date:</strong> {{date}} &nbsp; • &nbsp;
@@ -172,7 +169,7 @@
                           font-size: 14px;
                           line-height: 1.5;
                           font-family: Arial, Helvetica, sans-serif;
-                          color: #6b7280;
+                          color: #000;
                         "
                       >
                         <strong>Cancellation Date:</strong> {{cancellationDate}}
@@ -180,7 +177,6 @@
                     </tr>
                   </table>
 
-                  <!-- Button (bulletproof) -->
                   <table
                     role="presentation"
                     cellspacing="0"
@@ -190,11 +186,7 @@
                     style="margin: 24px auto"
                   >
                     <tr>
-                      <td
-                        align="center"
-                        bgcolor="#ffa2b3"
-                        style="border-radius: 999px"
-                      >
+                      <td align="center" bgcolor="#52051c">
                         <a
                           href="https://www.aestheticsbydrhendler.com.au/bookings"
                           target="_blank"
@@ -205,8 +197,8 @@
                             font-size: 15px;
                             color: #ffffff;
                             text-decoration: none;
-                            border-radius: 999px;
-                            background: #ffa2b3;
+                            background: #52051c;
+                            text-transform: uppercase;
                           "
                         >
                           Book New Consultation
@@ -215,7 +207,6 @@
                     </tr>
                   </table>
 
-                  <!-- Fallback link -->
                   <p
                     style="
                       margin: 8px 0 0;
@@ -243,11 +234,13 @@
 
                   <p
                     style="
-                      margin: 16px 0 0;
-                      font-size: 12px;
+                      margin: 0 0 3px;
+                      font-size: 14px;
                       line-height: 1.6;
                       font-family: Arial, Helvetica, sans-serif;
-                      color: #6b7280;
+                      color: #374151;
+                      text-transform: uppercase;
+                      font-size: x-small;
                     "
                   >
                     If you have any questions about this cancellation or need
@@ -256,7 +249,6 @@
                 </td>
               </tr>
 
-              <!-- Footer -->
               <tr>
                 <td
                   style="
@@ -274,7 +266,6 @@
                 </td>
               </tr>
             </table>
-            <!-- /Card container -->
           </td>
         </tr>
       </table>
