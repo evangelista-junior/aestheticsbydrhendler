@@ -30,15 +30,11 @@ export default function Contact() {
     setClearErrors,
   } = useFeedbackModal();
 
-  const urlPath = usePathname();
-
-  const isDedicatedPath = urlPath == "/contact" && true;
-
   const onSubmit = async (data) => {
     if (isSubmitting) return;
 
     try {
-      if (isDedicatedPath) setLoading(true);
+      setLoading(true);
 
       const res = await fetch("/api/v1/contact", {
         method: "POST",
