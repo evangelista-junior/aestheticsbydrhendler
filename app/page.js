@@ -12,8 +12,8 @@ export default function Home() {
       <Header />
       <AboutUs />
       <Team />
-      <Treatments />
       <WhatToExpect />
+      <Treatments />
       <FAQ />
       <Contact />
     </div>

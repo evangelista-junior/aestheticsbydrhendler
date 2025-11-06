@@ -49,7 +49,7 @@ export default function Checkout({ searchParams }) {
             <p className="mb-6">
               Click here if you want to{" "}
               <Link href="/bookings">
-                <span className="underline tracking-wider hover:text-primary-300 duration-300">
+                <span className="underline tracking-wider hover:text-primary duration-300">
                   create a new booking!
                 </span>
               </Link>

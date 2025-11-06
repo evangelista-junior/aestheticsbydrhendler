@@ -52,17 +52,7 @@
   --color-easyWhite: var(--easy-white);
   --color-easyDark: var(--easy-dark);
 
-  --color-primary-50: #fff1f3;
-  --color-primary-100: #ffe3e7;
-  --color-primary-200: #ffc0cb;
-  --color-primary-300: #ffa2b3;
-  --color-primary-400: #fe6e8b;
-  --color-primary-500: #f83b66;
-  --color-primary-600: #e51951;
-  --color-primary-700: #c20e43;
-  --color-primary-800: #a20f40;
-  --color-primary-900: #8a113c;
-  --color-primary-950: #4d041c;
+  --color-primary: #52051c;
 
   --font-title: "Nanum Myeongjo", serif;
   --font-body: "Lato", sans-serif;

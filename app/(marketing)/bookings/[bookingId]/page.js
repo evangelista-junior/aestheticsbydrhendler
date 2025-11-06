@@ -75,7 +75,7 @@ export default function Success({ searchParams }) {
     <div className="h-full flex flex-col justify-center items-center p-4">
       <div className="w-full flex flex-col items-center gap-6 bg-white/10 p-6 py-9 shadow-md">
         <div className="flex flex-col justify-center text-center gap-6">
-          <p className="flex justify-center items-center gap-1 text-3xl md:text-4xl font-light tracking-wider bg-[linear-gradient(90deg,white_0%,#fef2f2_50%,white_100%)] text-primary-300 py-3">
+          <p className="flex justify-center items-center gap-1 text-3xl md:text-4xl font-light tracking-wider bg-[linear-gradient(90deg,white_0%,#fef2f2_50%,white_100%)] text-primary py-3">
             <Check className="w-9 h-9 -mb-1.5 p-1" />
             Booking Confirmed!
           </p>
@@ -88,7 +88,7 @@ export default function Success({ searchParams }) {
             </p>
             <a
               href="mailto:info@aestheticsbydrhendler.com.au"
-              className="cursor-pointer text-primary-300 hover:text-primary-500 transition-all duration-300"
+              className="cursor-pointer text-primary hover:text-primary transition-all duration-300"
             >
               info@aestheticsbydrhendler.com.au
             </a>
@@ -147,14 +147,14 @@ export default function Success({ searchParams }) {
               To cancel your appointment, please{" "}
               <button
                 onClick={handleModalVisibility}
-                className="text-primary-500 underline tracking-wide cursor-pointer"
+                className="text-primary underline tracking-wide cursor-pointer"
               >
                 click here
               </button>{" "}
               or email us at{" "}
               <a
                 href="mailto:info@aestheticsbydrhendler.com.au"
-                className="text-primary-500 underline tracking-wide"
+                className="text-primary underline tracking-wide"
               >
                 info@aestheticsbydrhendler.com.au
               </a>

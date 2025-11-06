@@ -20,7 +20,7 @@ export default function TextArea({
       <textarea
         rows={4}
         className={`${className} mt-2 w-full shadow p-2 outline-none focus:ring-2 focus:ring-easyDark/30 
-          ${errors && " placeholder-primary-300 text-primary-300"}
+          ${errors && " placeholder-primary text-primary"}
         `}
         placeholder={placeholder}
         {...hookFormArgs}

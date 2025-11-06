@@ -9,16 +9,16 @@ export default function Team() {
   return (
     <section id="team" className="text-black lg:py-24 p-6">
       <div className="w-full xl:w-2/3 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center bg-white p-6">
-        <div className="relative w-full h-[500px] lg:h-[600px] overflow-hidden shadow-2xl">
+        <div className="relative w-full h-[500px] lg:h-[600px] shadow-2xl">
           <Image
             src={teamMemberPhoto}
             alt="Dr. Shane Hendler"
             fill
-            className="object-cover"
+            className="object-cover xl:grayscale-25 hover:grayscale-0 transition-all duration-300"
           />
         </div>
 
-        <div className="flex flex-col justify-center gap-8">
+        <div className="flex flex-col justify-center gap-6">
           <div className="flex items-center gap-3">
             <div>
               <Headings headingType="h2">Dr Shay Hendler</Headings>
@@ -28,7 +28,7 @@ export default function Team() {
             </div>
           </div>
 
-          <div className="text-gray-800 text-md leading-relaxed tracking-wide space-y-4">
+          <div className="text-gray-800 text-md leading-relaxed tracking-wide space-y-3">
             <p>
               Dr Hendler is a dedicated paediatric doctor with additional{" "}
               <strong>specialist training in medical aesthetics.</strong>
@@ -50,7 +50,7 @@ export default function Team() {
 
           <Link
             href="/bookings"
-            className="mx-auto items-center lg:items-start lg:mx-0"
+            className="mx-auto items-center md:mx-0 mt-3 lg:mt-0"
           >
             <Button buttonType="primaryRounded" className="w-auto">
               <CalendarDays size={20} aria-hidden="true" focusable="false" />

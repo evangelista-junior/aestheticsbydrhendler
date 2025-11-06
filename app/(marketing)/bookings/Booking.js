@@ -250,8 +250,8 @@ export default function Booking() {
           <label className="flex items-start gap-3 cursor-pointer align-middle">
             <input
               type="checkbox"
-              className="cursor-pointer h-[16px] w-[16px] aspect-square appearance-none rounded border border-primary-300
-                checked:bg-primary-300 checked:border-primary-400 
+              className="cursor-pointer h-[16px] w-[16px] aspect-square appearance-none rounded border border-primary
+                checked:bg-primary checked:border-primary 
                 "
               {...register("consent", {
                 required: "You must accept to continue",

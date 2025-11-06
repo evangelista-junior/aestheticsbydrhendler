@@ -2,9 +2,10 @@
 
 import { usePathname } from "next/navigation";
 import Card from "./components/Card/page";
+import halfFace from "@/public/images/half_face.png";
 import { useEffect, useState } from "react";
-import Headings from "@/components/Headings";
 import { useLoadingModal } from "@/store/useLoadingModal";
+import Image from "next/image";
 
 export default function Treatments() {
   const [treatments, setTreatments] = useState([]);
@@ -37,29 +38,29 @@ export default function Treatments() {
     return (
       <section
         id="treatments"
-        className="flex flex-col items-center justify-center gap-9 relative p-6 2xl:px-24 drop-shadow-[0_0px_10px_rgba(0,0,0,0.1)]"
+        className="p-6 xl:px-0 xl:w-2/3 mx-auto flex flex-col-reverse md:flex-row"
       >
-        {isDedicatedPath && treatments.length > 0 && (
-          <Headings headingType="h1" className="font-light tracking-widest">
-            Available treatments
-          </Headings>
-        )}
-
-        <div className="px-12 py-6 w-full grid 2xl:grid-cols-2 gap-3 xl:gap-12">
-          {treatments &&
-            treatments.map((treatment) => {
-              return (
-                <Card
-                  key={treatment.id}
-                  treatmentId={treatment.id}
-                  treatmentImage={treatment.imageUrl}
-                  treatmentName={treatment.name}
-                  treatmentInfo={treatment.description}
-                  treatmentAvailability={treatment.availability}
-                  treatmentHasBlogContent={treatment.hasBlogContent}
-                />
-              );
-            })}
+        <div className="w-full">
+          {treatments.map((t) => {
+            return (
+              <Card
+                key={t.id}
+                treatmentId={t.id}
+                treatmentImage={t.imageUrl}
+                treatmentName={t.name}
+                treatmentInfo={t.description}
+                treatmentAvailability={t.availability}
+                treatmentHasBlogContent={t.hasBlogContent}
+              />
+            );
+          })}
+        </div>
+        <div className="flex w-full bg-primary pt-12">
+          <Image
+            src={halfFace}
+            alt="Half face."
+            className="object-cover rounded-t-full grayscale"
+          />
         </div>
       </section>
     );

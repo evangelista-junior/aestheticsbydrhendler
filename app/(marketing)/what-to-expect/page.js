@@ -29,7 +29,7 @@ const BENEFITS = [
   {
     icon: Sparkle,
     title: "Natural Results",
-    info: "Achieve subtle enhancements that respect your facial dynamics and natural expressions. A ‘fresh not frozen’ approach.",
+    info: "Achieve subtle enhancements that respect your facial dynamics and natural expressions. A 'fresh not frozen' approach.",
   },
   {
     icon: NotebookPen,
@@ -45,35 +45,27 @@ const BENEFITS = [
 
 export default function WhatToExpect() {
   return (
-    <section id="what-to-expect" className="w-full">
-      <div className="w-full p-12 grid gap-6 2xl:grid-cols-[auto_1fr] justify-center items-center group">
-        <div className="w-full 2xl:w-[90%] flex justify-center overflow-hidden">
-          <Image
-            src={benefitsImg}
-            alt="Benefits"
-            className="2xl:w-full max-h-[650px] object-cover shadow-2xl scale-110 group-hover:scale-100 duration-700"
-          />
+    <section id="what-to-expect" className="w-4/5 relative mx-auto">
+      <div className="mt-12 h-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-3">
+        {BENEFITS.map(({ icon: Icon, title, info, gridClasses }) => (
+          <Card key={title} cardTitle={title} cardInfo={info} />
+        ))}
+        {/* <div className="col-span-2 row-span-2 bg-red-200">1</div>
+        <div className="col-span-2 row-span-3 col-start-1 row-start-3 bg-red-200 shadow">
+          2
         </div>
-
-        <div className="w-full 2xl:w-full">
-          <ul className="grid sm:grid-cols-1 lg:grid-cols-2 gap-6">
-            {BENEFITS.map(({ icon: Icon, title, info }) => (
-              <li key={title}>
-                <Card
-                  cardIcon={
-                    <Icon
-                      aria-hidden="true"
-                      focusable="false"
-                      className="h-6 w-6"
-                    />
-                  }
-                  cardTitle={title}
-                  cardInfo={info}
-                />
-              </li>
-            ))}
-          </ul>
+        <div className="row-span-3 col-start-3 row-start-1 bg-red-200 shadow">
+          3
         </div>
+        <div className="col-span-2 row-span-3 col-start-4 row-start-1 bg-red-200 shadow">
+          4
+        </div>
+        <div className="col-span-2 row-span-2 col-start-3 row-start-4 bg-red-200 shadow">
+          5
+        </div>
+        <div className="row-span-2 col-start-5 row-start-4 bg-red-200 shadow">
+          6
+        </div> */}
       </div>
     </section>
   );

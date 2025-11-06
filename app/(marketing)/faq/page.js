@@ -60,37 +60,34 @@ export default function FAQ() {
       <div className="relative px-3 pt-6 xl:px-6 xl:max-w-2/3 mx-auto">
         <Headings
           headingType="h2"
-          className="font-title italic mb-1 rounded text-center bg-gray-400/5"
+          className="tracking-wider uppercase font-light mb-6 text-center"
         >
-          FAQ
+          Explore Topics
         </Headings>
 
         <div className="">
           {faqs.map((item, idx) => (
-            <details
-              key={idx}
-              className="group p-6 transition duration-300 bg-gray-400/5 rounded mt-1"
-            >
-              <summary className="cursor-pointer flex items-center gap-3">
-                <span className="inline-flex h-6 w-6 items-center justify-center group-open:rotate-180 group-open:text-primary-300 transition-all duration-300">
-                  <ChevronDown size={20} aria-hidden="true" focusable="false" />
-                </span>
-                <p className="text-lg tracking-wider font-bold group-open:text-primary-300 transition-all duration-300">
+            <div key={idx} className="group p-6 transition duration-300">
+              <div>
+                <p className="tracking-wider uppercase transition-all duration-300">
                   {item.q}
                 </p>
-              </summary>
-              <div className="mt-2 text-gray-500 tracking-wide flex flex-col">
-                {item.a}
+                <div className="mt-2 text-gray-500 tracking-wide flex flex-col">
+                  {item.a}
 
-                {item.q === "How do I book?" && (
-                  <Link href="/bookings" className="">
-                    <Button buttonType="primaryRounded" className="mt-3">
-                      Book Here
-                    </Button>
-                  </Link>
-                )}
+                  {item.q === "How do I book?" && (
+                    <Link href="/bookings" className="">
+                      <Button
+                        buttonType="primaryRounded"
+                        className="relative mx-auto mt-3"
+                      >
+                        Book Here
+                      </Button>
+                    </Link>
+                  )}
+                </div>
               </div>
-            </details>
+            </div>
           ))}
         </div>
 

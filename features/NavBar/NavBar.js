@@ -60,10 +60,10 @@ export default function NavBar() {
     //TODO: Check if they want scroll or direction to the new page
     { label: "About Us", href: "about", dedicatedPage: false },
     { label: "Team", href: "team", dedicatedPage: true },
-    { label: "Treatments", href: "treatments", dedicatedPage: true },
     { label: "What to Expect", href: "what-to-expect", dedicatedPage: true },
+    { label: "Treatments", href: "treatments", dedicatedPage: true },
     { label: "FAQ", href: "faq", dedicatedPage: true },
-    { label: "Contact", href: "contact", dedicatedPage: false },
+    { label: "Contact", href: "contact", dedicatedPage: true },
   ];
 
   const { scrollY } = useScroll();
@@ -77,7 +77,7 @@ export default function NavBar() {
   const boxShadow = useTransform(
     scrollY,
     [0, 150],
-    ["0px 0px 0px rgba(0,0,0,0)", "0px 2px 10px rgba(0,0,0,0.25)"]
+    ["0px 0px 0px rgba(0,0,0,0)", "0px 2px 10px rgba(0,0,0,0.1)"]
   );
 
   return (

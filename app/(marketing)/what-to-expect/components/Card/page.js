@@ -1,14 +1,14 @@
 // CHANGED: permitir clonar ícone para forçar dimensões e atributos de acessibilidade
-import { cloneElement, isValidElement } from "react";
 import Headings from "@/components/Headings";
 
 export default function Card({ cardIcon, cardTitle, cardInfo }) {
   return (
-    <div className="flex flex-col h-full items-center justify-center gap-3 p-3 border border-white/40 rounded-md shadow-xl text-gray-600 backdrop-blur">
-      <div className="w-full flex items-center gap-3 ">{cardIcon}</div>
+    <div className="group shadow-inner px-6 py-12 md:p-6 md:aspect-square flex flex-col justify-center text-center">
+      <p className="uppercase group-hover:font-semibold group-hover:tracking-wide duration-100">
+        {cardTitle}
+      </p>
 
-      <div className="min-w-0">
-        <p className="text-xl font-bold tracking-wide">{cardTitle}</p>
+      <div className="">
         <p className="font-extralight tracking-wider text-gray-500">
           {cardInfo}
         </p>

@@ -14,7 +14,7 @@ export default function SelectInput({
 
       <select
         className={`mt-2 w-full shadow px-1 py-2.5 outline-none focus:ring-2 focus:ring-easyDark/30 placeholder:text-red-900
-                    ${errors & "placeholder-primary-300 text-primary-300"}`}
+                    ${errors & "placeholder-primary text-primary"}`}
         {...hookFormArgs}
       >
         <option value={labelTitle}>{labelTitle}</option>
