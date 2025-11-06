@@ -11,7 +11,7 @@ export default function TextArea({
   return (
     <div>
       <label
-        className={`block text-sm tracking-wide ${
+        className={`block text-sm tracking-wide uppercase ${
           isRequired && "after:content-['*'] after:text-red-400 after:ml-1"
         }`}
       >

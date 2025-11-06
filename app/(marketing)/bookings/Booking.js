@@ -147,15 +147,21 @@ export default function Booking() {
     return availableDate.toLocaleDateString("en-CA");
   }
 
+  function selectInputValidation(selection, errMessage) {
+    if (selection == "default") return errMessage;
+  }
+
   return (
     <section className="relative max-w-5xl bg-white shadow-xl p-6 lg:px-12 lg:py-12 ">
-      <span>
-        Please complete the form below to arrange your initial consultation.
-      </span>
-      <p className="mb-8">
-        During your consultation, we’ll confirm suitability, discuss potential
-        risks, and outline a personalised plan tailored to your goals.
-      </p>
+      <div className="uppercase text-sm">
+        <p>
+          Please complete the form below to arrange your initial consultation.
+        </p>
+        <p className="mb-8">
+          During your consultation, we’ll confirm suitability, discuss potential
+          risks, and outline a personalised plan tailored to your goals.
+        </p>
+      </div>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -167,7 +173,7 @@ export default function Booking() {
           inputAutoComplete="name"
           inputType="text"
           hookFormArgs={register("name", {
-            required: "Please enter your full name.",
+            required: "Please enter your full name",
             pattern: {
               value: fullNameValidator,
               message: "Please enter your full name",
@@ -182,7 +188,7 @@ export default function Booking() {
           inputAutoComplete="email"
           inputType="email"
           hookFormArgs={register("email", {
-            required: "Email is required.",
+            required: "Email is required",
             pattern: {
               value: emailValidator,
               message: "Please enter a valid email, e.g. name@example.com",
@@ -212,6 +218,8 @@ export default function Booking() {
           labelTitle="Desired Service"
           hookFormArgs={register("service", {
             required: "Please select a service",
+            validate: (selection) =>
+              selectInputValidation(selection, "Please select a valid service"),
           })}
           errors={errors.service}
           options={treatments}
@@ -232,6 +240,8 @@ export default function Booking() {
           labelTitle="Prefered time"
           hookFormArgs={register("preferedTime", {
             required: "Please select a preferred time",
+            validate: (selection) =>
+              selectInputValidation(selection, "Please select a valid time"),
           })}
           errors={errors.preferedTime}
           options={availableTimes}
@@ -240,7 +250,7 @@ export default function Booking() {
         <div className="xl:col-span-2">
           <TextArea
             title="Anything you’d like us to know?"
-            placeholder="Optional information."
+            placeholder="Optional information"
             hookFormArgs={register("notes")}
             className="xl:col-span-2"
           />
@@ -257,11 +267,11 @@ export default function Booking() {
                 required: "You must accept to continue",
               })}
             />
-            <span>
+            <p className="uppercase text-sm text-primary">
               I understand this request is for an initial consultation to assess
               suitability. All medical treatments carry potential risks and side
               effects.
-            </span>
+            </p>
           </label>
           <ErrorLabel field={errors.consent} />
         </div>

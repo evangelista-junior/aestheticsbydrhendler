@@ -8,7 +8,7 @@ export default function SelectInput({
 }) {
   return (
     <div>
-      <label className="block text-sm tracking-wider after:content-['*'] after:text-red-400">
+      <label className="block text-sm tracking-wider after:content-['*'] after:text-red-400 uppercase">
         {labelTitle}
       </label>
 
@@ -17,7 +17,7 @@ export default function SelectInput({
                     ${errors & "placeholder-primary text-primary"}`}
         {...hookFormArgs}
       >
-        <option value={labelTitle}>{labelTitle}</option>
+        <option value="default">{labelTitle}</option>
         {options.map((o, i) => (
           <option key={i} value={o}>
             {o}

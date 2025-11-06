@@ -10,8 +10,8 @@ export default function Input({
   minDate,
 }) {
   return (
-    <div className="">
-      <label className="block text-sm tracking-wide after:content-['*'] after:text-red-400 after:ml-1">
+    <div>
+      <label className="block text-sm tracking-wide after:content-['*'] after:text-red-400 after:ml-1 uppercase">
         {labelTitle}
       </label>
       <input
