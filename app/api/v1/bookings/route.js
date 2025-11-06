@@ -64,9 +64,9 @@ export async function POST(request) {
       audience: "api/bookings",
       scope: "booking-request",
       unreservedClaims: {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
+        name: String(data.name).trim(),
+        email: String(data.email).trim(),
+        phone: String(data.phone).trim(),
         service: data.service,
         preferedDate: data.preferedDate,
         preferedTime: data.preferedTime,

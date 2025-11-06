@@ -178,7 +178,7 @@ export default function Booking() {
             required: "Please enter your full name",
             pattern: {
               value: fullNameValidator,
-              message: "Please enter your full name",
+              message: "Please enter your full name (with no space at the end)",
             },
           })}
           errors={errors.name}
@@ -193,7 +193,8 @@ export default function Booking() {
             required: "Email is required",
             pattern: {
               value: emailValidator,
-              message: "Please enter a valid email, e.g. name@example.com",
+              message:
+                "Please enter a valid email with no space at the end, e.g. name@example.com",
             },
           })}
           errors={errors.email}
