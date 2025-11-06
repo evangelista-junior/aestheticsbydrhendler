@@ -27,11 +27,11 @@ export const metadata = {
     title: "Natural Cosmetic Injectables in Bondi & Eastern Suburbs",
     description:
       "Subtle, natural enhancements with a focus on safety and patient care. Serving Bondi, Coogee, Double Bay, and surrounding Eastern Suburbs.",
-    url: "https://aestheticsbydrhendler.com.au",
+    url: "https://www.aestheticsbydrhendler.com.au",
     siteName: "Aesthetics by Dr. Hendler",
     images: [
       {
-        url: "https://aestheticsbydrhendler.com.au/imagens/og-image.jpg",
+        url: "https://www.aestheticsbydrhendler.com.au/imagens/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Cosmetic injectables Bondi",
@@ -41,7 +41,7 @@ export const metadata = {
     type: "website",
   },
   alternates: {
-    canonical: "https://aestheticsbydrhendler.com.au",
+    canonical: "https://www.aestheticsbydrhendler.com.au",
   },
   other: {
     "geo.position": "-33.8915;151.2767",
