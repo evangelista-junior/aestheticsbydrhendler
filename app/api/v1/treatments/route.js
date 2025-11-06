@@ -5,6 +5,7 @@ export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const fieldsOnUrl = searchParams.get("fields");
+    const status = searchParams.get("status");
 
     const fields = fieldsOnUrl?.split(`,`).filter((s) => s.trim());
     const availableFields = Object.keys(prisma.treatments.fields).reduce(
@@ -21,9 +22,12 @@ export async function GET(request) {
       return acc;
     }, {});
     const isFiltered = select && Object.keys(select).length > 0;
+    const onlyAvailable = status == "AVAILABLE";
+    console.log(!!status);
 
     const treatments = await prisma.treatments.findMany({
       ...(isFiltered && { select }),
+      ...(onlyAvailable && { where: { availability: "AVAILABLE" } }),
     });
 
     if (!treatments) {

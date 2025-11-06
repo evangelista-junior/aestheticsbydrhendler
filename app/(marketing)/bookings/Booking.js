@@ -38,7 +38,9 @@ export default function Booking() {
   useEffect(() => {
     try {
       async function fetchAvailableTreatments() {
-        const response = await fetch("/api/v1/treatments?fields=name");
+        const response = await fetch(
+          "/api/v1/treatments?fields=name&status=AVAILABLE"
+        );
 
         if (!response.ok) {
           throw new Error("Treatments api request went wrong!");
