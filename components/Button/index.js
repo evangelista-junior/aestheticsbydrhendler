@@ -27,13 +27,13 @@ export default function Button({
       "rounded-md border-1 border-white bg-transparent text-white hover:bg-primary",
 
     confirm:
-      "rounded-md border-1 border-green-400 bg-green-400 text-white hover:bg-green-600",
+      "rounded-md border-1 border-emerald-600 bg-emerald-600 text-white hover:bg-emerald-500",
 
     decline:
-      "rounded-md border-1 border-red-400 bg-red-400 text-white hover:bg-red-600",
+      "rounded-md border-1 border-red-600 bg-red-600 text-white hover:bg-red-500",
 
     confirmInverse:
-      "rounded-md border-1 border-white bg-transparent text-white hover:bg-green-500 hover:border-green-200 hover:text-green-200",
+      "rounded-md border-1 border-white bg-transparent text-white hover:bg-emerald-500 hover:border-emerald-200 hover:text-emerald-200",
 
     declineInverse:
       "rounded-md border-1 border-white bg-transparent text-white hover:bg-red-500 hover:border-red-200 hover:text-red-200",
