@@ -1,7 +1,6 @@
 import Image from "next/image";
 import teamMemberPhoto from "@/public/images/teamMemberPhoto.jpeg";
 import drShaySignature from "@/public/images/dr_shay_signature.png";
-import Headings from "@/components/Headings";
 import Button from "@/components/Button";
 import { CalendarDays } from "lucide-react";
 import Link from "next/link";
@@ -15,7 +14,7 @@ export default function Team() {
             src={teamMemberPhoto}
             alt="Dr. Shane Hendler"
             fill
-            className="object-cover xl:grayscale-25 hover:grayscale-0 transition-all duration-300"
+            className="object-cover xl:grayscale-25 hover:grayscale-0 transition-all duration-300 relative z-10"
           />
         </div>
 
@@ -23,13 +22,13 @@ export default function Team() {
           <div className="flex items-center gap-3">
             <div>
               <div>
-                <Headings headingType="h2" className="relative z-10">
+                <p className="relative z-10 text-4xl lg:text-5xl font-title font-semi">
                   Dr Shay Hendler
-                </Headings>
+                </p>
                 <Image
                   src={drShaySignature}
                   alt="Dr Shay Hendler signature."
-                  className="object-cover absolute w-fit -m-10 -ml-16 z-0 grayscale opacity-15"
+                  className="object-cover absolute w-sm lg:w-fit -m-10 -ml-16 z-0 grayscale opacity-15"
                 />
               </div>
               <p className="text-gray-600 mt-6 tracking-wide font-title relative z-10">
