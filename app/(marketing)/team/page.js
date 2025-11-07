@@ -13,7 +13,6 @@ export default function Team() {
           <Image
             src={teamMemberPhoto}
             alt="Dr. Shane Hendler"
-            fill
             className="object-cover xl:grayscale-25 hover:grayscale-0 transition-all duration-300 relative z-10"
           />
         </div>
