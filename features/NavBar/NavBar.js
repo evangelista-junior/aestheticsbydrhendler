@@ -15,8 +15,11 @@ import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 export default function NavBar() {
-  const [showNavBar, setShowNavBar] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [showNavBar, setShowNavBar] = useState(window.scrollY > 80);
+  const [hideNavBar, setHideNavBar] = useState(false);
+  const [openSideMenu, setOpenSideMenu] = useState(false);
+
+  const { scrollY } = useScroll();
 
   const urlPath = usePathname();
   const notHomePage = urlPath != "/";
@@ -26,38 +29,47 @@ export default function NavBar() {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 80;
 
-      setShowNavBar((!open && isScrolled) || notHomePage);
+      setShowNavBar(
+        (!openSideMenu && isScrolled && !hideNavBar) || notHomePage
+      );
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [open, notHomePage]);
+  }, [showNavBar, openSideMenu, notHomePage, hideNavBar]);
 
   //Add listener for whenever the user clicks outside the drawer
   useEffect(() => {
-    if (!open) return;
-    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    if (!openSideMenu) return;
+    const onKey = (e) => e.key === "Escape" && setOpenSideMenu(false);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
+  }, [openSideMenu]);
 
   // Locks the scrolling when drawer menu is open
   useEffect(() => {
-    if (open) {
+    if (openSideMenu) {
       const prev = document.body.style.overflow;
       document.body.style.overflow = "hidden";
       return () => (document.body.style.overflow = prev);
     }
-  }, [open]);
+  }, [openSideMenu]);
 
-  const handleClickSideMenu = () => {
+  function handleClickMainMenu() {
+    console.warn("some navbar");
+    setHideNavBar(true);
+    setTimeout(() => {
+      setHideNavBar(false);
+    }, 3000);
+  }
+
+  function handleClickSideMenu() {
     setShowNavBar(false);
-    setOpen(!open);
-  };
+    setOpenSideMenu(!openSideMenu);
+  }
 
   const links = [
-    //TODO: Check if they want scroll or direction to the new page
     { label: "About Us", href: "about", dedicatedPage: false },
     { label: "Team", href: "team", dedicatedPage: true },
     { label: "What to Expect", href: "what-to-expect", dedicatedPage: true },
@@ -65,8 +77,6 @@ export default function NavBar() {
     { label: "FAQ", href: "faq", dedicatedPage: true },
     { label: "Contact", href: "contact", dedicatedPage: true },
   ];
-
-  const { scrollY } = useScroll();
 
   const backgroundColor = useTransform(
     scrollY,
@@ -83,8 +93,8 @@ export default function NavBar() {
   return (
     <>
       <motion.nav
-        initial={notHomePage ? { y: 0, opacity: 1 } : { y: 0, opacity: 1 }}
-        animate={showNavBar ? { y: 0, opacity: 1 } : { y: 0, opacity: 1 }}
+        initial={{ y: -50, opacity: 0 }}
+        animate={showNavBar ? { y: 0, opacity: 1 } : { y: -50, opacity: 0 }}
         style={{ backgroundColor, boxShadow }}
         className={
           notHomePage
@@ -108,6 +118,7 @@ export default function NavBar() {
                   href={`${notHomePage && l.dedicatedPage ? "/" : "/#"}${
                     l.href
                   }`}
+                  onClick={() => handleClickMainMenu()}
                 >
                   {l.label}
                 </Link>
@@ -122,28 +133,33 @@ export default function NavBar() {
           </div>
 
           <button
-            className="lg:hidden inline-flex items-center justify-center p-2 rounded-md border border-gray-200 active:scale-95 "
-            onClick={() => setOpen(true)}
+            className="lg:hidden inline-flex items-center justify-center p-2 border border-primary/20 active:scale-95 "
+            onClick={() => setOpenSideMenu(true)}
             aria-label="Open menu"
             aria-controls="mobile-drawer"
-            aria-expanded={open}
+            aria-expanded={openSideMenu}
           >
-            <Menu size={24} aria-hidden="true" focusable="false" />
+            <Menu
+              size={24}
+              aria-hidden="true"
+              focusable="false"
+              className="text-primary"
+            />
           </button>
         </div>
       </motion.nav>
 
       <AnimatePresence>
-        {open && (
+        {openSideMenu && (
           <>
             <motion.button
               type="button"
               aria-label="Close menu"
-              className="fixed inset-0 bg-easyDark/50 z-[60]"
+              className="fixed inset-0 bg-easyDark/60 z-[60]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setOpen(false)}
+              onClick={() => setOpenSideMenu(false)}
             />
 
             <motion.aside
@@ -165,9 +181,10 @@ export default function NavBar() {
                 >
                   <Image src={horizontal_logo} alt="" width={120} />
                 </Link>
+
                 <button
-                  className="p-2 rounded-md border border-gray-200 hover:bg-gray-50"
-                  onClick={() => setOpen(false)}
+                  className="p-2 border border-primary/20 text-primary rounded"
+                  onClick={() => setOpenSideMenu(false)}
                   aria-label="Close menu"
                 >
                   <X size={24} aria-hidden="true" focusable="false" />
@@ -182,7 +199,7 @@ export default function NavBar() {
                         href={`${notHomePage && l.dedicatedPage ? "/" : "/#"}${
                           l.href
                         }`}
-                        className="block px-3 py-1 tracking-widest"
+                        className="block px-3 py-1 uppercase"
                         onClick={() => handleClickSideMenu()}
                       >
                         {l.label}
@@ -192,7 +209,7 @@ export default function NavBar() {
                 </ul>
 
                 <div className="mt-4">
-                  <Link href="/bookings" onClick={() => setOpen(!open)}>
+                  <Link href="/bookings" onClick={() => setOpenSideMenu(false)}>
                     <Button
                       buttonType="primary"
                       className="w-full justify-center"
@@ -203,7 +220,7 @@ export default function NavBar() {
                 </div>
               </nav>
 
-              <div className="px-4 pb-5 text-xs text-gray-400">
+              <div className="px-4 pb-5 text-xs text-gray-400 uppercase">
                 © {new Date().getFullYear()} Aesthetics by Dr Hendler
               </div>
             </motion.aside>
