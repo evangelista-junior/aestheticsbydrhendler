@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/Button";
+import { apiRequest } from "@/lib/server/useApi";
 import {
   EmbeddedCheckout,
   EmbeddedCheckoutProvider,
@@ -19,17 +20,13 @@ export default function Checkout({ searchParams }) {
 
   const fetchClientSecret = useCallback(async () => {
     try {
-      const res = await fetch(`/api/v1/bookings/checkout?id=${bookingId}`, {
-        method: "GET",
-      });
-      const data = await res.json();
+      const res = await apiRequest(
+        `/api/v1/bookings/checkout?id=${bookingId}`,
+        {}
+      );
+      if (res.ok == false) throw new Error(res.message);
 
-      if (!res.ok) {
-        const { error: errorMessage } = data;
-        throw new Error(errorMessage);
-      }
-
-      const { client_secret } = data;
+      const { client_secret } = res;
       return client_secret;
     } catch (error) {
       setErrors(error.message);

@@ -7,11 +7,14 @@ import { parseEmailConsultationRequest } from "@/lib/utils/parseEmailConsultatio
 import { sendMail } from "@/lib/mailer";
 import dateFormater from "@/lib/utils/dateFormater";
 
-export async function POST(request) {
-  const { searchParams } = new URL(request.url);
-  const sessionId = searchParams.get("session_id");
-
+export async function POST(req) {
   try {
+    const headerKey = await req.headers.get("x-api-key");
+    if (headerKey != process.env.API_KEY)
+      return NextResponse.json("Access denied!", { status: 401 });
+
+    const { searchParams } = new URL(req.url);
+    const sessionId = searchParams.get("session_id");
     if (!sessionId) {
       return NextResponse.json(
         { error: "Please provide a valid session_id" },

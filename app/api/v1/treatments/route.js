@@ -1,9 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-export async function GET(request) {
+export async function GET(req) {
   try {
-    const { searchParams } = new URL(request.url);
+    const headerKey = await req.headers.get("x-api-key");
+    if (headerKey != process.env.API_KEY)
+      return NextResponse.json("Access denied!", { status: 401 });
+
+    const { searchParams } = new URL(req.url);
     const fieldsOnUrl = searchParams.get("fields");
     const status = searchParams.get("status");
 

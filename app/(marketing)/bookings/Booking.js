@@ -15,6 +15,7 @@ import { useFeedbackModal } from "@/store/useFeedbackModal";
 import { useLoadingModal } from "@/store/useLoadingModal";
 import { useEffect, useState } from "react";
 import { bookingDateValidation } from "@/lib/business/booking/bookingDateValidation";
+import { apiRequest } from "@/lib/server/useApi";
 
 export default function Booking() {
   const {
@@ -38,20 +39,18 @@ export default function Booking() {
   useEffect(() => {
     try {
       async function fetchAvailableTreatments() {
-        const response = await fetch(
+        const res = await apiRequest(
           "/api/v1/treatments?fields=name&status=AVAILABLE"
         );
-
-        if (!response.ok) {
-          throw new Error("Treatments api request went wrong!");
+        if (res.ok == false) {
+          throw new Error(res.message);
         }
-        const data = await response.json();
 
-        if (!data.treatments) {
+        if (!res.treatments) {
           throw new Error("No treatment found!");
         }
 
-        const treatments = data.treatments.map((t) => t.name);
+        const treatments = res.treatments.map((t) => t.name);
         setTreatments(treatments);
       }
 
@@ -66,16 +65,13 @@ export default function Booking() {
       if (isSubmitting) return;
 
       setLoading(true);
-      const res = await fetch(`/api/v1/bookings`, {
+      const res = await apiRequest(`/api/v1/bookings`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify(data),
       });
 
-      if (!res.ok) {
-        throw new Error((await res.json()).message);
+      if (res.ok == false) {
+        throw new Error(await res.message);
       }
 
       setSuccessTitle("Booking Confirmed!");
@@ -90,6 +86,7 @@ export default function Booking() {
     } finally {
       setLoading(false);
       setOpenModal();
+      setOnClick(redirectToHomempage);
     }
   };
 

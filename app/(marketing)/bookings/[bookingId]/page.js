@@ -7,6 +7,8 @@ import { Check, X } from "lucide-react";
 import { useParams } from "next/navigation";
 import { checkIsRefundable } from "@/lib/business/booking/cancellation";
 import { useLoadingModal } from "@/store/useLoadingModal";
+import { apiRequest } from "@/lib/server/useApi";
+import Headings from "@/components/Headings";
 
 export default function Success({ searchParams }) {
   const { bookingId } = useParams();
@@ -26,28 +28,24 @@ export default function Success({ searchParams }) {
     async function fecthCheckoutInfo() {
       try {
         setLoading(true);
-        const res = await fetch(`/api/v1/bookings/${bookingId}`, {
-          method: "GET",
-        });
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
+        const res = await apiRequest(`/api/v1/bookings/${bookingId}`);
+        if (res.ok == false) {
+          throw new Error(res.message);
         }
 
-        const data = await res.json();
-
         const checkRefundability = checkIsRefundable({
-          bookingDate: data.date,
-          bookingTime: data.time,
+          bookingDate: res.date,
+          bookingTime: res.time,
         });
         setIsRefundable(checkRefundability);
 
-        setStatus(data.status);
-        setAmount(data.amount);
-        setName(data.name);
-        setProviderRef(data.providerRef);
-        setDate(data.date);
-        setTime(data.time);
-        setService(data.service);
+        setStatus(res.status);
+        setAmount(res.amount);
+        setName(res.name);
+        setProviderRef(res.providerRef);
+        setDate(res.date);
+        setTime(res.time);
+        setService(res.service);
       } catch (error) {
       } finally {
         setLoading(false);
@@ -62,24 +60,30 @@ export default function Success({ searchParams }) {
   }
 
   async function cancelBooking() {
-    const res = await fetch(`/api/v1/bookings/${bookingId}`, {
-      method: "DELETE",
-    });
-    const data = await res.json();
-    console.log(data);
-    setStatus(data.status);
-    setModalIsOpen(false);
+    try {
+      setLoading(true);
+      setModalIsOpen(false);
+      const res = await apiRequest(`/api/v1/bookings/${bookingId}`, {
+        method: "DELETE",
+      });
+      if (res.ok == false) throw new Error(res.message);
+
+      setStatus(res.status);
+    } catch (err) {
+      console.warn(err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <div className="h-full flex flex-col justify-center items-center p-4">
-      <div className="w-full flex flex-col items-center gap-6 bg-white/10 p-6 py-9 shadow-md">
+      <div className="w-full flex flex-col items-center gap-6 p-6 py-9 shadow">
         <div className="flex flex-col justify-center text-center gap-6">
-          <p className="flex justify-center items-center gap-1 text-3xl md:text-4xl font-light tracking-wider bg-[linear-gradient(90deg,white_0%,#fef2f2_50%,white_100%)] text-primary py-3">
-            <Check className="w-9 h-9 -mb-1.5 p-1" />
-            Booking Confirmed!
-          </p>
-          <div className="tracking-wider max-w-lg mx-auto">
+          <Headings headingType="h3" className="uppercase font-title">
+            Booking Confirmed
+          </Headings>
+          <div className="uppercase text-xs tracking-wider max-w-lg mx-auto">
             <p>
               Hi {String(name).split(" ")[0]}, thank you for choosing us! Your
               reservation is confirmed. If there is anything you need before
@@ -96,12 +100,12 @@ export default function Success({ searchParams }) {
         </div>
 
         <div className="sm:min-w-lg">
-          <p className="text-xl md:text-2xl font-bold tracking-widest text-center ">
+          <p className="text-xl uppercase tracking-wider text-center">
             Booking Details
           </p>
           <div className="mt-3">
             <div className="flex justify-between mt-1">
-              <p className="font-bold">Status</p>
+              <p className="uppercase">Status</p>
               <p
                 className={`tracking-widest ml-3 font-bold
                    ${
@@ -112,49 +116,53 @@ export default function Success({ searchParams }) {
               </p>
             </div>
             <div className="flex justify-between mt-1">
-              <p className="font-bold">Deposit Paid</p>
-              <p className="tracking-wide ml-3">${moneyFormater(amount)}</p>
+              <p className="uppercase">Deposit Paid</p>
+              <p className="text-xs tracking-wide ml-3">
+                ${moneyFormater(amount)}
+              </p>
             </div>
             <div className="flex justify-between mt-1">
-              <p className="font-bold">Date</p>
-              <p className="tracking-wide ml-3">{date}</p>
+              <p className="uppercase">Date</p>
+              <p className="text-xs tracking-wide ml-3">{date}</p>
             </div>
             <div className="flex justify-between mt-1">
-              <p className="font-bold">Time</p>
-              <p className="tracking-wide ml-3">{time}</p>
+              <p className="uppercase">Time</p>
+              <p className="text-xs tracking-wide ml-3">{time}</p>
             </div>
             <div className="flex justify-between mt-1">
-              <p className="font-bold">Payment Reference Number</p>
-              <p className="tracking-wide ml-3 uppercase">{providerRef}</p>
+              <p className="uppercase">Payment Reference Number</p>
+              <p className="text-xs tracking-wide ml-3 uppercase">
+                {providerRef}
+              </p>
             </div>
             <div className="flex justify-between mt-1">
-              <p className="font-bold">Service</p>
-              <p className="tracking-wide ml-3">{service}</p>
+              <p className="uppercase">Service</p>
+              <p className="text-xs tracking-wide ml-3">{service}</p>
             </div>
             <div className="flex justify-between mt-1">
-              <p className="font-bold">Address</p>
-              <address className="tracking-wide ml-3">
+              <p className="uppercase">Address</p>
+              <address className="text-xs tracking-wide ml-3">
                 North Bondi, 2026, Sydney NSW
               </address>
             </div>
           </div>
 
-          <div className="mt-6 text-center">
-            <p className="text-lg font-bold ">Cancellation Policy</p>
-            <p className="text-sm">
+          <div className="mt-12 text-center uppercase text-xs">
+            <p className="font-bold">Cancellation Policy</p>
+            <p>
               Appointments cancelled within 24 hours will forfeit the full
               deposit. <br />
               To cancel your appointment, please{" "}
               <button
                 onClick={handleModalVisibility}
-                className="text-primary underline tracking-wide cursor-pointer"
+                className="text-primary/30 uppercase underline tracking-wide cursor-pointer"
               >
                 click here
               </button>{" "}
               or email us at{" "}
               <a
                 href="mailto:info@aestheticsbydrhendler.com.au"
-                className="text-primary underline tracking-wide"
+                className="text-primary/30 underline tracking-wide"
               >
                 info@aestheticsbydrhendler.com.au
               </a>
@@ -168,9 +176,11 @@ export default function Success({ searchParams }) {
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm backdrop-saturate-200" />
 
-          <div className="relative xl:max-w-1/3 z-10 mx-4 text-gray-200 rounded-md border border-white/20 bg-white/20 p-6 shadow-xl text-center fade-in">
-            <h2 className="text-xl font-semibold">Booking Cancellation</h2>
-            <p className="text-sm mt-1 tracking-wide">
+          <div className="relative xl:max-w-1/3 z-10 mx-4 text-gray-200 border border-white/20 bg-white/20 p-6 shadow-xl text-center fade-in">
+            <h2 className="text-xl font-semibold uppercase">
+              Booking Cancellation
+            </h2>
+            <p className="text-sm mt-1 tracking-wide uppercase">
               Please confirm if would like to proceed with your cancellation.
             </p>
             {!isRefundable && (

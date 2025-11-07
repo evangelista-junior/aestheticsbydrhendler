@@ -8,8 +8,12 @@ import { sendMail } from "@/lib/mailer";
 import { checkIsRefundable } from "@/lib/business/booking/cancellation";
 import dateFormater from "@/lib/utils/dateFormater";
 
-export async function GET(request, { params }) {
+export async function GET(req, { params }) {
   try {
+    const headerKey = await req.headers.get("x-api-key");
+    if (headerKey != process.env.API_KEY)
+      return NextResponse.json("Access denied!", { status: 401 });
+
     const { bookingId } = await params;
 
     if (!bookingId) {
@@ -49,8 +53,13 @@ export async function GET(request, { params }) {
     );
   }
 }
+
 export async function DELETE(req, { params }) {
   try {
+    const headerKey = await req.headers.get("x-api-key");
+    if (headerKey != process.env.API_KEY)
+      return NextResponse.json("Access denied!", { status: 401 });
+
     const { bookingId } = await params;
 
     var booking = await prisma.bookings.findUnique({
@@ -71,7 +80,7 @@ export async function DELETE(req, { params }) {
         { status: 209 }
       );
     }
-    console.log(booking.date, booking.time);
+
     const isRefundable = checkIsRefundable({
       bookingDate: booking.date,
       bookingTime: booking.time,
@@ -123,7 +132,7 @@ export async function DELETE(req, { params }) {
         id: bookingId,
       },
       data: {
-        cancelledAt: new Date(),
+        cancelledAt: dateFormater(new Date()),
         status: "CANCELLED",
       },
     });

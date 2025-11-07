@@ -9,6 +9,7 @@ import TextArea from "@/components/TextArea";
 import { usePathname } from "next/navigation";
 import { useLoadingModal } from "@/store/useLoadingModal";
 import { useFeedbackModal } from "@/store/useFeedbackModal";
+import { apiRequest } from "@/lib/server/useApi";
 
 export default function Contact() {
   const {
@@ -36,13 +37,12 @@ export default function Contact() {
     try {
       setLoading(true);
 
-      const res = await fetch("/api/v1/contact", {
+      const res = await apiRequest("/api/v1/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
-      if (!res.ok) {
+      if (res.ok == false) {
         throw new Error((await res.json()).message);
       }
 

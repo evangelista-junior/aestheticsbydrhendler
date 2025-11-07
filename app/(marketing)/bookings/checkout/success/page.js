@@ -1,33 +1,38 @@
 "use client";
 
-import { redirect, useRouter } from "next/navigation";
+import { apiRequest } from "@/lib/server/useApi";
+import { useRouter } from "next/navigation";
 import { use, useEffect } from "react";
+import { useLoadingModal } from "@/store/useLoadingModal";
 
 export default function Success({ searchParams }) {
   const { session_id: sessionId } = use(searchParams);
   const router = useRouter();
+  const { setLoading } = useLoadingModal();
 
   useEffect(() => {
     async function fecthCheckoutInfo() {
       try {
-        const res = await fetch(
+        setLoading(true);
+        const res = await apiRequest(
           `/api/v1/bookings/checkout/success?session_id=${sessionId}`,
           {
             method: "POST",
           }
         );
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
+        if (res.ok == false) {
+          throw new Error(res.message);
         }
 
-        const apiResponse = await res.json();
-        router.push(apiResponse.redirectUrl);
+        router.push(res.redirectUrl);
       } catch (error) {
-        //TODO: treat this
+        console.warn(error);
+      } finally {
+        setLoading(false);
       }
     }
 
     fecthCheckoutInfo();
-  }, [router, sessionId]);
+  }, [router, sessionId, setLoading]);
   return <></>;
 }

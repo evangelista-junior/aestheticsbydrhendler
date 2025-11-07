@@ -8,9 +8,13 @@ import { NextResponse } from "next/server";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-export async function POST(request) {
+export async function POST(req) {
   try {
-    const data = await request.json();
+    const headerKey = await req.headers.get("x-api-key");
+    if (headerKey != process.env.API_KEY)
+      return NextResponse.json("Access denied!", { status: 401 });
+
+    const data = await req.json();
     const secondsPerHour = 3600;
     const milisecondsPerSecond = 1000;
     const expiresInHours = 48;

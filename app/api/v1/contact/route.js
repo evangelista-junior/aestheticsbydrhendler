@@ -1,4 +1,4 @@
-import { sendContactMessage, sendMail } from "@/lib/mailer";
+import { sendContactMessage } from "@/lib/mailer";
 import {
   emailValidator,
   fullNameValidator,
@@ -6,9 +6,13 @@ import {
 } from "@/lib/utils/regexValidators";
 import { NextResponse } from "next/server";
 
-export async function POST(request, response) {
+export async function POST(req) {
   try {
-    const data = await request.json();
+    const headerKey = await req.headers.get("x-api-key");
+    if (headerKey != process.env.API_KEY)
+      return NextResponse.json("Access denied!", { status: 401 });
+
+    const data = await req.json();
     const requiredData = ["name", "phone", "email", "message"];
 
     const missingData = requiredData.filter((k) => !data[k] | (k.trim() == ""));

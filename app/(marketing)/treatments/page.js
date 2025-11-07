@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useLoadingModal } from "@/store/useLoadingModal";
 import Image from "next/image";
 import Headings from "@/components/Headings";
+import { apiRequest } from "@/lib/server/useApi";
 
 export default function Treatments() {
   const [treatments, setTreatments] = useState([]);
@@ -19,12 +20,10 @@ export default function Treatments() {
     async function fetchTreatments() {
       try {
         if (isDedicatedPath) setLoading(true);
-        const res = await fetch("/api/v1/treatments");
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const data = await res.json();
-        setTreatments(data.treatments);
+        const res = await apiRequest("/api/v1/treatments");
+        if (res.ok == "false") throw new Error(res.message);
+
+        setTreatments(res.treatments);
       } catch (err) {
         console.error("Failed to fetch treatments:", err);
       } finally {
