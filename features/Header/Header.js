@@ -10,11 +10,6 @@ import Link from "next/link";
 export default function Header() {
   return (
     <section className="w-full h-dvh flex justify-center items-center">
-      {/* <div className="absolute inset-0 overflow-hidden">
-        <Image src={HeaderBackground} alt="" fill className="object-cover" />
-        <div className="absolute inset-0 bg-[radial-gradient(30%_50%_at_50%_50%,rgba(255,255,255,0),rgba(255,255,255,0.3)80%)] " />
-      </div> */}
-
       <Image
         src={eyeAndCream}
         alt="Moistureiser being applied around the eye area"
@@ -25,11 +20,11 @@ export default function Header() {
         <div className="relative flex flex-col justify-center items-center gap-2 md:gap-1">
           <Image
             src={transparentLogo}
-            className="relative w-1/2 max-w-[350px] mt-12"
+            className="relative w-1/2 max-w-[450px] mt-15"
             alt=""
           />
 
-          <p className="w-full text-center text-md md:text-4xl font-title text-easyDark uppercase md:mt-12">
+          <p className="w-full text-center text-md md:text-4xl font-title text-easyDark uppercase md:mt-6">
             Where medical expertise meets natural aesthetics
           </p>
 

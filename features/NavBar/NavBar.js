@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import horizontal_logo from "@/public/images/logo_horizontal_blackandwhite.png";
+import horizontal_logo from "@/public/images/horizontal_logo_blackandwhite.png";
 import {
   motion,
   AnimatePresence,
@@ -98,7 +98,7 @@ export default function NavBar() {
             className="inline-flex items-center"
             aria-label="Go to homepage"
           >
-            <Image src={horizontal_logo} alt="" width={140} />
+            <Image src={horizontal_logo} alt="" width={120} />
           </Link>
 
           <div className="hidden lg:flex gap-6 items-center">
