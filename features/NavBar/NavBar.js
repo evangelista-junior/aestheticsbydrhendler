@@ -15,7 +15,7 @@ import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 export default function NavBar() {
-  const [showNavBar, setShowNavBar] = useState(window.scrollY > 80);
+  const [showNavBar, setShowNavBar] = useState(false);
   const [hideNavBar, setHideNavBar] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
 
