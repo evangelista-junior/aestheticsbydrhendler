@@ -152,15 +152,17 @@ export default function Booking() {
 
   return (
     <section className="relative max-w-5xl bg-white shadow-xl p-6 lg:px-12 lg:py-12 ">
-      <div className="uppercase text-sm">
-        <p>
-          Please complete the form below to arrange your initial consultation.
+      <p className="uppercase text-xs font-bold text-primary tracking-wide mb-6">
+        Please Note Dr Hendler Is Available On Sundays & Mondays.{" "}
+        <p className="text-gray-500 ">
+          If You Need To Book A Different Day, Please Send Us An Email At{" "}
+          <span className="text-primary underline tracking-wide">
+            <a href="mailto:info@aestheticsbydrhendler.com.au" className="">
+              info@aestheticsbydrhendler.com.au
+            </a>
+          </span>
         </p>
-        <p className="mb-8">
-          During your consultation, we’ll confirm suitability, discuss potential
-          risks, and outline a personalised plan tailored to your goals.
-        </p>
-      </div>
+      </p>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
