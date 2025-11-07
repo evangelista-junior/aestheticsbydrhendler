@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -16,9 +15,9 @@ export default function Card({
 
       <div className="w-full md:flex px-3">
         <div className="md:w-4/5">
-          <h3 className="text-md tracking-wider font-bold mb-1 flex text-start xl:items-center gap-3 flex-col xl:flex-row">
+          <h3 className="text-md tracking-wider font-bold mb-1 flex text-start items-center gap-3 flex-row">
             {treatmentAvailability == "SOON" && (
-              <p className="hidden xl:inline-block bg-primary text-white text-xs font-semibold px-2 py-0.5 relative xl:static -top-20">
+              <p className="inline-block bg-primary text-white text-xs font-semibold px-2 py-0.5 static -top-20">
                 COMING SOON
               </p>
             )}

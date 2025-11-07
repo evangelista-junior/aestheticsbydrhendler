@@ -60,11 +60,11 @@ export default function Treatments() {
               );
             })}
           </div>
-          <div className="flex w-full bg-primary pt-12">
+          <div className="bg-primary pt-12">
             <Image
               src={halfFace}
-              alt="Half face."
-              className="object-cover rounded-t-full grayscale"
+              alt="Half face image."
+              className="object-cover rounded-t-full grayscale h-full"
             />
           </div>
         </div>
