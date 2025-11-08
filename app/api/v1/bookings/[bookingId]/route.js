@@ -161,7 +161,7 @@ export async function DELETE(req, { params }) {
     });
     const email = await sendMail({
       emailTo: formatedDateBooking.email,
-      emailSubject: "Aesthetics by Dr Hendler | Booking Cancelled",
+      emailSubject: "Booking Cancelled | Aesthetics By Dr Hendler",
       emailText: emailTXTCustomized,
       emailHtml: emailHTMLCustomized,
     });

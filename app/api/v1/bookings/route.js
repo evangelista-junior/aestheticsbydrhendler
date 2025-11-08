@@ -148,7 +148,7 @@ export async function POST(req) {
     });
     const email = await sendMail({
       emailTo: formatedDateData.email,
-      emailSubject: "Aesthetics by Dr Hendler | Complete your booking",
+      emailSubject: "Finish Your Booking | Aesthetics By Dr Hendler",
       emailText: emailTXTCustomized,
       emailHtml: emailHTMLCustomized,
     });
