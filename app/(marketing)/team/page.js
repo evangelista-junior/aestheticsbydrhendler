@@ -27,6 +27,7 @@ export default function Team() {
                 <Image
                   src={drShaySignature}
                   alt="Dr Shay Hendler signature."
+                  unoptimized={false}
                   className="object-cover absolute w-sm lg:w-fit -m-9 -ml-15 z-0 opacity-15"
                 />
               </div>

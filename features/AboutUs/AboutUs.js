@@ -10,6 +10,7 @@ export default function AboutUs() {
       <Image
         src={aboutUsImage}
         alt="About us image (sand pattern)"
+        unoptimized={false}
         className="object-cover relative md:w-3/5 opacity-30"
       />
 
