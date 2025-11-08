@@ -78,16 +78,41 @@ export default function NavBar() {
     { label: "Contact", href: "contact", dedicatedPage: true },
   ];
 
+  const navBarStyles = {
+    notHomepage: {
+      scrollYPosition: [0],
+      bgColor: ["#fff"],
+      boxShadow: ["0px 2px 10px rgba(0,0,0,0.1)"],
+    },
+    homepage: {
+      scrollYPosition: [0, 100, 150],
+      bgColor: ["transparent", "#ffffff10", "#ffffff"],
+      boxShadow: [
+        "0px 0px 0px rgba(0,0,0,0)",
+        "0px 0px 0px rgba(0,0,0,0.03)",
+        "0px 2px 10px rgba(0,0,0,0.1)",
+      ],
+    },
+  };
+
   const backgroundColor = useTransform(
     scrollY,
-    [0, 100, 150],
-    ["transparent", "#ffffff10", "#ffffff"]
+    notHomePage
+      ? navBarStyles.notHomepage.scrollYPosition
+      : navBarStyles.homepage.scrollYPosition,
+    notHomePage
+      ? navBarStyles.notHomepage.bgColor
+      : navBarStyles.homepage.bgColor
   );
 
   const boxShadow = useTransform(
     scrollY,
-    [0, 150],
-    ["0px 0px 0px rgba(0,0,0,0)", "0px 2px 10px rgba(0,0,0,0.1)"]
+    notHomePage
+      ? navBarStyles.notHomepage.scrollYPosition
+      : navBarStyles.homepage.boxShadow,
+    notHomePage
+      ? navBarStyles.notHomepage.boxShadow
+      : navBarStyles.homepage.boxShadow
   );
 
   return (
@@ -98,7 +123,7 @@ export default function NavBar() {
         style={{ backgroundColor, boxShadow }}
         className={
           notHomePage
-            ? "sticky top-0 left-0 w-full z-50"
+            ? "bg-easyWhite sticky top-0 left-0 w-full z-50"
             : "fixed top-0 left-0 w-full z-50"
         }
       >
