@@ -1,6 +1,7 @@
 import { createToken } from "@/lib/jwt";
 import { sendMail } from "@/lib/mailer";
 import { prisma } from "@/lib/prisma";
+import { stripe } from "@/lib/stripe";
 import dateFormater from "@/lib/utils/dateFormater";
 import generateUUID from "@/lib/utils/generateUUID";
 import { parseEmailConsultationRequest } from "@/lib/utils/parseEmailConsultationRequest";
@@ -52,6 +53,7 @@ export async function POST(req) {
       );
     }
 
+    // TODO: Remove checker in future so it improves performance
     const jti = generateUUID();
     let jtiAlreadyExists = !!(await prisma.paymentTokens.findUnique({
       where: { jti: jti },
@@ -86,6 +88,20 @@ export async function POST(req) {
       },
     });
 
+    const servicePriceInfo = await prisma.treatments.findFirst({
+      where: { name: data.service },
+      select: { stripeProductNumber: true },
+    });
+
+    if (!servicePriceInfo.stripeProductNumber)
+      throw new Error("Service not found on the database!");
+
+    const priceInfo = await stripe.prices.retrieve(
+      servicePriceInfo.stripeProductNumber
+    );
+
+    if (!priceInfo) throw new Error("Price info not found on Stripe!");
+
     const paymentToken = await prisma.paymentTokens.create({
       data: {
         jti: jti,
@@ -97,7 +113,7 @@ export async function POST(req) {
         time: data.preferedTime,
         notes: data.notes == "" ? null : data.notes,
         consent: Boolean(data.consent),
-        amountCents: 9000,
+        amountCents: priceInfo.unit_amount,
         currency: "AUD",
         provider: "Stripe",
         providerRef: null,
