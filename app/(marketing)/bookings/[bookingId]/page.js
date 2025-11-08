@@ -88,7 +88,7 @@ export default function Success({ searchParams }) {
               Hi {String(name).split(" ")[0]}, thank you for choosing us! Your
               reservation is confirmed. If there is anything you need before
               your appointment, please don not hesitate to reach us out through
-              the email bellow:
+              the email below:
             </p>
             <a
               href="mailto:info@aestheticsbydrhendler.com.au"

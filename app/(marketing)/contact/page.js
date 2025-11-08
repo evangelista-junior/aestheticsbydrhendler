@@ -83,7 +83,7 @@ export default function Contact() {
 
         <div className="shadow p-6">
           <p className="uppercase font-light mb-1">
-            Get in contact with us through the form bellow{" "}
+            Get in contact with us through the form below{" "}
             <br className="hidden lg:block 2xl:hidden" />
             or follow us on Instagram
           </p>
