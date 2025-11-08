@@ -13,7 +13,7 @@ export default function Team() {
           <Image
             src={teamMemberPhoto}
             alt="Dr. Shane Hendler"
-            className="object-cover xl:grayscale-25 hover:grayscale-0 transition-all duration-300 relative z-10"
+            className="object-cover h-full xl:grayscale-25 hover:grayscale-0 transition-all duration-300 relative z-10"
           />
         </div>
 
@@ -27,7 +27,7 @@ export default function Team() {
                 <Image
                   src={drShaySignature}
                   alt="Dr Shay Hendler signature."
-                  className="object-cover absolute w-sm lg:w-fit -m-10 -ml-16 z-0 grayscale opacity-15"
+                  className="object-cover absolute w-sm lg:w-fit -m-9 -ml-15 z-0 opacity-15"
                 />
               </div>
               <p className="text-gray-600 mt-6 tracking-wide font-title relative z-10">
