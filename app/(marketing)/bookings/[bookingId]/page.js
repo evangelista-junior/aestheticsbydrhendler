@@ -141,9 +141,12 @@ export default function Success({ searchParams }) {
             </div>
             <div className="flex justify-between mt-1">
               <p className="uppercase">Address</p>
-              <address className="text-xs tracking-wide ml-3">
-                North Bondi, 2026, Sydney NSW
-              </address>
+              <a href="https://www.google.com/maps/place/Parlour+Box/@-33.8936287,151.2613542,960m/data=!3m2!1e3!4b1!4m6!3m5!1s0x6b12ad6e6b27f893:0xe2169701a671713d!8m2!3d-33.8936287!4d151.2613542!16s%2Fg%2F11gj4rw71z?entry=ttu&g_ep=EgoyMDI1MTEwNC4xIKXMDSoASAFQAw%3D%3D">
+                <address className="text-xs tracking-wide ml-3">
+                  Level 1, 97 Bondi Rd, Bondi NSW 2026, Australia (entry via
+                  Nimbus Co)
+                </address>
+              </a>
             </div>
           </div>
 

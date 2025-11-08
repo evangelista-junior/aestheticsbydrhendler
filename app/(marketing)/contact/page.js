@@ -100,9 +100,12 @@ export default function Contact() {
                 @aestheticsbydrhendler
               </a>
             </div>
-            <div className="flex items-center gap-1 cursor-pointer mb-1 hover:underline">
+            <div className="flex items-center gap-1 mb-1">
               <MapPinned className="w-3 h-3" />
-              <p>38 Wairoa Ave, North Bondi NSW 2026 (entrance at rear)</p>
+              <p>
+                Level 1, 97 Bondi Rd, Bondi NSW 2026, Australia (entry via
+                Nimbus Co)
+              </p>
             </div>
           </address>
 
