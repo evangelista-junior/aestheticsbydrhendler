@@ -62,7 +62,7 @@ export default function FAQ() {
           headingType="h2"
           className="tracking-wider uppercase font-light mb-6 text-center"
         >
-          Explore Topics
+          Frequently Asked Questions
         </Headings>
 
         <div className="">
