@@ -20,7 +20,7 @@ export const metadata = {
     siteName: "Aesthetics by Dr. Hendler",
     images: [
       {
-        url: "https://www.aestheticsbydrhendler.com.au/images/minimalist_logo.png",
+        url: "https://www.aestheticsbydrhendler.com.au/images/website-hero.png",
         width: 1200,
         height: 630,
         alt: "Cosmetic injectables Bondi",
@@ -35,7 +35,7 @@ export const metadata = {
     description:
       "Subtle, natural enhancements with a focus on safety and patient care.",
     images: [
-      "https://www.aestheticsbydrhendler.com.au/images/minimalist_logo.png",
+      "https://www.aestheticsbydrhendler.com.au/images/website-hero.png",
     ],
   },
   icons: {
