@@ -9,10 +9,10 @@ export default function Footer() {
             Website developed by{" "}
             <a
               className="underline tracking-wider"
-              href="https://www.linkedin.com/in/evangelista-junior/"
+              href="https://www.evan-tx.dev/"
               target="_blank"
             >
-              Evangelista Junior Alves Teixeira
+              evan-tx.dev
             </a>
           </span>
         </p>
