@@ -13,14 +13,14 @@ export const metadata = {
     canonical: "https://www.aestheticsbydrhendler.com.au",
   },
   openGraph: {
-    title: "Natural Cosmetic Injectables in Bondi & Eastern Suburbs",
+    title: "Cosmetic Injectables in Bondi & Eastern Suburbs",
     description:
       "Subtle, natural enhancements with a focus on safety and patient care. Serving Bondi, Coogee, Double Bay, and surrounding Eastern Suburbs.",
     url: "https://www.aestheticsbydrhendler.com.au",
     siteName: "Aesthetics by Dr. Hendler",
     images: [
       {
-        url: "https://www.aestheticsbydrhendler.com.au/images/website-hero.png",
+        url: "https://www.aestheticsbydrhendler.com.au/images/minimalist_logo.png",
         width: 1200,
         height: 630,
         alt: "Cosmetic injectables Bondi",
@@ -40,20 +40,15 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: "/images/favicon-16x16.png", type: "image/png", sizes: "16x16" },
-      { url: "/images/favicon-32x32.png", type: "image/png", sizes: "32x32" },
       { url: "/images/favicon-96x96.png", type: "image/png", sizes: "96x96" },
       { url: "/images/favicon.svg", type: "image/svg+xml" },
-      { url: "/images/favicon.ico", type: "image/x-icon" },
+      { url: "/images/favicon.ico" },
     ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-    shortcut: ["/images/favicon.ico"],
+    shortcut: "/images/favicon.ico",
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
   },
+  manifest: "/site.webmanifest",
 };
-
-// NOVO: export separado para viewport
 export const viewport = {
   themeColor: "#ffffff",
 };
