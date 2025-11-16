@@ -9,6 +9,8 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   try {
     const headerKey = await req.headers.get("x-api-key");
+    if (!headerKey) return NextResponse.json("Access denied!", { status: 401 });
+
     if (headerKey != process.env.API_KEY)
       return NextResponse.json("Access denied!", { status: 401 });
 
