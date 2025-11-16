@@ -1,9 +1,11 @@
 {
-  "name": "harmonia",
+  "name": "aestheticsbydrhendler",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "docker compose up -d && next dev",
+    "test": "jest --config jest.config.ts",
+    "test:watch": "jest --config jest.config.ts --watch",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -28,9 +30,16 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.11",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.5",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "jest": "^30.2.0",
     "prisma": "^6.14.0",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }
