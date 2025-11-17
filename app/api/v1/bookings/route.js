@@ -37,6 +37,13 @@ export async function POST(req) {
     const missing = required.filter(
       (k) => !data?.[k] || String(data[k]).trim() === ""
     );
+
+    if (missing.length == 1 && data.consent == false) {
+      return NextResponse.json(
+        { ok: false, message: "Consent is required." },
+        { status: 400 }
+      );
+    }
     if (missing.length) {
       return NextResponse.json(
         {
@@ -54,7 +61,7 @@ export async function POST(req) {
     }
 
     // TODO: Remove checker in future so it improves performance
-    const jti = generateUUID();
+    let jti = generateUUID();
     let jtiAlreadyExists = !!(await prisma.paymentTokens.findUnique({
       where: { jti: jti },
     }));
@@ -93,14 +100,21 @@ export async function POST(req) {
       select: { stripeProductNumber: true },
     });
 
-    if (!servicePriceInfo.stripeProductNumber)
-      throw new Error("Service not found on the database!");
+    if (!servicePriceInfo?.stripeProductNumber)
+      return NextResponse.json(
+        { ok: false, message: "Service not found on the database!" },
+        { status: 404 }
+      );
 
     const priceInfo = await stripe.prices.retrieve(
       servicePriceInfo.stripeProductNumber
     );
 
-    if (!priceInfo) throw new Error("Price info not found on Stripe!");
+    if (!priceInfo)
+      return NextResponse.json(
+        { ok: false, message: "Price info not found on Stripe!" },
+        { status: 404 }
+      );
 
     const paymentToken = await prisma.paymentTokens.create({
       data: {
@@ -111,7 +125,7 @@ export async function POST(req) {
         service: data.service,
         date: data.preferedDate,
         time: data.preferedTime,
-        notes: data.notes == "" ? null : data.notes,
+        notes: !!data.notes ? data.notes : null,
         consent: Boolean(data.consent),
         amountCents: priceInfo.unit_amount,
         currency: "AUD",
