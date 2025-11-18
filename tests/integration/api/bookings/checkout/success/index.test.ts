@@ -1,5 +1,3 @@
-// success.test.ts
-
 jest.mock("@/lib/prisma", () => ({
   prisma: {
     paymentTokens: {
@@ -157,7 +155,7 @@ describe("POST /api/v1/bookings/checkout/success", () => {
       const paymentToken = {
         id: "token-1",
         providerRef: "session-123",
-        usedAt: new Date(), // already used
+        usedAt: new Date(),
         status: "CONFIRMED",
         email: "user@example.com",
         name: "John Doe",
@@ -487,7 +485,6 @@ describe("POST /api/v1/bookings/checkout/success", () => {
 
   describe("Error handling", () => {
     test("Return 404 if any error is thrown in the flow", async () => {
-      // Força erro logo no começo
       (prisma.paymentTokens.findUnique as jest.Mock).mockImplementation(() => {
         throw new Error("Unexpected DB error");
       });
