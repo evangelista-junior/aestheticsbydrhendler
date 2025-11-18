@@ -17,6 +17,16 @@ import { useEffect, useState } from "react";
 import { bookingDateValidation } from "@/lib/business/booking/bookingDateValidation";
 import { apiRequest } from "@/lib/server/useApi";
 
+function setFirstAvailableDate() {
+  const today = new Date();
+  const availableDate = new Date(today.setDate(today.getDate() + 1));
+  return availableDate.toLocaleDateString("en-CA");
+}
+
+function selectInputValidation(selection, errMessage) {
+  if (selection == "default") return errMessage;
+}
+
 export default function Booking() {
   const {
     register,
@@ -37,27 +47,23 @@ export default function Booking() {
   const [treatments, setTreatments] = useState([]);
 
   useEffect(() => {
-    try {
-      async function fetchAvailableTreatments() {
-        const res = await apiRequest(
-          "/api/v1/treatments?fields=name&status=AVAILABLE"
-        );
-        if (res.ok == false) {
-          throw new Error(res.message);
-        }
-
-        if (!res.treatments) {
-          throw new Error("No treatment found!");
-        }
-
-        const treatments = res.treatments.map((t) => t.name);
-        setTreatments(treatments);
+    async function fetchAvailableTreatments() {
+      const res = await apiRequest(
+        "/api/v1/treatments?fields=name&status=AVAILABLE"
+      );
+      if (!res.ok) {
+        throw new Error(res.message);
       }
 
-      fetchAvailableTreatments();
-    } catch (err) {
-      console.warn(err);
+      if (!res.treatments) {
+        throw new Error("No treatment found!");
+      }
+
+      const treatments = res.treatments.map((t) => t.name);
+      setTreatments(treatments);
     }
+
+    fetchAvailableTreatments();
   }, []);
 
   const onSubmit = async (data) => {
@@ -70,7 +76,7 @@ export default function Booking() {
         body: JSON.stringify(data),
       });
 
-      if (res.ok == false) {
+      if (!res.ok) {
         throw new Error(await res.message);
       }
 
@@ -82,7 +88,7 @@ export default function Booking() {
       setOnClick(redirectToHomempage);
       setClearErrors();
     } catch (err) {
-      setErrorMessage(Error(err).message);
+      setErrorMessage(new Error(err).message);
     } finally {
       setLoading(false);
       setOpenModal();
@@ -139,16 +145,6 @@ export default function Booking() {
     "07:45 pm",
     "08:00 pm",
   ];
-
-  function setFirstAvailableDate() {
-    const today = new Date();
-    const availableDate = new Date(today.setDate(today.getDate() + 1));
-    return availableDate.toLocaleDateString("en-CA");
-  }
-
-  function selectInputValidation(selection, errMessage) {
-    if (selection == "default") return errMessage;
-  }
 
   return (
     <section className="relative max-w-5xl bg-white shadow-xl p-6 lg:px-12 lg:py-12 ">

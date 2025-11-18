@@ -29,7 +29,7 @@ export default function Success() {
       try {
         setLoading(true);
         const res = await apiRequest(`/api/v1/bookings/${bookingId}`);
-        if (res.ok == false) {
+        if (!res.ok) {
           throw new Error(res.message);
         }
 
@@ -66,7 +66,7 @@ export default function Success() {
       const res = await apiRequest(`/api/v1/bookings/${bookingId}`, {
         method: "DELETE",
       });
-      if (res.ok == false) throw new Error(res.message);
+      if (!res.ok) throw new Error(res.message);
 
       setStatus(res.status);
     } catch (err) {

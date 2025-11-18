@@ -42,7 +42,7 @@ export default function Contact() {
         body: JSON.stringify(data),
       });
 
-      if (res.ok == false) {
+      if (!res.ok) {
         throw new Error((await res.json()).message);
       }
 

@@ -24,7 +24,7 @@ export default function Checkout({ searchParams }) {
         `/api/v1/bookings/checkout?id=${bookingId}`,
         {}
       );
-      if (res.ok == false) throw new Error(res.message);
+      if (!res.ok) throw new Error(res.message);
 
       const { client_secret } = res;
       return client_secret;

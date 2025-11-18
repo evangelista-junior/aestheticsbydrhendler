@@ -20,7 +20,7 @@ export default function Success({ searchParams }) {
             method: "POST",
           }
         );
-        if (res.ok == false) {
+        if (!res.ok) {
           throw new Error(res.message);
         }
 
