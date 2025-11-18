@@ -3,6 +3,7 @@ import NavBar from "@/features/NavBar";
 import Footer from "@/features/Footer";
 import LoadingModal from "@/components/LoadingModal";
 import FeedbackModal from "@/components/FeedbackModal";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title:
@@ -57,6 +58,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="h-full font-body">
       <body className="grid h-screen grid-rows-[auto_1fr_auto] antialiased">
+        <Analytics />
         <LoadingModal />
         <FeedbackModal />
 
