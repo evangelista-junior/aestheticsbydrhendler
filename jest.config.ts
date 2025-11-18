@@ -6,23 +6,29 @@ const createJestConfig = nextJest({
 });
 
 const config: Config = {
-  preset: "ts-jest",
-  setupFiles: ["<rootDir>/jest.setup.js"],
-  testEnvironment: "node",
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+
+  testEnvironment: "jsdom",
+
   rootDir: "./",
+
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1",
   },
-  testMatch: [
-    "<rootDir>/tests/integration/api/**/index.test.ts",
-    // "<rootDir>/tests/integration/**/*.test.tsx",
-  ],
+
+  testMatch: ["<rootDir>/tests/**/*.test.{ts,tsx,js,jsx}"],
+
   collectCoverageFrom: [
-    "app/**/*.{ts,tsx}",
-    "lib/**/*.{ts,tsx}",
+    "app/**/*.{ts,tsx,js,jsx}",
+    "components/**/*.{ts,tsx,js,jsx}",
+    "features/**/*.{ts,tsx,js,jsx}",
+    "lib/**/*.{ts,tsx,js,jsx}",
     "!**/*.d.ts",
     "!**/node_modules/**",
+    "!**/.next/**",
   ],
+
+  coveragePathIgnorePatterns: ["/node_modules/", "/.next/", "/coverage/"],
 };
 
 export default createJestConfig(config);

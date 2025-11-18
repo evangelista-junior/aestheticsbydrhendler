@@ -49,7 +49,7 @@ export async function POST(req) {
     }
 
     // TODO:remove and add trycatch
-    const email = await sendContactMessage({
+    await sendContactMessage({
       contactName: data.name,
       contactEmail: data.email,
       contactPhone: data.phone,
@@ -57,7 +57,8 @@ export async function POST(req) {
     });
 
     return NextResponse.json({ ok: true }, { status: 200 });
-  } catch (error) {
+  } catch (err) {
+    console.error(err);
     return NextResponse.json(
       { ok: false, message: "Something went wrong on the server!" },
       { status: 500 }

@@ -2,7 +2,8 @@
 import { config } from "dotenv";
 import { resolve } from "path";
 
-// .env.test sobrescreve .env.local que sobrescreve .env
-config({ path: resolve(__dirname, ".env") });
-config({ path: resolve(__dirname, ".env.local") });
-config({ path: resolve(__dirname, ".env.test") });
+const rootDir = __dirname;
+
+config({ path: resolve(rootDir, ".env") });
+config({ path: resolve(rootDir, ".env.local") });
+config({ path: resolve(rootDir, ".env.test") });

@@ -1,6 +1,5 @@
 import Button from "@/components/Button";
 import Headings from "@/components/Headings";
-import { ChevronDown, Plus } from "lucide-react";
 import Link from "next/link";
 
 const faqs = [

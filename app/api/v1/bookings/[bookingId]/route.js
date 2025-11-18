@@ -18,7 +18,7 @@ export async function GET(req, { params }) {
 
     if (!bookingId) {
       return NextResponse.json(
-        { error: "Booking ID is required" },
+        { message: "Booking ID is required" },
         { status: 400 }
       );
     }
@@ -46,9 +46,9 @@ export async function GET(req, { params }) {
       },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (err) {
     return NextResponse.json(
-      { error: "Internal server error" },
+      { message: "Internal server error", err },
       { status: 500 }
     );
   }
@@ -69,14 +69,14 @@ export async function DELETE(req, { params }) {
 
     if (!booking) {
       return NextResponse.json(
-        { error: "Booking information not found!" },
+        { message: "Booking information not found!" },
         { status: 404 }
       );
     }
 
     if (booking.status == "CANCELLED") {
       return NextResponse.json(
-        { error: "Booking has already been cancelled!" },
+        { message: "Booking has already been cancelled!" },
         { status: 209 }
       );
     }
@@ -88,7 +88,7 @@ export async function DELETE(req, { params }) {
     if (isRefundable) {
       if (!booking.token?.providerRef) {
         return NextResponse.json(
-          { error: "Payment session not found!" },
+          { message: "Payment session not found!" },
           { status: 404 }
         );
       }
@@ -99,7 +99,7 @@ export async function DELETE(req, { params }) {
       );
       if (!paymentIntent) {
         return NextResponse.json(
-          { error: "Payment intent not found!" },
+          { message: "Payment intent not found!" },
           { status: 404 }
         );
       }
@@ -159,7 +159,7 @@ export async function DELETE(req, { params }) {
       string: emailTXTStringFormat,
       data: formatedDateBooking,
     });
-    const email = await sendMail({
+    await sendMail({
       emailTo: formatedDateBooking.email,
       emailSubject: "Booking Cancelled | Aesthetics By Dr Hendler",
       emailText: emailTXTCustomized,
@@ -175,7 +175,7 @@ export async function DELETE(req, { params }) {
   } catch (error) {
     console.error("Delete booking error:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { message: "Internal server error" },
       { status: 500 }
     );
   }

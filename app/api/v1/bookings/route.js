@@ -116,7 +116,7 @@ export async function POST(req) {
         { status: 404 }
       );
 
-    const paymentToken = await prisma.paymentTokens.create({
+    paymentToken = await prisma.paymentTokens.create({
       data: {
         jti: jti,
         email: data.email,
@@ -160,7 +160,7 @@ export async function POST(req) {
       data: formatedDateData,
       checkoutUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/checkout?id=${uuidToken.id}`,
     });
-    const email = await sendMail({
+    await sendMail({
       emailTo: formatedDateData.email,
       emailSubject: "Finish Your Booking | Aesthetics By Dr Hendler",
       emailText: emailTXTCustomized,

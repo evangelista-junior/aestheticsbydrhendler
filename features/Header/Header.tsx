@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import HeaderBackground from "@/public/images/hero.png";
 import eyeAndCream from "@/public/images/eye_and_cream.png";
 import { CalendarDays } from "lucide-react";
 import Button from "@/components/Button";

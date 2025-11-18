@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, use } from "react";
+import { useEffect, useState } from "react";
 import moneyFormater from "@/lib/utils/moneyFormater";
 import Button from "@/components/Button";
 import { Check, X } from "lucide-react";
@@ -46,7 +46,8 @@ export default function Success() {
         setDate(res.date);
         setTime(res.time);
         setService(res.service);
-      } catch (error) {
+      } catch (err) {
+        console.warn(err);
       } finally {
         setLoading(false);
       }

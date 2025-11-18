@@ -150,7 +150,8 @@ export async function GET(req) {
         { status: 400 }
       );
     }
-  } catch (error) {
+  } catch (err) {
+    console.error(err);
     return NextResponse.json(
       { ok: false, message: "Something went wrong on the server!" },
       { status: 500 }

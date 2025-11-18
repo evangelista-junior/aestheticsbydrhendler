@@ -3,7 +3,6 @@ import Link from "next/link";
 
 export default function Card({
   treatmentId,
-  treatmentImage,
   treatmentName,
   treatmentInfo,
   treatmentAvailability,

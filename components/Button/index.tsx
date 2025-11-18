@@ -1,11 +1,32 @@
+import { ButtonHTMLAttributes, ReactNode } from "react";
+
+type ButtonVariant =
+  | "primary"
+  | "dark"
+  | "darkInverse"
+  | "primaryRounded"
+  | "outline"
+  | "outlineInverse"
+  | "confirm"
+  | "decline"
+  | "confirmInverse"
+  | "declineInverse";
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  buttonType?: ButtonVariant;
+  className?: string;
+}
+
 export default function Button({
   children,
-  type,
+  type = "button",
   disabled,
   buttonType = "primary",
   className = "",
   onClick,
-}) {
+  ...rest
+}: ButtonProps) {
   const baseStyles =
     "flex justify-center items-center gap-2 cursor-pointer transition-all duration-300 uppercase tracking-wider shadow-xl p-2 px-4";
 

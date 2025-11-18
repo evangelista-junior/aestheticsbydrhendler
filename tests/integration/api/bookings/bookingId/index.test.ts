@@ -134,7 +134,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
 
       expect(res.status).toBe(400);
       expect(body).toEqual({
-        error: "Booking ID is required",
+        message: "Booking ID is required",
       });
     });
 
@@ -197,7 +197,8 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
 
       expect(res.status).toBe(500);
       expect(body).toEqual({
-        error: "Internal server error",
+        err: {},
+        message: "Internal server error",
       });
     });
   });
@@ -246,7 +247,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
 
       expect(res.status).toBe(404);
       expect(body).toEqual({
-        error: "Booking information not found!",
+        message: "Booking information not found!",
       });
     });
 
@@ -271,7 +272,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
 
       expect(res.status).toBe(209);
       expect(body).toEqual({
-        error: "Booking has already been cancelled!",
+        message: "Booking has already been cancelled!",
       });
     });
 
@@ -301,7 +302,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
       });
       expect(res.status).toBe(404);
       expect(body).toEqual({
-        error: "Payment session not found!",
+        message: "Payment session not found!",
       });
     });
 
@@ -336,7 +337,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
 
       expect(res.status).toBe(404);
       expect(body).toEqual({
-        error: "Payment intent not found!",
+        message: "Payment intent not found!",
       });
     });
 
@@ -573,7 +574,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
 
       expect(res.status).toBe(500);
       expect(body).toEqual({
-        error: "Internal server error",
+        message: "Internal server error",
       });
     });
   });

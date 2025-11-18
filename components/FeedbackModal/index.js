@@ -1,6 +1,5 @@
 "use client";
 
-import { Check, XCircle } from "lucide-react";
 import { createPortal } from "react-dom";
 import Button from "../Button";
 import { useFeedbackModal } from "@/store/useFeedbackModal";

@@ -3,10 +3,9 @@
 import Headings from "@/components/Headings";
 import { useForm } from "react-hook-form";
 import Button from "@/components/Button";
-import { Instagram, Mail, MapPinned, Phone, Send } from "lucide-react";
+import { Instagram, Mail, MapPinned, Send } from "lucide-react";
 import Input from "@/components/Input";
 import TextArea from "@/components/TextArea";
-import { usePathname } from "next/navigation";
 import { useLoadingModal } from "@/store/useLoadingModal";
 import { useFeedbackModal } from "@/store/useFeedbackModal";
 import { apiRequest } from "@/lib/server/useApi";
