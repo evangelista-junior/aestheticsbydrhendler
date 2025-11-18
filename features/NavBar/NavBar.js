@@ -61,7 +61,7 @@ export default function NavBar() {
     setHideNavBar(true);
     setTimeout(() => {
       setHideNavBar(false);
-    }, 3000);
+    }, 1500);
   }
 
   function handleClickSideMenu() {
