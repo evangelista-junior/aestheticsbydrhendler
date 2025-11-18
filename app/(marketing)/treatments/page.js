@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Card from "./components/Card/page";
+import Card from "./components/Card";
 import halfFace from "@/public/images/half_face.png";
 import { useEffect, useState } from "react";
 import { useLoadingModal } from "@/store/useLoadingModal";
