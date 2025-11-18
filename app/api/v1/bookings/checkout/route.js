@@ -18,31 +18,31 @@ export async function GET(req) {
       return NextResponse.json(
         {
           ok: false,
-          error: `UUID is not valid`,
+          message: `UUID is not valid`,
         },
         { status: 400 }
       );
     }
-
     const paymentToken = await prisma.tokensJWT.findUnique({
       where: {
         id: bookingId,
       },
     });
-    const { valid, payload } = await decodeToken(paymentToken.token);
     if (!paymentToken) {
       return NextResponse.json(
-        { ok: false, error: "Booking not found" },
+        { ok: false, message: "Booking not found" },
         { status: 404 }
       );
     }
+
+    const { valid, payload } = await decodeToken(paymentToken.token);
 
     if (!valid) {
       //TODO: Add webhook to run and change status of expired JWT tokens (check AWS Lambda)
       return NextResponse.json(
         {
           ok: false,
-          error: `This payment link has expired for security reasons. Please start a new booking process.`,
+          message: `This payment link has expired for security reasons. Please start a new booking process.`,
         },
         { status: 400 }
       );
@@ -63,7 +63,7 @@ export async function GET(req) {
 
     if (!paymentTokenInfo) {
       return NextResponse.json(
-        { ok: false, error: "Patient not found" },
+        { ok: false, message: "Patient not found" },
         { status: 404 }
       );
     }
@@ -71,7 +71,7 @@ export async function GET(req) {
     if (paymentTokenInfo.usedAt) {
       return NextResponse.json(
         {
-          error: "Payment already complete!",
+          message: "Payment already complete!",
         },
         { status: 409 }
       );
@@ -101,7 +101,7 @@ export async function GET(req) {
 
     if (!treatment?.stripeProductNumber) {
       return NextResponse.json(
-        { ok: false, error: "Treatment not found or not configured" },
+        { ok: false, message: "Treatment not found or not configured" },
         { status: 400 }
       );
     }
@@ -142,7 +142,11 @@ export async function GET(req) {
     } catch (err) {
       console.error(err);
       return NextResponse.json(
-        { error: err?.message ?? "Stripe error" },
+        {
+          ok: false,
+          message:
+            "Stripe or Prisma (update paymentToken.update) went on error",
+        },
         { status: 400 }
       );
     }
