@@ -275,7 +275,12 @@ export default function Booking() {
         </div>
 
         <div className="xl:col-span-2 flex items-center justify-between gap-3 pt-2">
-          <Button buttonType="primary" className="px-6" disabled={isSubmitting}>
+          <Button
+            buttonType="primary"
+            type="submit"
+            className="px-6"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Sending..." : "Request Booking"}
           </Button>
         </div>
