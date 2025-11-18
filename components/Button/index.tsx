@@ -12,8 +12,11 @@ type ButtonVariant =
   | "confirmInverse"
   | "declineInverse";
 
+type ButtonTypeVariant = "button" | "submit";
+
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
+  type: ButtonTypeVariant;
   buttonType?: ButtonVariant;
   className?: string;
 }
