@@ -25,7 +25,6 @@ export default function Button({
   buttonType = "primary",
   className = "",
   onClick,
-  ...rest
 }: ButtonProps) {
   const baseStyles =
     "flex justify-center items-center gap-2 cursor-pointer transition-all duration-300 uppercase tracking-wider shadow-xl p-2 px-4";
