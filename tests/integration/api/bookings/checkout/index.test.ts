@@ -762,7 +762,6 @@ describe("GET /api/v1/bookings/checkout", () => {
 
       const res = await GET(req);
       const body = await res.json();
-      console.log(res.status);
 
       expect(res.status).toBe(400);
       expect(body).toEqual({
