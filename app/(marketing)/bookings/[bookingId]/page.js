@@ -10,7 +10,7 @@ import { useLoadingModal } from "@/store/useLoadingModal";
 import { apiRequest } from "@/lib/server/useApi";
 import Headings from "@/components/Headings";
 
-export default function Success({ searchParams }) {
+export default function Success() {
   const { bookingId } = useParams();
   const [status, setStatus] = useState();
   const [amount, setAmount] = useState();
