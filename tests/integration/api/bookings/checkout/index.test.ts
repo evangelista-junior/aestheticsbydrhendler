@@ -1,4 +1,3 @@
-// Mocks dos módulos usados na rota
 jest.mock("@/lib/stripe", () => ({
   stripe: {
     checkout: {
@@ -64,7 +63,6 @@ describe("GET /api/v1/bookings/checkout", () => {
     process.env.API_KEY = "test-api-key";
     process.env.NEXT_PUBLIC_APP_URL = "https://example.com";
 
-    // Limpa mocks
     jest.clearAllMocks();
   });
 
@@ -149,7 +147,7 @@ describe("GET /api/v1/bookings/checkout", () => {
         message: "UUID is not valid",
       });
     });
-  }); //Done
+  });
 
   describe("JWT token validation", () => {
     test("Return 404 if booking (tokenJWT) is not found", async () => {
@@ -237,7 +235,7 @@ describe("GET /api/v1/bookings/checkout", () => {
           "This payment link has expired for security reasons. Please start a new booking process.",
       });
     });
-  }); //Done
+  });
 
   describe("PaymentToken validation", () => {
     test("Return 404 if paymentTokenInfo is not found", async () => {
@@ -313,7 +311,7 @@ describe("GET /api/v1/bookings/checkout", () => {
         message: "Payment already complete!",
       });
     });
-  }); //Done
+  });
 
   describe("Retrieving existing and valid Stripe session", () => {
     test("Return client_secret if providerRef exists and status is not expired", async () => {
