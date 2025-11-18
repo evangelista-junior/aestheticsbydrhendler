@@ -36,6 +36,7 @@ export async function GET(req, { params }) {
 
     return NextResponse.json(
       {
+        ok: true,
         status: formatedDateBooking.status,
         amount: formatedDateBooking.token.amountCents,
         name: formatedDateBooking.name,
@@ -169,6 +170,7 @@ export async function DELETE(req, { params }) {
     return NextResponse.json(
       {
         status: booking.status,
+        ok: true,
       },
       { status: 200 }
     );

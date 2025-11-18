@@ -172,6 +172,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
 
       expect(res.status).toBe(200);
       expect(body).toEqual({
+        ok: true,
         status: booking.status,
         amount: booking.token.amountCents,
         name: booking.name,
@@ -429,6 +430,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
 
       expect(res.status).toBe(200);
       expect(body).toEqual({
+        ok: true,
         status: "CANCELLED",
       });
     });
@@ -498,6 +500,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
 
       expect(res.status).toBe(200);
       expect(body).toEqual({
+        ok: true,
         status: "CANCELLED",
       });
     });
@@ -555,6 +558,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
 
       expect(res.status).toBe(200);
       expect(body).toEqual({
+        ok: true,
         status: "CANCELLED",
       });
     });

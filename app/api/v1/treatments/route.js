@@ -39,7 +39,8 @@ export async function GET(req) {
     if (!treatments) {
       return NextResponse.json({ error: "Data not found!" }, { status: 404 });
     }
-    return NextResponse.json({ treatments }, { status: 200 });
+
+    return NextResponse.json({ treatments, ok: true }, { status: 200 });
   } catch (err) {
     console.log(err);
     return NextResponse.json({ error: err }, { status: 500 });
