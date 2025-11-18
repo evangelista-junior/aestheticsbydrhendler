@@ -6,42 +6,21 @@ import { GET } from "@/app/api/v1/treatments/route";
 
 describe("GET /api/treatments", () => {
   const validApiKey = process.env.API_KEY;
+  const originalConsoleError = console.error;
+  const originalConsoleWarn = console.warn;
+  const originalConsoleLog = console.log;
 
-  // TODO: Create a new DB for testing later in future and add standard values
-  // beforeAll(async () => {
-  //   // Limpa e popula dados de teste
-  //   await prisma.treatments.deleteMany();
-  //   await prisma.treatments.createMany({
-  //     data: [
-  //       {
-  //         id: "1",
-  //         name: "Botox",
-  //         description: "Aplicação de toxina botulínica",
-  //         price: 1500,
-  //         availability: "AVAILABLE",
-  //       },
-  //       {
-  //         id: "2",
-  //         name: "Preenchimento",
-  //         description: "Preenchimento facial",
-  //         price: 2000,
-  //         availability: "UNAVAILABLE",
-  //       },
-  //       {
-  //         id: "3",
-  //         name: "Harmonização",
-  //         description: "Harmonização facial completa",
-  //         price: 3500,
-  //         availability: "AVAILABLE",
-  //       },
-  //     ],
-  //   });
-  // });
+  beforeAll(() => {
+    console.error = jest.fn();
+    console.warn = jest.fn();
+    console.log = jest.fn();
+  });
 
-  // afterAll(async () => {
-  //   await prisma.treatments.deleteMany();
-  //   await prisma.$disconnect();
-  // });
+  afterAll(() => {
+    console.error = originalConsoleError;
+    console.warn = originalConsoleWarn;
+    console.log = originalConsoleLog;
+  });
 
   describe("Authentication", () => {
     test("No API key: Must return 401", async () => {

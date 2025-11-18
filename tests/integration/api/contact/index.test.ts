@@ -8,6 +8,8 @@ jest.mock("@/lib/mailer", () => ({
 
 describe("POST /api/v1/contact", () => {
   const validApiKey = process.env.API_KEY;
+  const originalConsoleError = console.error;
+  const originalConsoleWarn = console.warn;
 
   const validContactData = {
     name: "Evangelista Teixeira",
@@ -16,9 +18,18 @@ describe("POST /api/v1/contact", () => {
     message: "I would like to schedule an appointment!",
   };
 
+  beforeAll(() => {
+    console.error = jest.fn();
+    console.warn = jest.fn();
+  });
+
   beforeEach(() => {
     jest.clearAllMocks();
     (sendContactMessage as jest.Mock).mockResolvedValue({ success: true });
+  });
+  afterAll(() => {
+    console.error = originalConsoleError;
+    console.warn = originalConsoleWarn;
   });
 
   describe("Authentication", () => {

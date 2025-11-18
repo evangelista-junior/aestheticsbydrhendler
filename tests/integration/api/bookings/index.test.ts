@@ -74,6 +74,13 @@ function createRequest({ body, headers = {} }) {
 
 describe("POST /api/v1/bookings", () => {
   const OLD_ENV = process.env;
+  const originalConsoleError = console.error;
+  const originalConsoleWarn = console.warn;
+
+  beforeAll(() => {
+    console.error = jest.fn();
+    console.warn = jest.fn();
+  });
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -107,6 +114,8 @@ describe("POST /api/v1/bookings", () => {
 
   afterAll(() => {
     process.env = OLD_ENV;
+    console.error = originalConsoleError;
+    console.warn = originalConsoleWarn;
   });
 
   describe("Authentication", () => {
