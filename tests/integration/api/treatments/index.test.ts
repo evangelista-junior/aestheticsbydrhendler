@@ -1,4 +1,6 @@
-"use server";
+/**
+ * @jest-environment node
+ */
 
 import { prisma } from "@/lib/prisma";
 import { NextRequest } from "next/server";
@@ -49,7 +51,7 @@ describe("GET /api/treatments", () => {
   describe("GET: List all treatments", () => {
     test("Get all treatments and validate fields", async () => {
       const req = new NextRequest("http://localhost:3000/api/v1/treatments", {
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
       });
 
       const res = await GET(req);
@@ -74,7 +76,7 @@ describe("GET /api/treatments", () => {
       const req = new NextRequest(
         "http://localhost:3000/api/v1/treatments?fields=id,name",
         {
-          headers: { "x-api-key": validApiKey },
+          headers: { "x-api-key": validApiKey || "" },
         }
       );
 
@@ -99,7 +101,7 @@ describe("GET /api/treatments", () => {
       const req = new NextRequest(
         "http://localhost:3000/api/v1/treatments?fields=id,campoInvalido,name",
         {
-          headers: { "x-api-key": validApiKey },
+          headers: { "x-api-key": validApiKey || "" },
         }
       );
 
@@ -116,7 +118,7 @@ describe("GET /api/treatments", () => {
       const req = new NextRequest(
         "http://localhost:3000/api/v1/treatments?fields=",
         {
-          headers: { "x-api-key": validApiKey },
+          headers: { "x-api-key": validApiKey || "" },
         }
       );
 
@@ -141,7 +143,7 @@ describe("GET /api/treatments", () => {
       const req = new NextRequest(
         "http://localhost:3000/api/v1/treatments?status=AVAILABLE",
         {
-          headers: { "x-api-key": validApiKey },
+          headers: { "x-api-key": validApiKey || "" },
         }
       );
 
@@ -150,16 +152,16 @@ describe("GET /api/treatments", () => {
 
       expect(res.status).toBe(200);
       expect(body.treatments).toHaveLength(3);
-      expect(body.treatments.every((t) => t.availability === "AVAILABLE")).toBe(
-        true
-      );
+      expect(
+        body.treatments.every((t: any) => t.availability === "AVAILABLE")
+      ).toBe(true);
     });
 
     it("Return all items when ?status is different than AVAILABLE or SOON", async () => {
       const req = new NextRequest(
         "http://localhost:3000/api/v1/treatments?status=OTHER",
         {
-          headers: { "x-api-key": validApiKey },
+          headers: { "x-api-key": validApiKey || "" },
         }
       );
 
@@ -176,7 +178,7 @@ describe("GET /api/treatments", () => {
       const req = new NextRequest(
         "http://localhost:3000/api/v1/treatments?fields=id,name&status=AVAILABLE",
         {
-          headers: { "x-api-key": validApiKey },
+          headers: { "x-api-key": validApiKey || "" },
         }
       );
 
@@ -205,7 +207,7 @@ describe("GET /api/treatments", () => {
         .mockRejectedValueOnce(new Error("Database error"));
 
       const req = new NextRequest("http://localhost:3000/api/v1/treatments", {
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
       });
 
       const res = await GET(req);

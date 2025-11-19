@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import { NextRequest } from "next/server";
 import { POST } from "@/app/api/v1/contact/route";
 import { sendContactMessage } from "@/lib/mailer";
@@ -27,6 +31,7 @@ describe("POST /api/v1/contact", () => {
     jest.clearAllMocks();
     (sendContactMessage as jest.Mock).mockResolvedValue({ success: true });
   });
+
   afterAll(() => {
     console.error = originalConsoleError;
     console.warn = originalConsoleWarn;
@@ -63,12 +68,12 @@ describe("POST /api/v1/contact", () => {
 
   describe("Validation - Missing Fields", () => {
     test("Should return 422 when name is missing", async () => {
-      const invalidData = { ...validContactData };
+      const invalidData = { ...validContactData } as any;
       delete invalidData.name;
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(invalidData),
       });
 
@@ -82,12 +87,12 @@ describe("POST /api/v1/contact", () => {
     });
 
     test("Should return 422 when phone is missing", async () => {
-      const invalidData = { ...validContactData };
+      const invalidData = { ...validContactData } as any;
       delete invalidData.phone;
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(invalidData),
       });
 
@@ -100,12 +105,12 @@ describe("POST /api/v1/contact", () => {
     });
 
     test("Should return 422 when email is missing", async () => {
-      const invalidData = { ...validContactData };
+      const invalidData = { ...validContactData } as any;
       delete invalidData.email;
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(invalidData),
       });
 
@@ -118,12 +123,12 @@ describe("POST /api/v1/contact", () => {
     });
 
     test("Should return 422 when message is missing", async () => {
-      const invalidData = { ...validContactData };
+      const invalidData = { ...validContactData } as any;
       delete invalidData.message;
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(invalidData),
       });
 
@@ -142,7 +147,7 @@ describe("POST /api/v1/contact", () => {
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(invalidData),
       });
 
@@ -164,7 +169,7 @@ describe("POST /api/v1/contact", () => {
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(invalidData),
       });
 
@@ -185,7 +190,7 @@ describe("POST /api/v1/contact", () => {
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(invalidData),
       });
 
@@ -206,7 +211,7 @@ describe("POST /api/v1/contact", () => {
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(invalidData),
       });
 
@@ -227,7 +232,7 @@ describe("POST /api/v1/contact", () => {
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(invalidData),
       });
 
@@ -250,7 +255,7 @@ describe("POST /api/v1/contact", () => {
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(invalidData),
       });
 
@@ -267,7 +272,7 @@ describe("POST /api/v1/contact", () => {
     test("Should return 200 and send email with valid data", async () => {
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(validContactData),
       });
 
@@ -309,7 +314,7 @@ describe("POST /api/v1/contact", () => {
 
         const req = new NextRequest("http://localhost:3000/api/v1/contact", {
           method: "POST",
-          headers: { "x-api-key": validApiKey },
+          headers: { "x-api-key": validApiKey || "" },
           body: JSON.stringify(data),
         });
 
@@ -332,7 +337,7 @@ describe("POST /api/v1/contact", () => {
 
         const req = new NextRequest("http://localhost:3000/api/v1/contact", {
           method: "POST",
-          headers: { "x-api-key": validApiKey },
+          headers: { "x-api-key": validApiKey || "" },
           body: JSON.stringify(data),
         });
 
@@ -353,7 +358,7 @@ describe("POST /api/v1/contact", () => {
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(validContactData),
       });
 
@@ -369,7 +374,7 @@ describe("POST /api/v1/contact", () => {
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
         headers: {
-          "x-api-key": validApiKey,
+          "x-api-key": validApiKey || "",
           "content-type": "application/json",
         },
         body: "invalid json{",
@@ -390,7 +395,7 @@ describe("POST /api/v1/contact", () => {
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(data),
       });
 
@@ -408,7 +413,7 @@ describe("POST /api/v1/contact", () => {
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(data),
       });
 
@@ -427,7 +432,7 @@ describe("POST /api/v1/contact", () => {
 
       const req = new NextRequest("http://localhost:3000/api/v1/contact", {
         method: "POST",
-        headers: { "x-api-key": validApiKey },
+        headers: { "x-api-key": validApiKey || "" },
         body: JSON.stringify(data),
       });
 

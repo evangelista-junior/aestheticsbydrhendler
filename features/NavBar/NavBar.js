@@ -57,7 +57,6 @@ export default function NavBar() {
   }, [openSideMenu]);
 
   function handleClickMainMenu() {
-    console.warn("some navbar");
     setHideNavBar(true);
     setTimeout(() => {
       setHideNavBar(false);

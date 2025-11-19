@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 jest.mock("@/lib/prisma", () => ({
   prisma: {
     paymentTokens: {
@@ -61,7 +65,13 @@ import { parseEmailConsultationRequest } from "@/lib/utils/parseEmailConsultatio
 import fs from "node:fs/promises";
 import { sendMail } from "@/lib/mailer";
 
-function createRequest({ body, headers = {} }) {
+function createRequest({
+  body,
+  headers = {},
+}: {
+  body: any;
+  headers?: Record<string, string>;
+}) {
   return new Request("http://localhost/api/v1/bookings", {
     method: "POST",
     headers: {
@@ -104,10 +114,10 @@ describe("POST /api/v1/bookings", () => {
     (prisma.paymentTokens.create as jest.Mock).mockResolvedValue({
       id: "payment-token-id",
     });
-    (dateFormater as jest.Mock).mockImplementation((d) => d);
+    (dateFormater as jest.Mock).mockImplementation((d: any) => d);
     (fs.readFile as jest.Mock).mockResolvedValue("TEMPLATE CONTENT");
     (parseEmailConsultationRequest as jest.Mock).mockImplementation(
-      ({ string }) => string
+      ({ string }: { string: string }) => string
     );
     (sendMail as jest.Mock).mockResolvedValue(true);
   });
@@ -475,8 +485,7 @@ describe("POST /api/v1/bookings", () => {
     });
 
     test("Return 404 when Stripe does not return priceInfo", async () => {
-      const { stripe } = require("@/lib/stripe");
-      stripe.prices.retrieve.mockResolvedValueOnce(null);
+      (stripe.prices.retrieve as jest.Mock).mockResolvedValueOnce(null);
 
       const body = {
         name: "John Doe",
@@ -586,8 +595,9 @@ describe("POST /api/v1/bookings", () => {
 
   describe("Email sending / template reading errors", () => {
     test("Return 500 when sendMail fails", async () => {
-      const { sendMail } = require("@/lib/mailer");
-      sendMail.mockRejectedValueOnce(new Error("Email service down"));
+      (sendMail as jest.Mock).mockRejectedValueOnce(
+        new Error("Email service down")
+      );
 
       const body = {
         name: "John Doe",
@@ -612,8 +622,9 @@ describe("POST /api/v1/bookings", () => {
     });
 
     test("Return 500 when fs.readFile fails", async () => {
-      const fs = require("node:fs/promises");
-      fs.readFile.mockRejectedValueOnce(new Error("File not found"));
+      (fs.readFile as jest.Mock).mockRejectedValueOnce(
+        new Error("File not found")
+      );
 
       const body = {
         name: "John Doe",
@@ -660,7 +671,6 @@ describe("POST /api/v1/bookings", () => {
 
       expect(res.status).toBe(201);
 
-      const { createToken } = require("@/lib/jwt");
       expect(createToken).toHaveBeenCalledWith(
         expect.objectContaining({
           unreservedClaims: expect.objectContaining({
@@ -708,12 +718,7 @@ describe("POST /api/v1/bookings", () => {
 
   describe("Email templates integration", () => {
     test("Call parseEmailConsultationRequest with proper data and checkout URL", async () => {
-      const {
-        parseEmailConsultationRequest,
-      } = require("@/lib/utils/parseEmailConsultationRequest");
-      const dateFormater = require("@/lib/utils/dateFormater").default;
-
-      dateFormater.mockReturnValueOnce("01/01/2025");
+      (dateFormater as jest.Mock).mockReturnValueOnce("01/01/2025");
 
       const body = {
         name: "John Doe",
@@ -809,8 +814,7 @@ describe("POST /api/v1/bookings", () => {
     });
 
     test("Use unit_amount from Stripe as amountCents", async () => {
-      const { stripe } = require("@/lib/stripe");
-      stripe.prices.retrieve.mockResolvedValueOnce({
+      (stripe.prices.retrieve as jest.Mock).mockResolvedValueOnce({
         id: "price_123",
         unit_amount: 25000, // $250.00 AUD
       });

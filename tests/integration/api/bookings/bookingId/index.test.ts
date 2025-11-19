@@ -1,4 +1,6 @@
-// tests/integration/api/bookings/[bookingId]/index.test.ts
+/**
+ * @jest-environment node
+ */
 
 jest.mock("@/lib/prisma", () => ({
   prisma: {
