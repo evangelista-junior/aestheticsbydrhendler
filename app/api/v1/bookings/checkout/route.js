@@ -85,7 +85,7 @@ export async function GET(req) {
 
         if (paymentTokenInfo.status != "expired") {
           return NextResponse.json(
-            { client_secret: session.client_secret },
+            { ok: true, client_secret: session.client_secret },
             { status: 200 }
           );
         }
