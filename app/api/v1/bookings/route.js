@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { stripe } from "@/lib/stripe";
 import dateFormater from "@/lib/utils/dateFormater";
 import generateUUID from "@/lib/utils/generateUUID";
+import getCurrentTimeSyd from "@/lib/utils/getCurrentTimeSyd";
 import { parseEmailConsultationRequest } from "@/lib/utils/parseEmailConsultationRequest";
 import { NextResponse } from "next/server";
 import fs from "node:fs/promises";
@@ -16,14 +17,6 @@ export async function POST(req) {
       return NextResponse.json("Access denied!", { status: 401 });
 
     const data = await req.json();
-    const secondsPerHour = 3600;
-    const milisecondsPerSecond = 1000;
-    const expiresInHours = 48;
-    const issuedAt = new Date();
-    const expireAt = new Date(
-      issuedAt.getTime() +
-        expiresInHours * secondsPerHour * milisecondsPerSecond
-    );
 
     const required = [
       "name",
@@ -59,6 +52,23 @@ export async function POST(req) {
         { status: 400 }
       );
     }
+
+    const parsedDate = new Date(data.preferedDate);
+    const year = parsedDate.getFullYear();
+    const month = parsedDate.getMonth();
+    const day = parsedDate.getDate();
+    const formatedPreferedDate = new Date(Date.UTC(year, month, day));
+
+    const secondsPerHour = 3600;
+    const milisecondsPerSecond = 1000;
+    const expiresInHours = 48;
+    const issuedAt = getCurrentTimeSyd();
+    const expireAt = new Date(
+      issuedAt.getTime() +
+        expiresInHours * secondsPerHour * milisecondsPerSecond
+    );
+
+    data.preferedDate = dateFormater(data.preferedDate);
 
     // TODO: Remove checker in future so it improves performance
     let jti = generateUUID();
@@ -116,14 +126,14 @@ export async function POST(req) {
         { status: 404 }
       );
 
-    paymentToken = await prisma.paymentTokens.create({
+    await prisma.paymentTokens.create({
       data: {
         jti: jti,
         email: data.email,
         name: data.name,
         phone: data.phone,
         service: data.service,
-        date: data.preferedDate,
+        date: formatedPreferedDate,
         time: data.preferedTime,
         notes: !!data.notes ? data.notes : null,
         consent: Boolean(data.consent),

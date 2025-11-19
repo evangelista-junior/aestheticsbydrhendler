@@ -10,7 +10,7 @@ export default function Input({
   minDate,
 }) {
   return (
-    <div>
+    <div className="mb-1">
       <label className="block text-sm tracking-wide after:content-['*'] after:text-red-400 after:ml-1 uppercase">
         {labelTitle}
       </label>

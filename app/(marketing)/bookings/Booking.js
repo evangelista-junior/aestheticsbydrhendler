@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/Button";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import ErrorLabel from "@/components/ErrorLabel";
 import SelectInput from "./components/SelectInput";
 import Input from "../../../components/Input";
@@ -16,12 +16,8 @@ import { useLoadingModal } from "@/store/useLoadingModal";
 import { useEffect, useState } from "react";
 import { bookingDateValidation } from "@/lib/business/booking/bookingDateValidation";
 import { apiRequest } from "@/lib/server/useApi";
-
-function setFirstAvailableDate() {
-  const today = new Date();
-  const availableDate = new Date(today.setDate(today.getDate() + 1));
-  return availableDate.toLocaleDateString("en-CA");
-}
+import DatePicker from "./components/DatePicker";
+import dateFormater from "@/lib/utils/dateFormater";
 
 function selectInputValidation(selection, errMessage) {
   if (selection == "default") return errMessage;
@@ -31,6 +27,7 @@ export default function Booking() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
   } = useForm();
   const {
@@ -68,12 +65,17 @@ export default function Booking() {
 
   const onSubmit = async (data) => {
     try {
+      const formatedData = {
+        ...data,
+        preferedDate: dateFormater(data.preferedDate),
+      };
+
       if (isSubmitting) return;
 
       setLoading(true);
       const res = await apiRequest(`/api/v1/bookings`, {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify(formatedData),
       });
 
       if (!res.ok) {
@@ -148,8 +150,8 @@ export default function Booking() {
 
   return (
     <section className="relative max-w-5xl bg-white shadow-xl p-6 lg:px-12 lg:py-12 ">
-      <p className="uppercase text-xs font-bold text-primary tracking-wide mb-6">
-        Please Note Dr Hendler Is Available On Sundays & Mondays.{" "}
+      <div className="uppercase text-xs font-bold text-primary tracking-wide mb-6">
+        <p>Please Note Dr Hendler Is Available On Sundays & Mondays. </p>
         <p className="text-gray-500 ">
           If You Need To Book A Different Day, Please Send Us An Email At{" "}
           <span className="text-primary underline tracking-wide">
@@ -158,7 +160,7 @@ export default function Booking() {
             </a>
           </span>
         </p>
-      </p>
+      </div>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -223,15 +225,21 @@ export default function Booking() {
           options={treatments}
         />
 
-        <Input
-          labelTitle="Prefered Date"
-          inputType="date"
-          hookFormArgs={register("preferedDate", {
+        <Controller
+          control={control}
+          name="preferedDate"
+          rules={{
             required: "Please choose a date",
             validate: (pickedDate) => bookingDateValidation(pickedDate),
-          })}
-          errors={errors.preferedDate}
-          minDate={setFirstAvailableDate()}
+          }}
+          render={({ field }) => (
+            <DatePicker
+              labelTitle="Prefered Date"
+              value={field.value}
+              onChange={field.onChange}
+              error={errors.preferedDate}
+            />
+          )}
         />
 
         <SelectInput
@@ -247,7 +255,7 @@ export default function Booking() {
 
         <div className="xl:col-span-2">
           <TextArea
-            title="Anything you’d like us to know?"
+            title="Anything you would like us to know?"
             placeholder="Optional information"
             hookFormArgs={register("notes")}
             className="xl:col-span-2"

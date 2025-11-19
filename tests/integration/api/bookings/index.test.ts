@@ -64,6 +64,7 @@ import generateUUID from "@/lib/utils/generateUUID";
 import { parseEmailConsultationRequest } from "@/lib/utils/parseEmailConsultationRequest";
 import fs from "node:fs/promises";
 import { sendMail } from "@/lib/mailer";
+import getCurrentTimeSyd from "@/lib/utils/getCurrentTimeSyd";
 
 function createRequest({
   body,
@@ -698,9 +699,9 @@ describe("POST /api/v1/bookings", () => {
         headers: { "x-api-key": "test-api-key" },
       });
 
-      const beforeCall = Date.now();
+      const beforeCall = getCurrentTimeSyd().getTime();
       await POST(req);
-      const afterCall = Date.now();
+      const afterCall = getCurrentTimeSyd().getTime();
 
       const createCall = (prisma.paymentTokens.create as jest.Mock).mock
         .calls[0][0];
