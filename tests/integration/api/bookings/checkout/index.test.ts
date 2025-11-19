@@ -357,6 +357,7 @@ describe("GET /api/v1/bookings/checkout", () => {
       );
       expect(res.status).toBe(200);
       expect(body).toEqual({
+        ok: true,
         client_secret: "cs_test_123",
       });
     });
