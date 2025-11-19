@@ -57,6 +57,7 @@ export default function DatePicker({
       </label>
 
       <button
+        type="button"
         onClick={() => setOpen((prev) => !prev)}
         className={`
           mt-2 w-full shadow p-2 outline-none text-left focus:ring-2 focus:ring-easyDark/30 cursor-pointer ${
