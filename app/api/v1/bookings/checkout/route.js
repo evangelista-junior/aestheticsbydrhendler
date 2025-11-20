@@ -4,12 +4,14 @@ import { stripe } from "@/lib/stripe";
 import { decodeToken } from "@/lib/jwt";
 import { prisma } from "@/lib/prisma";
 import { isValidUUID } from "@/lib/utils/isValidUUID";
+import { validateApiKey } from "@/lib/security";
 
 export async function GET(req) {
   try {
-    const headerKey = await req.headers.get("x-api-key");
-    if (headerKey != process.env.API_KEY)
-      return NextResponse.json("Access denied!", { status: 401 });
+    const headerApiKey = req.headers.get("x-api-key");
+
+    const apiKeyValidationError = validateApiKey(headerApiKey);
+    if (apiKeyValidationError) return apiKeyValidationError;
 
     const { searchParams } = new URL(req.url);
     const bookingId = searchParams.get("id");
@@ -70,9 +72,7 @@ export async function GET(req) {
 
     if (paymentTokenInfo.usedAt) {
       return NextResponse.json(
-        {
-          message: "Payment already complete!",
-        },
+        { ok: false, message: "Payment already complete!" },
         { status: 409 }
       );
     }
@@ -134,9 +134,7 @@ export async function GET(req) {
       });
 
       return NextResponse.json(
-        {
-          client_secret: session.client_secret,
-        },
+        { ok: true, client_secret: session.client_secret },
         { status: 200 }
       );
     } catch (err) {

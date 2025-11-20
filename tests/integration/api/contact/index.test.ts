@@ -48,7 +48,7 @@ describe("POST /api/v1/contact", () => {
       const body = await res.json();
 
       expect(res.status).toBe(401);
-      expect(body).toBe("Access denied!");
+      expect(body).toEqual({ ok: false, message: "Access denied!" });
     });
 
     test("Request with wrong API key: Must return 401", async () => {
@@ -62,7 +62,7 @@ describe("POST /api/v1/contact", () => {
       const body = await res.json();
 
       expect(res.status).toBe(401);
-      expect(body).toBe("Access denied!");
+      expect(body).toEqual({ ok: false, message: "Access denied!" });
     });
   });
 

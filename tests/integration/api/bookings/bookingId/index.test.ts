@@ -110,7 +110,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
       const body = await res.json();
 
       expect(res.status).toBe(401);
-      expect(body).toBe("Access denied!");
+      expect(body).toEqual({ ok: false, message: "Access denied!" });
     });
 
     test("Return 401 if x-api-key is not provided", async () => {
@@ -122,7 +122,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
       const body = await res.json();
 
       expect(res.status).toBe(401);
-      expect(body).toBe("Access denied!");
+      expect(body).toEqual({ ok: false, message: "Access denied!" });
     });
 
     test("Return 400 if bookingId is not provided in params", async () => {
@@ -217,7 +217,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
       const body = await res.json();
 
       expect(res.status).toBe(401);
-      expect(body).toBe("Access denied!");
+      expect(body).toEqual({ ok: false, message: "Access denied!" });
     });
 
     test("Return 401 if x-api-key is not provided", async () => {
@@ -229,7 +229,7 @@ describe("GET /api/v1/bookings/[bookingId] and DELETE /api/v1/bookings/[bookingI
       const body = await res.json();
 
       expect(res.status).toBe(401);
-      expect(body).toBe("Access denied!");
+      expect(body).toEqual({ ok: false, message: "Access denied!" });
     });
 
     test("Return 404 if booking is not found", async () => {

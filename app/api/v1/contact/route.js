@@ -1,4 +1,5 @@
 import { sendContactMessage } from "@/lib/mailer";
+import { validateApiKey } from "@/lib/security";
 import {
   emailValidator,
   fullNameValidator,
@@ -8,11 +9,10 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    const headerKey = await req.headers.get("x-api-key");
-    if (!headerKey) return NextResponse.json("Access denied!", { status: 401 });
+    const headerApiKey = req.headers.get("x-api-key");
 
-    if (headerKey != process.env.API_KEY)
-      return NextResponse.json("Access denied!", { status: 401 });
+    const apiKeyValidationError = validateApiKey(headerApiKey);
+    if (apiKeyValidationError) return apiKeyValidationError;
 
     const data = await req.json();
     const requiredData = ["name", "phone", "email", "message"];

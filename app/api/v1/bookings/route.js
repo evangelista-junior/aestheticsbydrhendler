@@ -1,6 +1,7 @@
 import { createToken } from "@/lib/jwt";
 import { sendMail } from "@/lib/mailer";
 import { prisma } from "@/lib/prisma";
+import { validateApiKey } from "@/lib/security";
 import { stripe } from "@/lib/stripe";
 import dateFormater from "@/lib/utils/dateFormater";
 import generateUUID from "@/lib/utils/generateUUID";
@@ -12,9 +13,10 @@ import path from "node:path";
 
 export async function POST(req) {
   try {
-    const headerKey = await req.headers.get("x-api-key");
-    if (headerKey != process.env.API_KEY)
-      return NextResponse.json("Access denied!", { status: 401 });
+    const headerApiKey = req.headers.get("x-api-key");
+
+    const apiKeyValidationError = validateApiKey(headerApiKey);
+    if (apiKeyValidationError) return apiKeyValidationError;
 
     const data = await req.json();
 

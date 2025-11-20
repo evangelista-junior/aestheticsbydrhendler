@@ -94,7 +94,7 @@ describe("POST /api/v1/bookings/checkout/success", () => {
       const body = await res.json();
 
       expect(res.status).toBe(401);
-      expect(body).toBe("Access denied!");
+      expect(body).toEqual({ ok: false, message: "Access denied!" });
     });
 
     test("Return 401 if x-api-key is not provided", async () => {
@@ -107,7 +107,7 @@ describe("POST /api/v1/bookings/checkout/success", () => {
       const body = await res.json();
 
       expect(res.status).toBe(401);
-      expect(body).toBe("Access denied!");
+      expect(body).toEqual({ ok: false, message: "Access denied!" });
     });
 
     test("Return 400 if session_id is not provided", async () => {

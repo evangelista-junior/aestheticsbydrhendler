@@ -6,12 +6,14 @@ import fs from "node:fs/promises";
 import { parseEmailConsultationRequest } from "@/lib/utils/parseEmailConsultationRequest";
 import { sendMail } from "@/lib/mailer";
 import dateFormater from "@/lib/utils/dateFormater";
+import { validateApiKey } from "@/lib/security";
 
 export async function POST(req) {
   try {
-    const headerKey = await req.headers.get("x-api-key");
-    if (headerKey != process.env.API_KEY)
-      return NextResponse.json("Access denied!", { status: 401 });
+    const headerApiKey = req.headers.get("x-api-key");
+
+    const apiKeyValidationError = validateApiKey(headerApiKey);
+    if (apiKeyValidationError) return apiKeyValidationError;
 
     const { searchParams } = new URL(req.url);
     const sessionId = searchParams.get("session_id");

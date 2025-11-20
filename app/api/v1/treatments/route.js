@@ -1,14 +1,13 @@
 import { prisma } from "@/lib/prisma";
+import { validateApiKey } from "@/lib/security";
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
   try {
-    const headerKey = await req.headers.get("x-api-key");
+    const headerApiKey = req.headers.get("x-api-key");
 
-    if (!headerKey) return NextResponse.json("Access denied!", { status: 401 });
-
-    if (headerKey != process.env.API_KEY)
-      return NextResponse.json("Access denied!", { status: 401 });
+    const apiKeyValidationError = validateApiKey(headerApiKey);
+    if (apiKeyValidationError) return apiKeyValidationError;
 
     const { searchParams } = new URL(req.url);
     const fieldsOnUrl = searchParams.get("fields");

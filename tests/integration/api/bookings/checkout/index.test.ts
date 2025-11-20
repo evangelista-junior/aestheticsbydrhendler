@@ -91,7 +91,7 @@ describe("GET /api/v1/bookings/checkout", () => {
       const body = await res.json();
 
       expect(res.status).toBe(401);
-      expect(body).toBe("Access denied!");
+      expect(body).toEqual({ ok: false, message: "Access denied!" });
     });
 
     test("Return 401 if x-api-key is not given", async () => {
@@ -106,7 +106,7 @@ describe("GET /api/v1/bookings/checkout", () => {
       const body = await res.json();
 
       expect(res.status).toBe(401);
-      expect(body).toBe("Access denied!");
+      expect(body).toEqual({ ok: false, message: "Access denied!" });
     });
 
     test("Return 400 if UUID is invalid", async () => {
@@ -312,6 +312,7 @@ describe("GET /api/v1/bookings/checkout", () => {
 
       expect(res.status).toBe(409);
       expect(body).toEqual({
+        ok: false,
         message: "Payment already complete!",
       });
     });
@@ -407,9 +408,7 @@ describe("GET /api/v1/bookings/checkout", () => {
       );
       expect(stripe.checkout.sessions.create).toHaveBeenCalled();
       expect(res.status).toBe(200);
-      expect(body).toEqual({
-        client_secret: "cs_test_new",
-      });
+      expect(body).toEqual({ ok: true, client_secret: "cs_test_new" });
     });
   });
 
@@ -559,9 +558,7 @@ describe("GET /api/v1/bookings/checkout", () => {
       });
 
       expect(res.status).toBe(200);
-      expect(body).toEqual({
-        client_secret: "cs_test_456",
-      });
+      expect(body).toEqual({ ok: true, client_secret: "cs_test_456" });
     });
 
     test("Return 400 if Stripe throws an error when creating session", async () => {

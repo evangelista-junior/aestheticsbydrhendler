@@ -140,7 +140,7 @@ describe("POST /api/v1/bookings", () => {
       const json = await res.json();
 
       expect(res.status).toBe(401);
-      expect(json).toBe("Access denied!");
+      expect(json).toEqual({ ok: false, message: "Access denied!" });
     });
 
     test("Return 401 when x-api-key is missing", async () => {
@@ -153,7 +153,7 @@ describe("POST /api/v1/bookings", () => {
       const json = await res.json();
 
       expect(res.status).toBe(401);
-      expect(json).toBe("Access denied!");
+      expect(json).toEqual({ ok: false, message: "Access denied!" });
     });
   });
 

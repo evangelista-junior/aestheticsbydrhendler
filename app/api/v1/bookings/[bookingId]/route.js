@@ -7,12 +7,14 @@ import { parseEmailConsultationRequest } from "@/lib/utils/parseEmailConsultatio
 import { sendMail } from "@/lib/mailer";
 import { checkIsRefundable } from "@/lib/business/booking/cancellation";
 import dateFormater from "@/lib/utils/dateFormater";
+import { validateApiKey } from "@/lib/security";
 
 export async function GET(req, { params }) {
   try {
-    const headerKey = await req.headers.get("x-api-key");
-    if (headerKey != process.env.API_KEY)
-      return NextResponse.json("Access denied!", { status: 401 });
+    const headerApiKey = req.headers.get("x-api-key");
+
+    const apiKeyValidationError = validateApiKey(headerApiKey);
+    if (apiKeyValidationError) return apiKeyValidationError;
 
     const { bookingId } = await params;
 
@@ -57,9 +59,10 @@ export async function GET(req, { params }) {
 
 export async function DELETE(req, { params }) {
   try {
-    const headerKey = await req.headers.get("x-api-key");
-    if (headerKey != process.env.API_KEY)
-      return NextResponse.json("Access denied!", { status: 401 });
+    const headerApiKey = req.headers.get("x-api-key");
+
+    const apiKeyValidationError = validateApiKey(headerApiKey);
+    if (apiKeyValidationError) return apiKeyValidationError;
 
     const { bookingId } = await params;
 
