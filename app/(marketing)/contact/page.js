@@ -6,9 +6,12 @@ import Button from "@/components/Button";
 import { Instagram, Mail, MapPinned, Send } from "lucide-react";
 import Input from "@/components/Input";
 import TextArea from "@/components/TextArea";
+import staticMap from "@/public/images/static_map.png";
 import { useLoadingModal } from "@/store/useLoadingModal";
 import { useFeedbackModal } from "@/store/useFeedbackModal";
 import { apiRequest } from "@/lib/server/useApi";
+import { useState } from "react";
+import Image from "next/image";
 
 export default function Contact() {
   const {
@@ -19,6 +22,7 @@ export default function Contact() {
     formState: { errors },
   } = useForm();
   const { setLoading } = useLoadingModal();
+  const [mapLoaded, setMapLoaded] = useState(false);
   const {
     setOpenModal,
     setSuccessTitle,
@@ -70,14 +74,36 @@ export default function Contact() {
       </Headings>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6">
-        <div className="shadow w-full h-full grayscale">
-          <iframe
-            title="Clinic Location Map"
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB2NIWI3Tv9iDPrlnowr_0ZqZWoAQydKJU&q=Parlour%20Box%2C%20entrance%20at%20rear%2C%20Wairoa%20Avenue%2C%20North%20Bondi%20NSW%2C%20Australia&zoom=16&maptype=roadmap"
-            width="100%"
-            height="100%"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+        <div className="shadow w-full h-full">
+          {!mapLoaded ? (
+            <div
+              className="h-full w-full cursor-pointer"
+              onClick={() => setMapLoaded(true)}
+            >
+              <Image
+                src={staticMap}
+                alt="Static image of the clinic location map."
+                className="absolute h-fit w-fit z-0"
+              />
+              <div className="relative z-20 bg-white/60 h-full w-full flex justify-center items-center">
+                <div className="flex items-center bg-white text-primary rounded p-3 gap-1">
+                  <MapPinned className="w-10 h-10 p-2" />
+                  <p className="uppercase font-light p-1">
+                    Click to explore the map
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <iframe
+              title="Clinic Location Map"
+              width="100%"
+              height="100%"
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://maps.google.com/maps?width=600&height=400&hl=en&q=Level%201%2097%20Bondi%20Rd%2C%20Bondi%20NSW%202026%2C%20Australia&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+              className="border-0 grayscale"
+            />
+          )}
         </div>
 
         <div className="shadow p-6">
