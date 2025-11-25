@@ -48,7 +48,6 @@ export async function POST(req) {
       );
     }
 
-    // TODO:remove and add trycatch
     await sendContactMessage({
       contactName: data.name,
       contactEmail: data.email,
