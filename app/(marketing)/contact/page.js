@@ -77,18 +77,18 @@ export default function Contact() {
         <div className="shadow w-full h-full">
           {!mapLoaded ? (
             <div
-              className="h-full w-full cursor-pointer"
+              className="relative cursor-pointer"
               onClick={() => setMapLoaded(true)}
             >
               <Image
                 src={staticMap}
                 alt="Static image of the clinic location map."
-                className="absolute h-fit w-fit z-0"
+                className="w-full h-full"
               />
-              <div className="relative z-20 bg-white/60 h-full w-full flex justify-center items-center">
-                <div className="flex items-center bg-white text-primary rounded p-3 gap-1">
+              <div className="absolute inset-0 z-20 bg-white/50 flex justify-center items-center">
+                <div className="flex items-center bg-white/95 text-primary rounded p-3 gap-1 pointer-events-none shadow-md">
                   <MapPinned className="w-10 h-10 p-2" />
-                  <p className="uppercase font-light p-1">
+                  <p className="uppercase text-xs lg:text-base font-light p-1 whitespace-nowrap">
                     Click to explore the map
                   </p>
                 </div>
