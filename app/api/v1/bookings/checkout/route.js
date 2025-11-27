@@ -40,7 +40,6 @@ export async function GET(req) {
     const { valid, payload } = await decodeToken(paymentToken.token);
 
     if (!valid) {
-      //TODO: Add webhook to run and change status of expired JWT tokens (check AWS Lambda)
       return NextResponse.json(
         {
           ok: false,

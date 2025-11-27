@@ -10,9 +10,7 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-// Config Flat do ESLint
 const eslintConfig = [
-  // Ignorar pastas de build e dependências
   {
     ignores: [
       "node_modules/**",
@@ -24,10 +22,8 @@ const eslintConfig = [
     ],
   },
 
-  // Presets do Next (inclui core-web-vitals + TS)
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 
-  // Regras adicionais para arquivos TS/TSX
   {
     files: ["**/*.ts", "**/*.tsx"],
     languageOptions: {
@@ -37,7 +33,7 @@ const eslintConfig = [
       },
     },
     rules: {
-      "no-unused-vars": "off", // desliga regra JS padrão
+      "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
