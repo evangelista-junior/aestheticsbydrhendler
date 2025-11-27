@@ -73,11 +73,11 @@ export default function Contact() {
         how to find us
       </Headings>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6">
+      <div className="grid grid-cols-1 2xl:grid-cols-[1fr_auto] gap-6">
         <div className="shadow w-full h-full">
           {!mapLoaded ? (
             <div
-              className="relative cursor-pointer"
+              className="relative w-full h-full cursor-pointer"
               onClick={() => setMapLoaded(true)}
             >
               <Image
