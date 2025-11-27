@@ -4,6 +4,7 @@ import Footer from "@/features/Footer";
 import LoadingModal from "@/components/LoadingModal";
 import FeedbackModal from "@/components/FeedbackModal";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 
 export const metadata = {
   title:
@@ -48,8 +49,8 @@ export const metadata = {
     shortcut: "/images/favicon.ico",
     apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
   },
-  manifest: "/site.webmanifest",
 };
+
 export const viewport = {
   themeColor: "#ffffff",
 };
@@ -57,6 +58,21 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="h-full font-body">
+      <head>
+        {/* Google Analytics */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-1D0FCDLB4Y"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-1D0FCDLB4Y');
+          `}
+        </Script>
+      </head>
       <body className="grid h-screen grid-rows-[auto_1fr_auto] antialiased">
         <Analytics />
         <LoadingModal />
