@@ -8,16 +8,29 @@ import Script from "next/script";
 
 export const metadata = {
   title:
-    "Cosmetic Injectables Bondi & Eastern Suburbs | Natural & Subtle Results",
+    "Aesthetics by Dr Hendler - Sydney | Premium Cosmetic Injections & Skin Clinic",
   description:
-    "Trusted cosmetic injectables clinic in Bondi, Coogee, and Eastern Suburbs of Sydney. Delivering natural, subtle results with a focus on safety and patient care.",
+    "Trust Dr. Hendler for safe, medically led non-surgical aesthetic treatments in Sydney. Specialising in natural-looking dermal fillers and anti-wrinkle injections.",
+  keywords: [
+    "Cosmetic Doctor Sydney",
+    "Dermal Fillers Sydney",
+    "Anti-wrinkle injections Melbourne",
+    "Non-surgical facelift AU",
+    "Lip fillers near me",
+    "Best aesthetic clinic Australia",
+    "Medical grade skincare",
+    "Facial balancing specialist",
+    "Dr. Hendler cosmetic",
+    "Premium injectables Sydney",
+  ],
   alternates: {
     canonical: "https://www.aestheticsbydrhendler.com.au",
   },
   openGraph: {
-    title: "Cosmetic Injectables in Bondi & Eastern Suburbs",
+    title: "Aesthetics by Dr. Hendler: Achieve Your Natural and Refined Look",
     description:
-      "Subtle, natural enhancements with a focus on safety and patient care. Serving Bondi, Coogee, Double Bay, and surrounding Eastern Suburbs.",
+      "Medically-led aesthetic care providing bespoke anti-wrinkle, filler, and skin treatments. Trust the expertise of Dr. Hendler for sophisticated, natural results.",
+    type: "website",
     url: "https://www.aestheticsbydrhendler.com.au",
     siteName: "Aesthetics by Dr. Hendler",
     images: [
@@ -33,9 +46,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Natural Cosmetic Injectables in Bondi & Eastern Suburbs",
+    title: "Aesthetics by Dr. Hendler: Achieve Your Natural and Refined Look",
     description:
-      "Subtle, natural enhancements with a focus on safety and patient care.",
+      "Medically-led aesthetic care providing bespoke anti-wrinkle, filler, and skin treatments. Trust the expertise of Dr. Hendler for sophisticated, natural results.",
     images: [
       "https://www.aestheticsbydrhendler.com.au/images/website-hero.png",
     ],
