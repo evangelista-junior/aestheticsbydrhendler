@@ -44,4 +44,3 @@ This section outlines the planned features and subsequent steps for project evol
 - [ ] Add basic **CRM** capabilities for lead and patient follow-up.
 - [ ] Integrate with **Email Marketing services** (e.g., Mailchimp, SendGrid).
 - [ ] Further performance and accessibility (A11Y) optimizations.
-- [ ] [YOUR CUSTOM TODO ITEM HERE]
