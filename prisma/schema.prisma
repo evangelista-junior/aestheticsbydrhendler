@@ -84,7 +84,7 @@ model Bookings {
   name        String?
   phone       String?
   service     String
-  date        String?
+  date        DateTime?
   time        String?
   notes       String?
   consent     Boolean       @default(false)

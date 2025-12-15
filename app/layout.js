@@ -3,6 +3,7 @@ import NavBar from "@/features/NavBar";
 import Footer from "@/features/Footer";
 import LoadingModal from "@/components/LoadingModal";
 import FeedbackModal from "@/components/FeedbackModal";
+// import { Bodoni_Moda, Nanum_Myeongjo } from "next/font/google"; //TODO:
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
 

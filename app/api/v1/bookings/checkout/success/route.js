@@ -92,7 +92,7 @@ export async function POST(req) {
       data: formatedDatePaymentToken,
       bookingUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/${booking.id}`,
     });
-    email = await sendMail({
+    await sendMail({
       emailTo: formatedDatePaymentToken.email,
       emailSubject: "Booking Confirmed | Aesthetics By Dr Hendler",
       emailText: emailTXTCustomized,
@@ -101,6 +101,7 @@ export async function POST(req) {
 
     return NextResponse.json(
       {
+        ok: true,
         redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/bookings/${booking.id}`,
       },
       { status: 200 }
