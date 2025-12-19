@@ -31,7 +31,7 @@ export default function Header() {
             <Link href="/bookings">
               <Button className="" buttonType="primaryRounded">
                 <CalendarDays size={18} aria-hidden="true" focusable="false" />
-                Book Your Consultation
+                Book Your Appointment
               </Button>
             </Link>
             <Link href="#treatments">
